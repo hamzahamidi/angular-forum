@@ -1,6 +1,7 @@
 {
   "name": "ang2-forum",
   "short_name": "forum",
+  "start_url": "index.html",
   "icons": [{
       "src": "assets/img/android-chrome-192x192.png",
       "sizes": "192x192",
