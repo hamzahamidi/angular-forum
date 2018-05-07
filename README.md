@@ -1,11 +1,11 @@
-[![Build Status](https://travis-ci.org/hamidihamza/angular-forum.svg?branch=master)](https://travis-ci.org/hamidihamza/angular-forum)
+[![Build Status](https://travis-ci.org/hamzahamidi/angular-forum.svg?branch=master)](https://travis-ci.org/hamzahamidi/angular-forum/)
 
 
 > ### Angular 5 codebase containing real world examples (CRUD, auth, advanced patterns, etc).
 
 
 
-### [Demo](https://angular.realworld.io)&nbsp;&nbsp;&nbsp;&nbsp;
+### [Demo](http://hamidihamza.com/angular-forum)&nbsp;&nbsp;&nbsp;&nbsp;
 
 This codebase was created to demonstrate a fully fledged application built with Angular that interacts with an actual backend server including CRUD operations, authentication, routing, pagination, and more.
 
@@ -22,7 +22,7 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 
 ## Functionality overview
 
-The example application is a social blogging site (i.e. a Medium.com clone) called "Forum". It uses a custom API for all requests, including authentication. You can view a live demo over at https://angular.realworld.io
+The example application is a social blogging site (i.e. a Medium.com clone). You can view a live demo over at http://hamidihamza.com/angular-forum/
 
 **General functionality:**
 
