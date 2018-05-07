@@ -3,6 +3,7 @@
 
 > ### Angular 5 codebase containing real world examples (CRUD, auth, advanced patterns, etc).
 
+# ![Angular Forum App](logo.png)
 
 
 ### [Demo](http://hamidihamza.com/angular-forum)&nbsp;&nbsp;&nbsp;&nbsp;
