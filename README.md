@@ -1,7 +1,8 @@
 [![Build Status](https://travis-ci.org/hamzahamidi/angular-forum.svg?branch=master)](https://travis-ci.org/hamzahamidi/angular-forum/)
+[![GitHub license](https://img.shields.io/github/license/hamzahamidi/angular-forum.svg)](https://github.com/hamzahamidi/angular-forum)
 
 
-> ### Angular 5 codebase containing real world examples (CRUD, auth, advanced patterns, etc).
+> ### Angular project containing real world examples (CRUD, auth, advanced patterns, etc).
 
 # ![Angular Forum App](logo.png)
 
@@ -13,7 +14,11 @@ This codebase was created to demonstrate a fully fledged application built with 
 
 # Getting started
 
-Make sure you have the [Angular CLI](https://github.com/angular/angular-cli#installation) installed globally. We use [Yarn](https://yarnpkg.com) to manage the dependencies, so we strongly recommend you to use it. you can install it from [Here](https://yarnpkg.com/en/docs/install), then run `yarn install --frozen-lockfile` to resolve all dependencies (might take a minute).
+Make sure you have the [Angular CLI](https://github.com/angular/angular-cli#installation) installed globally. 
+
+We use [Yarn](https://yarnpkg.com) to manage the dependencies, so we strongly recommend you to use it. you can install it from [Here](https://yarnpkg.com/en/docs/install), then run `yarn install --frozen-lockfile` to resolve all dependencies (might take a minute).
+
+Or, you can use npm the default package manager of NodeJs & install the dependencies with `npm install`.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
