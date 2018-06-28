@@ -17,7 +17,7 @@ This codebase was created to demonstrate a fully fledged application built with 
 
 Make sure you have the [Angular CLI](https://github.com/angular/angular-cli#installation) installed globally. 
 
-We use [Yarn](https://yarnpkg.com) to manage the dependencies, so we strongly recommend you to use it. you can install it from [Here](https://yarnpkg.com/en/docs/install), then run `yarn install --frozen-lockfile` to resolve all dependencies (might take a minute).
+We use both npm & [Yarn](https://yarnpkg.com) to manage the dependencies, but we strongly recommend you to use Yarn. you can install it from [Here](https://yarnpkg.com/en/docs/install), then run `yarn install --frozen-lockfile` to resolve all dependencies (might take a minute).
 
 Or, you can use npm the default package manager of NodeJs & install the dependencies with `npm install`.
 
