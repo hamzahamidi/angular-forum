@@ -193,10 +193,10 @@
   resolved "https://registry.yarnpkg.com/@angular/language-service/-/language-service-8.2.10.tgz#0b508955f39dfd9862efb55b3373da8793a7406a"
   integrity sha512-VJaFkbffRPh4WC8aW01BXljLVyiMs2p32LgGxPTntNZ4cSLDRkUXkIoiCMUK9CHl+RCstFKWhlDnppONDePONw==
 
-"@angular/platform-browser-dynamic@~8.2.9":
-  version "8.2.10"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-8.2.10.tgz#e4fed5fae97445a8f636b93dd6ced31826273cab"
-  integrity sha512-mpViCrRlCOtM4iW1VwPwANEAPLu2gHAQbtnZheSN1RSyuXFoe1th8ToGfSWcsWa0Hep6xU0sunYbaYWtb2IgjA==
+"@angular/platform-browser-dynamic@~8.2.14":
+  version "8.2.14"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-8.2.14.tgz#4439a79fe10ec45170e6940a28835e9ff0918950"
+  integrity sha512-mO2JPR5kLU/A3AQngy9+R/Q5gaF9csMStBQjwsCRI0wNtlItOIGL6+wTYpiTuh/ux+WVN1F2sLcEYU4Zf1ud9A==
   dependencies:
     tslib "^1.9.0"
 
