@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/hamzahamidi/angular-forum.svg?branch=master)](https://travis-ci.org/hamzahamidi/angular-forum/)
+[![Build Status](https://travis-ci.com/hamzahamidi/angular-forum.svg?branch=master)](https://travis-ci.com/hamzahamidi/angular-forum)
 [![GitHub release](https://img.shields.io/github/release/hamzahamidi/angular-forum.svg)](https://github.com/hamzahamidi/angular-forum/releases/latest)
 [![GitHub license](https://img.shields.io/github/license/hamzahamidi/angular-forum.svg)](https://github.com/hamzahamidi/angular-forum)
 
