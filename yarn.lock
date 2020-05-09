@@ -143,10 +143,10 @@
     universal-analytics "^0.4.20"
     uuid "^3.3.2"
 
-"@angular/common@^9.0.5":
-  version "9.0.5"
-  resolved "https://registry.yarnpkg.com/@angular/common/-/common-9.0.5.tgz#80e5ebbd5ec9b7f33bace0d6f70267b07cba9090"
-  integrity sha512-AwZKYK5M/3762woK+3290JnBdlBvZXqxX5vVze6wk23IiBlwIV+l79+Lyfjo/4s031kibq47taaZdC7qkkBkNA==
+"@angular/common@^9.1.2":
+  version "9.1.6"
+  resolved "https://registry.yarnpkg.com/@angular/common/-/common-9.1.6.tgz#6428051e8fb18fddf1f800fc6a5e1d7d8f92067b"
+  integrity sha512-L9vw//wE+8QcSArOA411uJ68znnszCiPrbzSBV0BRZeadc7X68MwANA9qjtiTWZx5Xh9pNfHHwsCUyv2lUeinQ==
 
 "@angular/compiler-cli@~9.0.5":
   version "9.0.5"
@@ -166,35 +166,35 @@
     sourcemap-codec "^1.4.8"
     yargs "13.1.0"
 
-"@angular/compiler@^9.0.5":
-  version "9.0.5"
-  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-9.0.5.tgz#823dd4df25a9f1a641346712e7b7097ed1176105"
-  integrity sha512-TeyhRGefTOtA9N3udMrvheafoXcz/dvTTdZLcieeZQxm1SSeaQDUQ/rUH6QTOiHVNMtjOCrZ9J5rk1A4mPYuag==
+"@angular/compiler@^9.1.2":
+  version "9.1.6"
+  resolved "https://registry.yarnpkg.com/@angular/compiler/-/compiler-9.1.6.tgz#be4bc14e000c4b9e4c1ebf85f15f8de0b2603dc5"
+  integrity sha512-tHOQEjWuWqSkrk6/vI6BK7uJnpAyFajCXPW37rH5xspF/aMbetrpoOiGBNUQg/HLaFh04nOAnnFntjLkW0ooaA==
 
-"@angular/core@^9.0.5":
-  version "9.0.5"
-  resolved "https://registry.yarnpkg.com/@angular/core/-/core-9.0.5.tgz#71df41a45e60619fb7454ab9fe604d6ce7d0d8da"
-  integrity sha512-7VznrYjaAIzeq/zQ7v6tbeoOI7JJKgChKwG7s8jRoEpENu+w2pRlRdyQul88iJLsXgObR+/TfBNm/K+G4cqAFw==
+"@angular/core@^9.1.2":
+  version "9.1.6"
+  resolved "https://registry.yarnpkg.com/@angular/core/-/core-9.1.6.tgz#810b4bb960cc2a933b89969c4d0f5ac53535c241"
+  integrity sha512-iXgPh5DebLwkMzLtQ6WKiv/mo4hpwMOwYex3O4F2CKToR2tKPnXbV5WC/ADGm0XYXiocSKQPiyL4ZrUjVeKEqA==
 
-"@angular/forms@^9.0.5":
-  version "9.0.5"
-  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-9.0.5.tgz#3bc96364754a50e03595873045b72ab886ee0748"
-  integrity sha512-579PXAfT92J4mghjWKiZ3Zj3xee4h3RP70YHSlsfbi94MONvryWDrnXxvUZ0zJJCVnEJQ7x+nGEp3wwWqR12Jw==
+"@angular/forms@^9.1.2":
+  version "9.1.6"
+  resolved "https://registry.yarnpkg.com/@angular/forms/-/forms-9.1.6.tgz#2589b74288318ddebb8c12b0fd45eb48dbd9e665"
+  integrity sha512-3KiFjLDipZVgS5rfnZ8EoKlkUokOR8dmuw2xdjKHgzflWFFeuaY9ZtQgjZGw9/jkwWlc9P38BOSEHbK8NakdDw==
 
-"@angular/platform-browser-dynamic@^9.0.5":
-  version "9.0.5"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-9.0.5.tgz#df569a99d9d077733e53d3323e9f88f410f5f3df"
-  integrity sha512-NRfsAwbgxOvEcpqlERDAG0wap5xJa0wKwnudTCnyvf4B0D6kLkT1Idjqv22NDW5rfM2oDWaZ/qpgpDnAo6/ZBQ==
+"@angular/platform-browser-dynamic@^9.1.2":
+  version "9.1.6"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser-dynamic/-/platform-browser-dynamic-9.1.6.tgz#3522fd43825f12f8e9982acab85c0a9cdc0c5c86"
+  integrity sha512-7AL3hWu4oY0LRiMS9ZEFXPW2uqybWcVNFDHjPp3UwsDIT4+sW3DIm8P+UvAOFkkRwaHpPDqm4chTTiAHygC/1Q==
 
-"@angular/platform-browser@^9.0.5":
-  version "9.0.5"
-  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-9.0.5.tgz#a760fa7d5921d7b58875b07dfe0a408c92abf143"
-  integrity sha512-24QGcQXthYXB/wT8okJjxqss/JOk4A6O1/Fmva79k0AvwtYkl2tikcyEc5T3xZtjoi8g32AN9nbZAobtkxlqTA==
+"@angular/platform-browser@^9.1.2":
+  version "9.1.6"
+  resolved "https://registry.yarnpkg.com/@angular/platform-browser/-/platform-browser-9.1.6.tgz#3f107b96f8fdfc87370dae5bc6698c8be9b246e9"
+  integrity sha512-ebQhbT0Z55vwlQwAY4+s3Bcf1Q4wEN5Yk43iCuVt4g2kFkg09UP0z8aYtbuh7VQDyv/W4TTIGX8smGBWstoedQ==
 
-"@angular/router@^9.0.5":
-  version "9.0.5"
-  resolved "https://registry.yarnpkg.com/@angular/router/-/router-9.0.5.tgz#97f23adc933e96ba04c0ef93b3a8f0c2e7777e77"
-  integrity sha512-Sz3DQUxlzAk9aZ9eVtZRh6xF5SMg/Gb3rc5I7dL1M+mycSNoFJ4HPTXleZkKM69mMkKQ5fEtza4x26MSlF+O9w==
+"@angular/router@^9.1.2":
+  version "9.1.6"
+  resolved "https://registry.yarnpkg.com/@angular/router/-/router-9.1.6.tgz#1186e63d3f69faffbf7f92773f342314130b1fcf"
+  integrity sha512-Oz4nVQUR6t68DSzZuSrVaqrzmA7/0PIEi0sc85CE+UuOEoAqGMwN0NdQYizFT62WZ16DRI/1tZ+TTWvdmpEv8w==
 
 "@babel/code-frame@^7.0.0", "@babel/code-frame@^7.5.5":
   version "7.5.5"
