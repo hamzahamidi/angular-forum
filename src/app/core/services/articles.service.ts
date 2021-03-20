@@ -8,11 +8,11 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ArticlesService {
-  constructor (
+  constructor(
     private apiService: ApiService
   ) {}
 
-  query(config: ArticleListConfig): Observable<{articles: Article[], articlesCount: number}> {
+  query(config: ArticleListConfig): Observable<{articles: Article[]; articlesCount: number}> {
     // Convert any filters over to Angular's URLSearchParams
     const params = {};
 
@@ -40,12 +40,12 @@ export class ArticlesService {
   save(article): Observable<Article> {
     // If we're updating an existing article
     if (article.slug) {
-      return this.apiService.put('/articles/' + article.slug, {article: article})
+      return this.apiService.put('/articles/' + article.slug, {article})
         .pipe(map(data => data.article));
 
     // Otherwise, create a new article
     } else {
-      return this.apiService.post('/articles/', {article: article})
+      return this.apiService.post('/articles/', {article})
         .pipe(map(data => data.article));
     }
   }

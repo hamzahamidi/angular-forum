@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class CommentsService {
-  constructor (
+  constructor(
     private apiService: ApiService
   ) {}
 

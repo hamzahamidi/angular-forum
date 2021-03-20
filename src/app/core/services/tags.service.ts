@@ -6,7 +6,7 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class TagsService {
-  constructor (
+  constructor(
     private apiService: ApiService
   ) {}
 

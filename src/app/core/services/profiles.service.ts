@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 
 @Injectable()
 export class ProfilesService {
-  constructor (
+  constructor(
     private apiService: ApiService
   ) {}
 

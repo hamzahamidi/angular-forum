@@ -7,7 +7,7 @@ import { Article, ArticleListConfig, ArticlesService } from '../../core';
   templateUrl: './article-list.component.html'
 })
 export class ArticleListComponent {
-  constructor (
+  constructor(
     private articlesService: ArticlesService
   ) {}
 

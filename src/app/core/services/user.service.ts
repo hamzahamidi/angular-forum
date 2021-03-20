@@ -16,7 +16,7 @@ export class UserService {
   private isAuthenticatedSubject = new ReplaySubject<boolean>(1);
   public isAuthenticated = this.isAuthenticatedSubject.asObservable();
 
-  constructor (
+  constructor(
     private apiService: ApiService,
     private http: HttpClient,
     private jwtService: JwtService
