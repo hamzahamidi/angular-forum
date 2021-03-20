@@ -8,17 +8,10 @@ import { ArticleListComponent, ArticleMetaComponent, ArticlePreviewComponent } f
 import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
 import { ListErrorsComponent } from './list-errors.component';
 import { ShowAuthedDirective } from './show-authed.directive';
-import {TranslateModule} from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-            imports: [
-              CommonModule,
-              FormsModule,
-              ReactiveFormsModule,
-              HttpClientModule,
-              RouterModule,
-              TranslateModule
-            ],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule, TranslateModule],
   declarations: [
     ArticleListComponent,
     ArticleMetaComponent,
@@ -26,7 +19,7 @@ import {TranslateModule} from '@ngx-translate/core';
     FavoriteButtonComponent,
     FollowButtonComponent,
     ListErrorsComponent,
-    ShowAuthedDirective
+    ShowAuthedDirective,
   ],
   exports: [
     ArticleListComponent,
@@ -40,7 +33,7 @@ import {TranslateModule} from '@ngx-translate/core';
     HttpClientModule,
     ListErrorsComponent,
     RouterModule,
-    ShowAuthedDirective
-  ]
+    ShowAuthedDirective,
+  ],
 })
 export class SharedModule {}

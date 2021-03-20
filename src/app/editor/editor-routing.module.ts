@@ -9,20 +9,20 @@ const routes: Routes = [
   {
     path: '',
     component: EditorComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
   },
   {
     path: ':slug',
     component: EditorComponent,
     canActivate: [AuthGuard],
     resolve: {
-      article: EditableArticleResolver
-    }
-  }
+      article: EditableArticleResolver,
+    },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class EditorRoutingModule {}

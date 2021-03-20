@@ -8,13 +8,13 @@ const routes: Routes = [
     path: ':slug',
     component: ArticleComponent,
     resolve: {
-      article: ArticleResolver
-    }
-  }
+      article: ArticleResolver,
+    },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class ArticleRoutingModule {}

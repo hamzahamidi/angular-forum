@@ -4,12 +4,10 @@ import { Comment, User, UserService } from '../core';
 
 @Component({
   selector: 'app-article-comment',
-  templateUrl: './article-comment.component.html'
+  templateUrl: './article-comment.component.html',
 })
 export class ArticleCommentComponent implements OnInit {
-  constructor(
-    private userService: UserService
-  ) {}
+  constructor(private userService: UserService) {}
 
   @Input() comment: Comment;
   @Output() deleteComment = new EventEmitter<boolean>();
@@ -18,16 +16,12 @@ export class ArticleCommentComponent implements OnInit {
 
   ngOnInit() {
     // Load the current user's data
-    this.userService.currentUser.subscribe(
-      (userData: User) => {
-        this.canModify = (userData.username === this.comment.author.username);
-      }
-    );
+    this.userService.currentUser.subscribe((userData: User) => {
+      this.canModify = userData.username === this.comment.author.username;
+    });
   }
 
   deleteClicked() {
     this.deleteComment.emit(true);
   }
-
-
 }

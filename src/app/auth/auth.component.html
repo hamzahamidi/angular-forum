@@ -1,12 +1,11 @@
 <div class="auth-page">
   <div class="container page">
     <div class="row">
-
       <div class="col-md-6 offset-md-3 col-xs-12">
         <h1 class="text-xs-center">{{ title }}</h1>
         <p class="text-xs-center">
-          <a *ngIf="authType == 'register'" [routerLink]="['/login']">{{'have-account' | translate}}</a>
-          <a *ngIf="authType == 'login'" [routerLink]="['/register']">{{'need-account' | translate}}</a>
+          <a *ngIf="authType == 'register'" [routerLink]="['/login']">{{ 'have-account' | translate }}</a>
+          <a *ngIf="authType == 'login'" [routerLink]="['/register']">{{ 'need-account' | translate }}</a>
         </p>
         <app-list-errors [errors]="errors"></app-list-errors>
         <form (ngSubmit)="submitForm()" [formGroup]="authForm">
@@ -17,21 +16,24 @@
                 [placeholder]="'username' | translate"
                 class="form-control form-control-lg"
                 formControlName="username"
-                type="text"/>
+                type="text"
+              />
             </fieldset>
             <fieldset class="form-group">
               <input
                 [placeholder]="'email' | translate"
                 class="form-control form-control-lg"
                 formControlName="email"
-                type="text"/>
+                type="text"
+              />
             </fieldset>
             <fieldset class="form-group">
               <input
                 [placeholder]="'password' | translate"
                 class="form-control form-control-lg"
                 formControlName="password"
-                type="password"/>
+                type="password"
+              />
             </fieldset>
             <button [disabled]="!authForm.valid" class="btn btn-lg btn-primary pull-xs-right" type="submit">
               {{ title }}
@@ -39,7 +41,6 @@
           </fieldset>
         </form>
       </div>
-
     </div>
   </div>
 </div>

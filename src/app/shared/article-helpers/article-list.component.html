@@ -1,29 +1,22 @@
-<app-article-preview
-  *ngFor="let article of results"
-  [article]="article">
-</app-article-preview>
+<app-article-preview *ngFor="let article of results" [article]="article"> </app-article-preview>
 
-<div [hidden]="!loading"
-     class="app-article-preview">
-  {{'loading-articles' | translate}}
+<div [hidden]="!loading" class="app-article-preview">
+  {{ 'loading-articles' | translate }}
 </div>
 
-<div [hidden]="loading || results.length"
-     class="app-article-preview">
-  {{'no-articles-yet' | translate}}
+<div [hidden]="loading || results.length" class="app-article-preview">
+  {{ 'no-articles-yet' | translate }}
 </div>
 
 <nav [hidden]="loading || totalPages.length <= 1">
   <ul class="pagination">
-
-    <li (click)="setPageTo(pageNumber)"
-        *ngFor="let pageNumber of totalPages"
-        [ngClass]="{'active': pageNumber === currentPage}"
-        class="page-item">
-
+    <li
+      (click)="setPageTo(pageNumber)"
+      *ngFor="let pageNumber of totalPages"
+      [ngClass]="{ active: pageNumber === currentPage }"
+      class="page-item"
+    >
       <a class="page-link">{{ pageNumber }}</a>
-
     </li>
-
   </ul>
 </nav>

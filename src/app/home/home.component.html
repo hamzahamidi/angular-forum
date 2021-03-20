@@ -1,36 +1,32 @@
 <div class="home-page">
-
   <div *appShowAuthed="false" class="banner">
     <div class="container">
-      <h1 class="logo-font">{{'forum' | translate}}</h1>
-      <p>{{'forum-title' | translate}}</p>
+      <h1 class="logo-font">{{ 'forum' | translate }}</h1>
+      <p>{{ 'forum-title' | translate }}</p>
     </div>
   </div>
 
   <div class="container page">
     <div class="row">
-
       <div class="col-md-9">
         <div class="feed-toggle">
           <ul class="nav nav-pills outline-active">
             <li class="nav-item">
-              <a (click)="setListTo('feed')"
-                 [ngClass]="{'active': listConfig.type === 'feed'}"
-                 class="nav-link">
-                {{'your-feed' | translate}}
+              <a (click)="setListTo('feed')" [ngClass]="{ active: listConfig.type === 'feed' }" class="nav-link">
+                {{ 'your-feed' | translate }}
               </a>
             </li>
             <li class="nav-item">
-              <a (click)="setListTo('all')"
-                 [ngClass]="{'active': listConfig.type === 'all' && !listConfig.filters.tag}"
-                 class="nav-link">
-                {{'global-feed' | translate}}
+              <a
+                (click)="setListTo('all')"
+                [ngClass]="{ active: listConfig.type === 'all' && !listConfig.filters.tag }"
+                class="nav-link"
+              >
+                {{ 'global-feed' | translate }}
               </a>
             </li>
             <li [hidden]="!listConfig.filters.tag" class="nav-item">
-              <a class="nav-link active">
-                <i class="ion-pound"></i> {{ listConfig.filters.tag }}
-              </a>
+              <a class="nav-link active"> <i class="ion-pound"></i> {{ listConfig.filters.tag }} </a>
             </li>
           </ul>
         </div>
@@ -40,26 +36,23 @@
 
       <div class="col-md-3">
         <div class="sidebar">
-          <p>{{'popular-tags' | translate}}</p>
+          <p>{{ 'popular-tags' | translate }}</p>
 
           <div class="tag-list">
-            <a (click)="setListTo('all', {tag: tag})"
-               *ngFor="let tag of tags"
-               class="tag-default tag-pill">
+            <a (click)="setListTo('all', { tag: tag })" *ngFor="let tag of tags" class="tag-default tag-pill">
               {{ tag }}
             </a>
           </div>
 
           <div [hidden]="tagsLoaded">
-            {{'loading-tags' | translate}}
+            {{ 'loading-tags' | translate }}
           </div>
 
           <div [hidden]="!tagsLoaded || tags.length > 0">
-            {{'no-tags-yet' | translate}}
+            {{ 'no-tags-yet' | translate }}
           </div>
         </div>
       </div>
-
     </div>
   </div>
 </div>

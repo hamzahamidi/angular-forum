@@ -8,13 +8,13 @@ const routes: Routes = [
     path: '',
     component: HomeComponent,
     resolve: {
-      isAuthenticated: HomeAuthResolver
-    }
-  }
+      isAuthenticated: HomeAuthResolver,
+    },
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
 export class HomeRoutingModule {}

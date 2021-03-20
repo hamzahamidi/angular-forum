@@ -4,12 +4,10 @@ import { Article, ArticleListConfig, ArticlesService } from '../../core';
 @Component({
   selector: 'app-article-list',
   styleUrls: ['article-list.component.css'],
-  templateUrl: './article-list.component.html'
+  templateUrl: './article-list.component.html',
 })
 export class ArticleListComponent {
-  constructor(
-    private articlesService: ArticlesService
-  ) {}
+  constructor(private articlesService: ArticlesService) {}
 
   @Input() limit: number;
   @Input()
@@ -39,11 +37,10 @@ export class ArticleListComponent {
     // Create limit and offset filter (if necessary)
     if (this.limit) {
       this.query.filters.limit = this.limit;
-      this.query.filters.offset =  (this.limit * (this.currentPage - 1));
+      this.query.filters.offset = this.limit * (this.currentPage - 1);
     }
 
-    this.articlesService.query(this.query)
-    .subscribe(data => {
+    this.articlesService.query(this.query).subscribe((data) => {
       this.loading = false;
       this.results = data.articles;
 

@@ -11,13 +11,11 @@ import {
   JwtService,
   ProfilesService,
   TagsService,
-  UserService
+  UserService,
 } from './services';
 
 @NgModule({
-  imports: [
-    CommonModule
-  ],
+  imports: [CommonModule],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpTokenInterceptor, multi: true },
     ApiService,
@@ -27,8 +25,8 @@ import {
     JwtService,
     ProfilesService,
     TagsService,
-    UserService
+    UserService,
   ],
-  declarations: []
+  declarations: [],
 })
-export class CoreModule { }
+export class CoreModule {}

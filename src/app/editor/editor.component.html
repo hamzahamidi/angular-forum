@@ -2,44 +2,44 @@
   <div class="container page">
     <div class="row">
       <div class="col-md-10 offset-md-1 col-xs-12">
-
         <app-list-errors [errors]="errors"></app-list-errors>
 
         <form [formGroup]="articleForm">
           <fieldset [disabled]="isSubmitting">
-
             <fieldset class="form-group">
-              <input [placeholder]="'article-title' | translate"
-                     class="form-control form-control-lg"
-                     formControlName="title"
-                     type="text"/>
+              <input
+                [placeholder]="'article-title' | translate"
+                class="form-control form-control-lg"
+                formControlName="title"
+                type="text"
+              />
             </fieldset>
 
             <fieldset class="form-group">
-              <input [placeholder]="'article-description' | translate"
-                     class="form-control"
-                     formControlName="description"
-                     type="text"/>
+              <input
+                [placeholder]="'article-description' | translate"
+                class="form-control"
+                formControlName="description"
+                type="text"
+              />
             </fieldset>
 
             <fieldset class="form-group">
-              <textarea [placeholder]="'article-body' | translate"
-                        class="form-control"
-                        formControlName="body"
-                        rows="8">
+              <textarea [placeholder]="'article-body' | translate" class="form-control" formControlName="body" rows="8">
               </textarea>
             </fieldset>
 
             <fieldset class="form-group">
-              <input (keyup.enter)="addTag()"
-                     [formControl]="tagField"
-                     [placeholder]="'enter-tags' | translate"
-                     class="form-control"
-                     type="text"/>
+              <input
+                (keyup.enter)="addTag()"
+                [formControl]="tagField"
+                [placeholder]="'enter-tags' | translate"
+                class="form-control"
+                type="text"
+              />
 
               <div class="tag-list">
-                <span *ngFor="let tag of article.tagList"
-                      class="tag-default tag-pill">
+                <span *ngFor="let tag of article.tagList" class="tag-default tag-pill">
                   <i (click)="removeTag(tag)" class="ion-close-round"></i>
                   {{ tag }}
                 </span>
@@ -47,12 +47,10 @@
             </fieldset>
 
             <button (click)="submitForm()" class="btn btn-lg pull-xs-right btn-primary" type="button">
-              {{'publish-article' | translate}}
+              {{ 'publish-article' | translate }}
             </button>
-
           </fieldset>
         </form>
-
       </div>
     </div>
   </div>
