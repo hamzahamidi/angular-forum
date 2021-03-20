@@ -6,11 +6,11 @@
       <app-article-meta [article]="article">
         <span [hidden]="!canModify">
           <a [routerLink]="['/editor', article.slug]" class="btn btn-sm btn-outline-secondary">
-            <i class="ion-edit"></i> {{ 'edit-article' | translate }}
+            <em class="ion-edit"></em> {{ 'edit-article' | translate }}
           </a>
 
           <button (click)="deleteArticle()" [ngClass]="{ disabled: isDeleting }" class="btn btn-sm btn-outline-danger">
-            <i class="ion-trash-a"></i> {{ 'delete-article' | translate }}
+            <em class="ion-trash-a"></em> {{ 'delete-article' | translate }}
           </button>
         </span>
 
@@ -45,11 +45,11 @@
       <app-article-meta [article]="article">
         <span [hidden]="!canModify">
           <a [routerLink]="['/editor', article.slug]" class="btn btn-sm btn-outline-secondary">
-            <i class="ion-edit"></i> {{ 'edit-article' | translate }}
+            <em class="ion-edit"></em> {{ 'edit-article' | translate }}
           </a>
 
           <button (click)="deleteArticle()" [ngClass]="{ disabled: isDeleting }" class="btn btn-sm btn-outline-danger">
-            <i class="ion-trash-a"></i> {{ 'delete-article' | translate }}
+            <em class="ion-trash-a"></em> {{ 'delete-article' | translate }}
           </button>
         </span>
 
@@ -70,6 +70,7 @@
           <app-list-errors [errors]="commentFormErrors"></app-list-errors>
           <form (ngSubmit)="addComment()" class="card comment-form">
             <fieldset [disabled]="isSubmitting">
+              <legend>{{'article-comment' | translate}}</legend>
               <div class="card-block">
                 <textarea
                   [formControl]="commentControl"
@@ -79,7 +80,7 @@
                 ></textarea>
               </div>
               <div class="card-footer">
-                <img [src]="currentUser.image" class="comment-author-img" />
+                <img [alt]="'profile-picture' | translate" [src]="currentUser.image" class="comment-author-img" />
                 <button class="btn btn-sm btn-primary" type="submit">
                   {{ 'post-comment' | translate }}
                 </button>

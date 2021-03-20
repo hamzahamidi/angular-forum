@@ -3,13 +3,13 @@
     <div class="container">
       <div class="row">
         <div class="col-xs-12 col-md-10 offset-md-1">
-          <img [src]="profile.image" class="user-img" />
+          <img [src]="profile.image" [alt]="'profile-picture' | translate" class="user-img" />
           <h4>{{ profile.username }}</h4>
           <p>{{ profile.bio }}</p>
           <app-follow-button (toggle)="onToggleFollowing($event)" [hidden]="isUser" [profile]="profile">
           </app-follow-button>
           <a [hidden]="!isUser" [routerLink]="['/settings']" class="btn btn-sm btn-outline-secondary action-btn">
-            <i class="ion-gear-a"></i> {{ 'edit-profile-settings' | translate }}
+            <em class="ion-gear-a"></em> {{ 'edit-profile-settings' | translate }}
           </a>
         </div>
       </div>

@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormControl } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Article, ArticlesService } from '../core';
+import { Article, ArticlesService, Errors } from '../core';
 
 @Component({
   selector: 'app-editor-page',
@@ -12,7 +12,7 @@ export class EditorComponent implements OnInit {
   article: Article = {} as Article;
   articleForm: FormGroup;
   tagField = new FormControl();
-  errors: Object = {};
+  errors: Errors;
   isSubmitting = false;
 
   constructor(

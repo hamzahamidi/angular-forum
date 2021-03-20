@@ -9,6 +9,7 @@
         <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
           <fieldset [disabled]="isSubmitting">
             <fieldset class="form-group">
+              <legend>{{'url-profile-picture' | translate}}</legend>
               <input
                 class="form-control"
                 type="text"
@@ -18,6 +19,7 @@
             </fieldset>
 
             <fieldset class="form-group">
+              <legend>{{'username' | translate}}</legend>
               <input
                 class="form-control form-control-lg"
                 type="text"
@@ -27,6 +29,7 @@
             </fieldset>
 
             <fieldset class="form-group">
+              <legend>{{'short-bio' | translate}}</legend>
               <textarea
                 class="form-control form-control-lg"
                 rows="8"
@@ -37,6 +40,7 @@
             </fieldset>
 
             <fieldset class="form-group">
+              <legend>{{'email' | translate}}</legend>
               <input
                 class="form-control form-control-lg"
                 type="email"
@@ -46,6 +50,7 @@
             </fieldset>
 
             <fieldset class="form-group">
+              <legend>{{'new-password' | translate}}</legend>
               <input
                 class="form-control form-control-lg"
                 type="password"

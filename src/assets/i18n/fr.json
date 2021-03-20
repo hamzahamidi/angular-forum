@@ -1,6 +1,7 @@
 {
   "add-comment-to-article": "Ajouter un commentaire à cet article",
   "article": "Article",
+  "article-comment": "commentaire",
   "article-body": "Pour écrire votre article (markdown supporté)",
   "article-description": "De quoi parle l'article ?",
   "article-title": "Titre de l'article",
@@ -26,6 +27,7 @@
   "password": "Mot de passe",
   "popular-tags": "Tags populaires",
   "post-comment": "Poster un commentaire",
+  "profile-picture": "Image de profil",
   "publish-article": "Publier un article",
   "read-more": "Lire plus...",
   "settings": "Paramètres",

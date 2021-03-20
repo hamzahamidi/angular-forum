@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
-import { User, UserService } from '../core';
+import { Errors, User, UserService } from '../core';
 
 @Component({
   selector: 'app-settings-page',
@@ -11,7 +11,7 @@ import { User, UserService } from '../core';
 export class SettingsComponent implements OnInit {
   user: User = {} as User;
   settingsForm: FormGroup;
-  errors: Object = {};
+  errors: Errors;
   isSubmitting = false;
 
   constructor(private router: Router, private userService: UserService, private fb: FormBuilder) {

@@ -29,19 +29,20 @@
 
       <li class="nav-item">
         <a class="nav-link" routerLink="/editor" routerLinkActive="active">
-          <i class="ion-compose"></i>&nbsp;{{ 'new-article' | translate }}
+          <em class="ion-compose"></em>&nbsp;{{ 'new-article' | translate }}
         </a>
       </li>
 
       <li class="nav-item">
         <a class="nav-link" routerLink="/settings" routerLinkActive="active">
-          <i class="ion-gear-a"></i>&nbsp;{{ 'settings' | translate }}
+          <em class="ion-gear-a"></em>&nbsp;{{ 'settings' | translate }}
         </a>
       </li>
 
       <li class="nav-item">
         <a [routerLink]="['/profile', currentUser.username]" class="nav-link" routerLinkActive="active">
-          <img *ngIf="currentUser.image" [src]="currentUser.image" class="user-pic" />
+          <img *ngIf="currentUser.image" [alt]="'profile-picture' | translate" [src]="currentUser.image"
+               class="user-pic" />
           {{ currentUser.username }}
         </a>
       </li>

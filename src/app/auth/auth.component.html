@@ -11,6 +11,7 @@
         <form (ngSubmit)="submitForm()" [formGroup]="authForm">
           <fieldset [disabled]="isSubmitting">
             <fieldset class="form-group">
+              <legend>{{'username' | translate}}</legend>
               <input
                 *ngIf="authType == 'register'"
                 [placeholder]="'username' | translate"
@@ -20,6 +21,7 @@
               />
             </fieldset>
             <fieldset class="form-group">
+              <legend>{{'email' | translate}}</legend>
               <input
                 [placeholder]="'email' | translate"
                 class="form-control form-control-lg"
@@ -28,6 +30,7 @@
               />
             </fieldset>
             <fieldset class="form-group">
+              <legend>{{'password' | translate}}</legend>
               <input
                 [placeholder]="'password' | translate"
                 class="form-control form-control-lg"

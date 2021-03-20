@@ -7,6 +7,7 @@
         <form [formGroup]="articleForm">
           <fieldset [disabled]="isSubmitting">
             <fieldset class="form-group">
+              <legend>{{'article-title' | translate}}</legend>
               <input
                 [placeholder]="'article-title' | translate"
                 class="form-control form-control-lg"
@@ -16,6 +17,7 @@
             </fieldset>
 
             <fieldset class="form-group">
+              <legend>{{'article-description' | translate}}</legend>
               <input
                 [placeholder]="'article-description' | translate"
                 class="form-control"
@@ -25,11 +27,13 @@
             </fieldset>
 
             <fieldset class="form-group">
+              <legend>{{'article-body' | translate}}</legend>
               <textarea [placeholder]="'article-body' | translate" class="form-control" formControlName="body" rows="8">
               </textarea>
             </fieldset>
 
             <fieldset class="form-group">
+              <legend>{{'enter-tags' | translate}}</legend>
               <input
                 (keyup.enter)="addTag()"
                 [formControl]="tagField"
@@ -40,7 +44,7 @@
 
               <div class="tag-list">
                 <span *ngFor="let tag of article.tagList" class="tag-default tag-pill">
-                  <i (click)="removeTag(tag)" class="ion-close-round"></i>
+                  <em (click)="removeTag(tag)" class="ion-close-round"></em>
                   {{ tag }}
                 </span>
               </div>

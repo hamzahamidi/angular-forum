@@ -14,7 +14,7 @@ export class ArticleComponent implements OnInit {
   canModify: boolean;
   comments: Comment[];
   commentControl = new FormControl();
-  commentFormErrors = {};
+  commentFormErrors;
   isSubmitting = false;
   isDeleting = false;
 
