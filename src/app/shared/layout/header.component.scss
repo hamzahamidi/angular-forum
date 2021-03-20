@@ -1,0 +1,15 @@
+li.nav-item {
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+li.lang > a {
+  height: 32px;
+  text-align: center;
+  width: 32px;
+
+  &.active {
+    color: black;
+  }
+}

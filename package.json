@@ -22,7 +22,10 @@
     "@angular/platform-browser": "11.2.6",
     "@angular/platform-browser-dynamic": "11.2.6",
     "@angular/router": "11.2.6",
+    "@ngx-translate/core": "13.0.0",
+    "@ngx-translate/http-loader": "6.0.0",
     "marked": "^0.8.1",
+    "ngx-translate-multi-http-loader": "3.0.0",
     "rxjs": "6.6.6",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"

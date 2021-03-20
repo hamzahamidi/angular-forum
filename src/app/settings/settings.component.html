@@ -3,7 +3,7 @@
     <div class="row">
       <div class="col-md-6 offset-md-3 col-xs-12">
 
-        <h1 class="text-xs-center">Your Settings</h1>
+        <h1 class="text-xs-center">{{'your-settings' | translate}}</h1>
 
         <app-list-errors [errors]="errors"></app-list-errors>
 
@@ -13,21 +13,21 @@
             <fieldset class="form-group">
               <input class="form-control"
                 type="text"
-                placeholder="URL of profile picture"
+                [placeholder]="'url-profile-picture' | translate"
                 formControlName="image" />
             </fieldset>
 
             <fieldset class="form-group">
               <input class="form-control form-control-lg"
                 type="text"
-                placeholder="Username"
+                [placeholder]="'username' | translate"
                 formControlName="username" />
             </fieldset>
 
             <fieldset class="form-group">
               <textarea class="form-control form-control-lg"
                 rows="8"
-                placeholder="Short bio about you"
+                [placeholder]="'short-bio' | translate"
                 formControlName="bio">
               </textarea>
             </fieldset>
@@ -35,20 +35,20 @@
             <fieldset class="form-group">
               <input class="form-control form-control-lg"
                 type="email"
-                placeholder="Email"
+                [placeholder]="'email' | translate"
                 formControlName="email" />
             </fieldset>
 
             <fieldset class="form-group">
               <input class="form-control form-control-lg"
                 type="password"
-                placeholder="New Password"
+                [placeholder]="'new-password' | translate"
                 formControlName="password" />
             </fieldset>
 
             <button class="btn btn-lg btn-primary pull-xs-right"
               type="submit">
-              Update Settings
+              {{'update-settings' | translate}}
             </button>
 
           </fieldset>

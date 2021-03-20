@@ -5,35 +5,35 @@
       <div class="col-md-6 offset-md-3 col-xs-12">
         <h1 class="text-xs-center">{{ title }}</h1>
         <p class="text-xs-center">
-          <a [routerLink]="['/login']" *ngIf="authType == 'register'">Have an account?</a>
-          <a [routerLink]="['/register']" *ngIf="authType == 'login'">Need an account?</a>
+          <a *ngIf="authType == 'register'" [routerLink]="['/login']">{{'have-account' | translate}}</a>
+          <a *ngIf="authType == 'login'" [routerLink]="['/register']">{{'need-account' | translate}}</a>
         </p>
         <app-list-errors [errors]="errors"></app-list-errors>
-        <form [formGroup]="authForm" (ngSubmit)="submitForm()">
+        <form (ngSubmit)="submitForm()" [formGroup]="authForm">
           <fieldset [disabled]="isSubmitting">
             <fieldset class="form-group">
               <input
+                *ngIf="authType == 'register'"
+                [placeholder]="'username' | translate"
+                class="form-control form-control-lg"
                 formControlName="username"
-                placeholder="Username"
-                class="form-control form-control-lg"
-                type="text"
-                *ngIf="authType == 'register'" />
+                type="text"/>
             </fieldset>
             <fieldset class="form-group">
               <input
+                [placeholder]="'email' | translate"
+                class="form-control form-control-lg"
                 formControlName="email"
-                placeholder="Email"
-                class="form-control form-control-lg"
-                type="text" />
+                type="text"/>
             </fieldset>
             <fieldset class="form-group">
               <input
-                formControlName="password"
-                placeholder="Password"
+                [placeholder]="'password' | translate"
                 class="form-control form-control-lg"
-                type="password" />
+                formControlName="password"
+                type="password"/>
             </fieldset>
-            <button class="btn btn-lg btn-primary pull-xs-right" [disabled]="!authForm.valid" type="submit">
+            <button [disabled]="!authForm.valid" class="btn btn-lg btn-primary pull-xs-right" type="submit">
               {{ title }}
             </button>
           </fieldset>

@@ -7,28 +7,29 @@
       <app-article-meta [article]="article">
 
           <span [hidden]="!canModify">
-          <a class="btn btn-sm btn-outline-secondary"
-             [routerLink]="['/editor', article.slug]">
-            <i class="ion-edit"></i> Edit Article
+          <a [routerLink]="['/editor', article.slug]"
+             class="btn btn-sm btn-outline-secondary">
+            <i class="ion-edit"></i> {{'edit-article' | translate}}
           </a>
 
-          <button class="btn btn-sm btn-outline-danger"
-            [ngClass]="{disabled: isDeleting}"
-            (click)="deleteArticle()">
-            <i class="ion-trash-a"></i> Delete Article
+          <button (click)="deleteArticle()"
+                  [ngClass]="{disabled: isDeleting}"
+                  class="btn btn-sm btn-outline-danger">
+            <i class="ion-trash-a"></i> {{'delete-article' | translate}}
           </button>
         </span>
 
         <span [hidden]="canModify">
           <app-follow-button
-            [profile]="article.author"
-            (toggle)="onToggleFollowing($event)">
+            (toggle)="onToggleFollowing($event)"
+            [profile]="article.author">
           </app-follow-button>
 
           <app-favorite-button
-            [article]="article"
-            (toggle)="onToggleFavorite($event)">
-            {{ article.favorited ? 'Unfavorite' : 'Favorite' }} Article <span class="counter">({{ article.favoritesCount }})</span>
+            (toggle)="onToggleFavorite($event)"
+            [article]="article">
+            {{ (article.favorited ? 'unfavorite' : 'favorite') | translate }} {{'article' | translate}} <span
+            class="counter">({{ article.favoritesCount }})</span>
           </app-favorite-button>
         </span>
 
@@ -44,8 +45,7 @@
         <div [innerHTML]="article.body | markdown"></div>
 
         <ul class="tag-list">
-          <li *ngFor="let tag of article.tagList"
-            class="tag-default tag-pill tag-outline">
+          <li *ngFor="let tag of article.tagList" class="tag-default tag-pill tag-outline">
             {{ tag }}
           </li>
         </ul>
@@ -53,34 +53,36 @@
       </div>
     </div>
 
-    <hr />
+    <hr/>
 
     <div class="article-actions">
       <app-article-meta [article]="article">
 
           <span [hidden]="!canModify">
-          <a class="btn btn-sm btn-outline-secondary"
-             [routerLink]="['/editor', article.slug]">
-            <i class="ion-edit"></i> Edit Article
+          <a [routerLink]="['/editor', article.slug]"
+             class="btn btn-sm btn-outline-secondary">
+            <i class="ion-edit"></i> {{'edit-article' | translate}}
           </a>
 
-          <button class="btn btn-sm btn-outline-danger"
-            [ngClass]="{disabled: isDeleting}"
-            (click)="deleteArticle()">
-            <i class="ion-trash-a"></i> Delete Article
+          <button (click)="deleteArticle()"
+                  [ngClass]="{disabled: isDeleting}"
+                  class="btn btn-sm btn-outline-danger">
+            <i class="ion-trash-a"></i> {{'delete-article' | translate}}
           </button>
         </span>
 
         <span [hidden]="canModify">
           <app-follow-button
-            [profile]="article.author"
-            (toggle)="onToggleFollowing($event)">
+            (toggle)="onToggleFollowing($event)"
+            [profile]="article.author">
           </app-follow-button>
 
           <app-favorite-button
-            [article]="article"
-            (toggle)="onToggleFavorite($event)">
-            {{ article.favorited ? 'Unfavorite' : 'Favorite' }} Article <span class="counter">({{ article.favoritesCount }})</span>
+            (toggle)="onToggleFavorite($event)"
+            [article]="article">
+            {{ (article.favorited ? 'unfavorite' : 'favorite') | translate }} {{'article' | translate}}  <span
+            class="counter">({{
+            article.favoritesCount }})</span>
           </app-favorite-button>
         </span>
 
@@ -92,19 +94,19 @@
 
         <div *appShowAuthed="true">
           <app-list-errors [errors]="commentFormErrors"></app-list-errors>
-          <form class="card comment-form" (ngSubmit)="addComment()">
+          <form (ngSubmit)="addComment()" class="card comment-form">
             <fieldset [disabled]="isSubmitting">
               <div class="card-block">
-                <textarea class="form-control"
-                  placeholder="Write a comment..."
-                  rows="3"
-                  [formControl]="commentControl"
+                <textarea [formControl]="commentControl"
+                          [placeholder]="'write-a-comment' | translate"
+                          class="form-control"
+                          rows="3"
                 ></textarea>
               </div>
               <div class="card-footer">
-                <img [src]="currentUser.image" class="comment-author-img" />
+                <img [src]="currentUser.image" class="comment-author-img"/>
                 <button class="btn btn-sm btn-primary" type="submit">
-                 Post Comment
+                  {{'post-comment' | translate}}
                 </button>
               </div>
             </fieldset>
@@ -112,13 +114,14 @@
         </div>
 
         <div *appShowAuthed="false">
-          <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this article.
+          <a [routerLink]="['/login']">{{'sign-in' | translate}}</a> or <a [routerLink]="['/register']">{{'sign-up' |
+          translate}}</a> {{'add-comment-to-article' | translate}}
         </div>
 
         <app-article-comment
+          (deleteComment)="onDeleteComment(comment)"
           *ngFor="let comment of comments"
-          [comment]="comment"
-          (deleteComment)="onDeleteComment(comment)">
+          [comment]="comment">
         </app-article-comment>
 
       </div>
