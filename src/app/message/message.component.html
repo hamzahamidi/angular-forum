@@ -1,0 +1,106 @@
+<div class="message-page">
+  <div class="banner">
+    <div class="container">
+      <h1>{{ message.title }}</h1>
+
+      <app-message-meta [message]="message">
+        <span [hidden]="!canModify">
+          <a [routerLink]="['/editor', message.slug]" class="btn btn-sm btn-outline-secondary">
+            <em class="ion-edit"></em> {{ 'edit-message' | translate }}
+          </a>
+
+          <button (click)="deleteMessage()" [ngClass]="{ disabled: isDeleting }" class="btn btn-sm btn-outline-danger">
+            <em class="ion-trash-a"></em> {{ 'delete-message' | translate }}
+          </button>
+        </span>
+
+        <span [hidden]="canModify">
+          <app-follow-button (toggle)="onToggleFollowing($event)" [profile]="message.author"> </app-follow-button>
+
+          <app-favorite-button (toggle)="onToggleFavorite($event)" [message]="message">
+            {{ (message.favorited ? 'unfavorite' : 'favorite') | translate }} {{ 'message' | translate }}
+            <span class="counter">({{ message.favoritesCount }})</span>
+          </app-favorite-button>
+        </span>
+      </app-message-meta>
+    </div>
+  </div>
+
+  <div class="container page">
+    <div class="row mesage-content">
+      <div class="col-md-12">
+        <div [innerHTML]="message.body | markdown"></div>
+
+        <ul class="tag-list">
+          <li *ngFor="let tag of message.tagList" class="tag-default tag-pill tag-outline">
+            {{ tag }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <hr />
+
+    <div class="message-actions">
+      <app-message-meta [message]="message">
+        <span [hidden]="!canModify">
+          <a [routerLink]="['/editor', message.slug]" class="btn btn-sm btn-outline-secondary">
+            <em class="ion-edit"></em> {{ 'edit-message' | translate }}
+          </a>
+
+          <button (click)="deleteMessage()" [ngClass]="{ disabled: isDeleting }" class="btn btn-sm btn-outline-danger">
+            <em class="ion-trash-a"></em> {{ 'delete-message' | translate }}
+          </button>
+        </span>
+
+        <span [hidden]="canModify">
+          <app-follow-button (toggle)="onToggleFollowing($event)" [profile]="message.author"> </app-follow-button>
+
+          <app-favorite-button (toggle)="onToggleFavorite($event)" [message]="message">
+            {{ (message.favorited ? 'unfavorite' : 'favorite') | translate }} {{ 'messgae' | translate }}
+            <span class="counter">({{ message.favoritesCount }})</span>
+          </app-favorite-button>
+        </span>
+      </app-message-meta>
+    </div>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-8 offset-md-2">
+        <div *appShowAuthed="true">
+          <app-list-errors [errors]="commentFormErrors"></app-list-errors>
+          <form (ngSubmit)="addComment()" class="card comment-form">
+            <fieldset [disabled]="isSubmitting">
+              <legend>{{'message-comment' | translate}}</legend>
+              <div class="card-block">
+                <textarea
+                  [formControl]="commentControl"
+                  [placeholder]="'write-a-comment' | translate"
+                  class="form-control"
+                  rows="3"
+                ></textarea>
+              </div>
+              <div class="card-footer">
+                <img [alt]="'profile-picture' | translate" [src]="currentUser.image" class="comment-author-img" />
+                <button class="btn btn-sm btn-primary" type="submit">
+                  {{ 'post-comment' | translate }}
+                </button>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+
+        <div *appShowAuthed="false">
+          <a [routerLink]="['/login']">{{ 'sign-in' | translate }}</a> or
+          <a [routerLink]="['/register']">{{ 'sign-up' | translate }}</a> {{ 'add-comment-to-message' | translate }}
+        </div>
+
+        <app-message-comment
+          (deleteComment)="onDeleteComment(comment)"
+          *ngFor="let comment of comments"
+          [comment]="comment"
+        >
+        </app-message-comment>
+      </div>
+    </div>
+  </div>
+</div>

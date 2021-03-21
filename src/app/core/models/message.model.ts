@@ -1,6 +1,6 @@
 import { Profile } from './profile.model';
 
-export interface Article {
+export interface Message {
   slug: string;
   title: string;
   description: string;

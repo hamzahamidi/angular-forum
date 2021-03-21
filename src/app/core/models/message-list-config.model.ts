@@ -1,4 +1,4 @@
-export interface ArticleListConfig {
+export interface MessageListConfig {
   type: string;
 
   filters: {

@@ -1,4 +1,4 @@
-export * from './article-helpers';
+export * from './message-helpers';
 export * from './buttons';
 export * from './layout';
 export * from './list-errors.component';

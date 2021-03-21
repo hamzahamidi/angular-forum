@@ -1,11 +1,11 @@
-<app-article-preview *ngFor="let article of results" [article]="article"> </app-article-preview>
+<app-message-preview *ngFor="let message of results" [message]="message"> </app-message-preview>
 
-<div [hidden]="!loading" class="app-article-preview">
-  {{ 'loading-articles' | translate }}
+<div [hidden]="!loading" class="app-message-preview">
+  {{ 'loading-messages' | translate }}
 </div>
 
-<div [hidden]="loading || results.length" class="app-article-preview">
-  {{ 'no-articles-yet' | translate }}
+<div [hidden]="loading || results.length" class="app-message-preview">
+  {{ 'no-messages-yet' | translate }}
 </div>
 
 <nav [hidden]="loading || totalPages.length <= 1">

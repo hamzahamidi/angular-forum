@@ -2,14 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Article, ArticlesService, Comment, CommentsService, User, UserService } from '../core';
+import { MessagesService, Comment, CommentsService, User, UserService } from '../core';
+import { Message } from '../core/models/message.model';
 
 @Component({
-  selector: 'app-article-page',
-  templateUrl: './article.component.html',
+  selector: 'app-message-page',
+  templateUrl: './message.component.html',
 })
-export class ArticleComponent implements OnInit {
-  article: Article;
+export class MessageComponent implements OnInit {
+  message: Message;
   currentUser: User;
   canModify: boolean;
   comments: Comment[];
@@ -20,18 +21,18 @@ export class ArticleComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private articlesService: ArticlesService,
+    private messagesService: MessagesService,
     private commentsService: CommentsService,
     private router: Router,
     private userService: UserService
   ) {}
 
   ngOnInit() {
-    // Retreive the prefetched article
-    this.route.data.subscribe((data: { article: Article }) => {
-      this.article = data.article;
+    // Retreive the prefetched message
+    this.route.data.subscribe((data: { message: Message }) => {
+      this.message = data.message;
 
-      // Load the comments on this article
+      // Load the comments on this message
       this.populateComments();
     });
 
@@ -39,34 +40,34 @@ export class ArticleComponent implements OnInit {
     this.userService.currentUser.subscribe((userData: User) => {
       this.currentUser = userData;
 
-      this.canModify = this.currentUser.username === this.article.author.username;
+      this.canModify = this.currentUser.username === this.message.author.username;
     });
   }
 
   onToggleFavorite(favorited: boolean) {
-    this.article.favorited = favorited;
+    this.message.favorited = favorited;
 
     if (favorited) {
-      this.article.favoritesCount++;
+      this.message.favoritesCount++;
     } else {
-      this.article.favoritesCount--;
+      this.message.favoritesCount--;
     }
   }
 
   onToggleFollowing(following: boolean) {
-    this.article.author.following = following;
+    this.message.author.following = following;
   }
 
-  deleteArticle() {
+  deleteMessage() {
     this.isDeleting = true;
 
-    this.articlesService.destroy(this.article.slug).subscribe((success) => {
+    this.messagesService.destroy(this.message.slug).subscribe((success) => {
       this.router.navigateByUrl('/');
     });
   }
 
   populateComments() {
-    this.commentsService.getAll(this.article.slug).subscribe((comments) => (this.comments = comments));
+    this.commentsService.getAll(this.message.slug).subscribe((comments) => (this.comments = comments));
   }
 
   addComment() {
@@ -74,7 +75,7 @@ export class ArticleComponent implements OnInit {
     this.commentFormErrors = {};
 
     const commentBody = this.commentControl.value;
-    this.commentsService.add(this.article.slug, commentBody).subscribe(
+    this.commentsService.add(this.message.slug, commentBody).subscribe(
       (comment) => {
         this.comments.unshift(comment);
         this.commentControl.reset('');
@@ -88,7 +89,7 @@ export class ArticleComponent implements OnInit {
   }
 
   onDeleteComment(comment) {
-    this.commentsService.destroy(comment.id, this.article.slug).subscribe((success) => {
+    this.commentsService.destroy(comment.id, this.message.slug).subscribe((success) => {
       this.comments = this.comments.filter((item) => item !== comment);
     });
   }

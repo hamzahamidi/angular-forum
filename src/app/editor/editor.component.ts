@@ -2,45 +2,45 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Article, ArticlesService, Errors } from '../core';
+import { Message, MessagesService, Errors } from '../core';
 
 @Component({
   selector: 'app-editor-page',
   templateUrl: './editor.component.html',
 })
 export class EditorComponent implements OnInit {
-  article: Article = {} as Article;
-  articleForm: FormGroup;
+  message: Message = {} as Message;
+  messageForm: FormGroup;
   tagField = new FormControl();
   errors: Errors;
   isSubmitting = false;
 
   constructor(
-    private articlesService: ArticlesService,
+    private messageService: MessagesService,
     private route: ActivatedRoute,
     private router: Router,
     private fb: FormBuilder
   ) {
     // use the FormBuilder to create a form group
-    this.articleForm = this.fb.group({
+    this.messageForm = this.fb.group({
       title: '',
       description: '',
       body: '',
     });
 
     // Initialized tagList as empty array
-    this.article.tagList = [];
+    this.message.tagList = [];
 
     // Optional: subscribe to value changes on the form
-    // this.articleForm.valueChanges.subscribe(value => this.updateArticle(value));
+    // this.messageForm.valueChanges.subscribe(value => this.updateMessage(value));
   }
 
   ngOnInit() {
-    // If there's an article prefetched, load it
-    this.route.data.subscribe((data: { article: Article }) => {
-      if (data.article) {
-        this.article = data.article;
-        this.articleForm.patchValue(data.article);
+    // If there's an message prefetched, load it
+    this.route.data.subscribe((data: { message: Message }) => {
+      if (data.message) {
+        this.message = data.message;
+        this.messageForm.patchValue(data.message);
       }
     });
   }
@@ -49,26 +49,26 @@ export class EditorComponent implements OnInit {
     // retrieve tag control
     const tag = this.tagField.value;
     // only add tag if it does not exist yet
-    if (this.article.tagList.indexOf(tag) < 0) {
-      this.article.tagList.push(tag);
+    if (this.message.tagList.indexOf(tag) < 0) {
+      this.message.tagList.push(tag);
     }
     // clear the input
     this.tagField.reset('');
   }
 
   removeTag(tagName: string) {
-    this.article.tagList = this.article.tagList.filter((tag) => tag !== tagName);
+    this.message.tagList = this.message.tagList.filter((tag) => tag !== tagName);
   }
 
   submitForm() {
     this.isSubmitting = true;
 
     // update the model
-    this.updateArticle(this.articleForm.value);
+    this.updateMessage(this.messageForm.value);
 
     // post the changes
-    this.articlesService.save(this.article).subscribe(
-      (article) => this.router.navigateByUrl('/article/' + article.slug),
+    this.messageService.save(this.message).subscribe(
+      (message) => this.router.navigateByUrl('/message/' + message.slug),
       (err) => {
         this.errors = err;
         this.isSubmitting = false;
@@ -76,7 +76,7 @@ export class EditorComponent implements OnInit {
     );
   }
 
-  updateArticle(values: Object) {
-    Object.assign(this.article, values);
+  updateMessage(values: Object) {
+    Object.assign(this.message, values);
   }
 }

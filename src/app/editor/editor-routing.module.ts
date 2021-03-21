@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { EditorComponent } from './editor.component';
-import { EditableArticleResolver } from './editable-article-resolver.service';
 import { AuthGuard } from '../core';
+import { EditableMessageResolver } from './editable-message-resolver.service';
 
 const routes: Routes = [
   {
@@ -15,7 +15,7 @@ const routes: Routes = [
     component: EditorComponent,
     canActivate: [AuthGuard],
     resolve: {
-      article: EditableArticleResolver,
+      message: EditableMessageResolver,
     },
   },
 ];

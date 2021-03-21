@@ -1,17 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { ArticleListConfig, Profile } from '../core';
+import { MessageListConfig, Profile } from '../core';
 
 @Component({
-  selector: 'app-profile-articles',
-  templateUrl: './profile-articles.component.html',
+  selector: 'app-profile-messages',
+  templateUrl: './profile-messages.component.html',
 })
-export class ProfileArticlesComponent implements OnInit {
+export class ProfileMessagesComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   profile: Profile;
-  articlesConfig: ArticleListConfig = {
+  messagesConfig: MessageListConfig = {
     type: 'all',
     filters: {},
   };
@@ -19,11 +19,11 @@ export class ProfileArticlesComponent implements OnInit {
   ngOnInit() {
     this.route.parent.data.subscribe((data: { profile: Profile }) => {
       this.profile = data.profile;
-      this.articlesConfig = {
+      this.messagesConfig = {
         type: 'all',
         filters: {},
-      }; // Only method I found to refresh article load on swap
-      this.articlesConfig.filters.author = this.profile.username;
+      }; // Only method I found to refresh message load on swap
+      this.messagesConfig.filters.author = this.profile.username;
     });
   }
 }

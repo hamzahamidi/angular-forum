@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
-import { ArticleListComponent, ArticleMetaComponent, ArticlePreviewComponent } from './article-helpers';
+import { MessageListComponent, MessageMetaComponent, MessagePreviewComponent } from './message-helpers';
 import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
 import { ListErrorsComponent } from './list-errors.component';
 import { ShowAuthedDirective } from './show-authed.directive';
@@ -13,18 +13,18 @@ import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule, RouterModule, TranslateModule],
   declarations: [
-    ArticleListComponent,
-    ArticleMetaComponent,
-    ArticlePreviewComponent,
+    MessageListComponent,
+    MessageMetaComponent,
+    MessagePreviewComponent,
     FavoriteButtonComponent,
     FollowButtonComponent,
     ListErrorsComponent,
     ShowAuthedDirective,
   ],
   exports: [
-    ArticleListComponent,
-    ArticleMetaComponent,
-    ArticlePreviewComponent,
+    MessageListComponent,
+    MessageMetaComponent,
+    MessagePreviewComponent,
     CommonModule,
     FavoriteButtonComponent,
     FollowButtonComponent,

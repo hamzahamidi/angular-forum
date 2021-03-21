@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 
 import { EditorComponent } from './editor.component';
-import { EditableArticleResolver } from './editable-article-resolver.service';
+import { EditableMessageResolver } from './editable-message-resolver.service';
 import { SharedModule } from '../shared';
 import { EditorRoutingModule } from './editor-routing.module';
 import { TranslateModule } from '@ngx-translate/core';
@@ -9,6 +9,6 @@ import { TranslateModule } from '@ngx-translate/core';
 @NgModule({
   imports: [SharedModule, EditorRoutingModule, TranslateModule],
   declarations: [EditorComponent],
-  providers: [EditableArticleResolver],
+  providers: [EditableMessageResolver],
 })
 export class EditorModule {}

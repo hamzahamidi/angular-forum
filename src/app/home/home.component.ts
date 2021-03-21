@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { ArticleListConfig, TagsService, UserService } from '../core';
+import { MessageListConfig, TagsService, UserService } from '../core';
 
 @Component({
   selector: 'app-home-page',
@@ -12,7 +12,7 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private tagsService: TagsService, private userService: UserService) {}
 
   isAuthenticated: boolean;
-  listConfig: ArticleListConfig = {
+  listConfig: MessageListConfig = {
     type: 'all',
     filters: {},
   };
@@ -23,7 +23,7 @@ export class HomeComponent implements OnInit {
     this.userService.isAuthenticated.subscribe((authenticated) => {
       this.isAuthenticated = authenticated;
 
-      // set the article list accordingly
+      // set the message list accordingly
       if (authenticated) {
         this.setListTo('feed');
       } else {

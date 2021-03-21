@@ -1,17 +1,17 @@
 import { Component, Input } from '@angular/core';
 
-import { Article, ArticleListConfig, ArticlesService } from '../../core';
+import { Message, MessageListConfig, MessagesService } from '../../core';
 @Component({
-  selector: 'app-article-list',
-  styleUrls: ['article-list.component.css'],
-  templateUrl: './article-list.component.html',
+  selector: 'app-message-list',
+  styleUrls: ['message-list.component.css'],
+  templateUrl: './message-list.component.html',
 })
-export class ArticleListComponent {
-  constructor(private articlesService: ArticlesService) {}
+export class MessageListComponent {
+  constructor(private messagesService: MessagesService) {}
 
   @Input() limit: number;
   @Input()
-  set config(config: ArticleListConfig) {
+  set config(config: MessageListConfig) {
     if (config) {
       this.query = config;
       this.currentPage = 1;
@@ -19,8 +19,8 @@ export class ArticleListComponent {
     }
   }
 
-  query: ArticleListConfig;
-  results: Article[];
+  query: MessageListConfig;
+  results: Message[];
   loading = false;
   currentPage = 1;
   totalPages: Array<number> = [1];
@@ -40,12 +40,12 @@ export class ArticleListComponent {
       this.query.filters.offset = this.limit * (this.currentPage - 1);
     }
 
-    this.articlesService.query(this.query).subscribe((data) => {
+    this.messagesService.query(this.query).subscribe((data) => {
       this.loading = false;
-      this.results = data.articles;
+      this.results = data.messages;
 
       // Used from http://www.jstips.co/en/create-range-0...n-easily-using-one-line/
-      this.totalPages = Array.from(new Array(Math.ceil(data.articlesCount / this.limit)), (val, index) => index + 1);
+      this.totalPages = Array.from(new Array(Math.ceil(data.messagesCount / this.limit)), (val, index) => index + 1);
     });
   }
 }

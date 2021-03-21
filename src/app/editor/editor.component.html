@@ -4,12 +4,12 @@
       <div class="col-md-10 offset-md-1 col-xs-12">
         <app-list-errors [errors]="errors"></app-list-errors>
 
-        <form [formGroup]="articleForm">
+        <form [formGroup]="messageForm">
           <fieldset [disabled]="isSubmitting">
             <fieldset class="form-group">
-              <legend>{{'article-title' | translate}}</legend>
+              <legend>{{'message-title' | translate}}</legend>
               <input
-                [placeholder]="'article-title' | translate"
+                [placeholder]="'message-title' | translate"
                 class="form-control form-control-lg"
                 formControlName="title"
                 type="text"
@@ -17,9 +17,9 @@
             </fieldset>
 
             <fieldset class="form-group">
-              <legend>{{'article-description' | translate}}</legend>
+              <legend>{{'message-description' | translate}}</legend>
               <input
-                [placeholder]="'article-description' | translate"
+                [placeholder]="'message-description' | translate"
                 class="form-control"
                 formControlName="description"
                 type="text"
@@ -27,8 +27,8 @@
             </fieldset>
 
             <fieldset class="form-group">
-              <legend>{{'article-body' | translate}}</legend>
-              <textarea [placeholder]="'article-body' | translate" class="form-control" formControlName="body" rows="8">
+              <legend>{{'message-body' | translate}}</legend>
+              <textarea [placeholder]="'message-body' | translate" class="form-control" formControlName="body" rows="8">
               </textarea>
             </fieldset>
 
@@ -43,7 +43,7 @@
               />
 
               <div class="tag-list">
-                <span *ngFor="let tag of article.tagList" class="tag-default tag-pill">
+                <span *ngFor="let tag of message.tagList" class="tag-default tag-pill">
                   <em (click)="removeTag(tag)" class="ion-close-round"></em>
                   {{ tag }}
                 </span>
@@ -51,7 +51,7 @@
             </fieldset>
 
             <button (click)="submitForm()" class="btn btn-lg pull-xs-right btn-primary" type="button">
-              {{ 'publish-article' | translate }}
+              {{ 'publish-message' | translate }}
             </button>
           </fieldset>
         </form>

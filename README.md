@@ -35,28 +35,28 @@ The example application is a social blogging site (i.e. a Medium.com clone). You
 
 - Authenticate users via JWT (login/signup pages + logout button on settings page)
 - CRU* users (sign up & settings page - no deleting required)
-- CRUD Articles
-- CR*D Comments on articles (no updating required)
-- GET and display paginated lists of articles
-- Favorite articles
+- CRUD messages
+- CR*D Comments on messages (no updating required)
+- GET and display paginated lists of messages
+- Favorite messages
 - Follow other users
 
 **The general page breakdown looks like this:**
 
 - Home page (URL: /#/ )
     - List of tags
-    - List of articles pulled from either Feed, Global, or by Tag
-    - Pagination for list of articles
+    - List of messages pulled from either Feed, Global, or by Tag
+    - Pagination for list of messages
 - Sign in/Sign up pages (URL: /#/login, /#/register )
     - Uses JWT (store the token in localStorage)
     - Authentication can be easily switched to session/cookie based
 - Settings page (URL: /#/settings )
-- Editor page to create/edit articles (URL: /#/editor, /#/editor/article-slug-here )
-- Article page (URL: /#/article/article-slug-here )
-    - Delete article button (only shown to article's author)
+- Editor page to create/edit messages (URL: /#/editor, /#/editor/message-slug-here )
+- Message page (URL: /#/message/message-slug-here )
+    - Delete message button (only shown to message's author)
     - Render markdown from server client side
     - Comments section at bottom of page
     - Delete comment button (only shown to comment's author)
 - Profile page (URL: /#/profile/:username, /#/profile/:username/favorites )
     - Show basic user info
-    - List of articles populated from author's created articles or author's favorited articles
+    - List of messages populated from author's created messages or author's favorited messages

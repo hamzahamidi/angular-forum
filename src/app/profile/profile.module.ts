@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 
-import { ProfileArticlesComponent } from './profile-articles.component';
+import { ProfileMessagesComponent } from './profile-messages.component';
 import { ProfileComponent } from './profile.component';
 import { ProfileFavoritesComponent } from './profile-favorites.component';
 import { ProfileResolver } from './profile-resolver.service';
@@ -10,7 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   imports: [SharedModule, ProfileRoutingModule, TranslateModule],
-  declarations: [ProfileArticlesComponent, ProfileComponent, ProfileFavoritesComponent],
+  declarations: [ProfileMessagesComponent, ProfileComponent, ProfileFavoritesComponent],
   providers: [ProfileResolver],
 })
 export class ProfileModule {}

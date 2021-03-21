@@ -1,6 +1,6 @@
 <button
   class="btn btn-sm"
-  [ngClass]="{ disabled: isSubmitting, 'btn-outline-primary': !article.favorited, 'btn-primary': article.favorited }"
+  [ngClass]="{ disabled: isSubmitting, 'btn-outline-primary': !message.favorited, 'btn-primary': message.favorited }"
   (click)="toggleFavorite()"
 >
   <em class="ion-heart"></em> <ng-content></ng-content>

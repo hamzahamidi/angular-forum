@@ -1,0 +1,18 @@
+<div class="message-preview">
+  <app-message-meta [message]="message">
+    <app-favorite-button (toggle)="onToggleFavorite($event)" [message]="message" class="pull-xs-right">
+      {{ message.favoritesCount }}
+    </app-favorite-button>
+  </app-message-meta>
+
+  <a [routerLink]="['/message', message.slug]" class="preview-link">
+    <h1>{{ message.title }}</h1>
+    <p>{{ message.description }}</p>
+    <span>{{ 'read-more' | translate }}</span>
+    <ul class="tag-list">
+      <li *ngFor="let tag of message.tagList" class="tag-default tag-pill tag-outline">
+        {{ tag }}
+      </li>
+    </ul>
+  </a>
+</div>

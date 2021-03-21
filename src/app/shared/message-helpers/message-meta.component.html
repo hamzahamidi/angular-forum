@@ -1,0 +1,16 @@
+<div class="message-meta">
+  <a [routerLink]="['/profile', message.author.username]">
+    <img [alt]="'profile-picture' | translate" [src]="message.author.image" />
+  </a>
+
+  <div class="info">
+    <a class="author" [routerLink]="['/profile', message.author.username]">
+      {{ message.author.username }}
+    </a>
+    <span class="date">
+      {{ message.createdAt | date: 'longDate' }}
+    </span>
+  </div>
+
+  <ng-content></ng-content>
+</div>

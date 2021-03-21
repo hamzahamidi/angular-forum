@@ -2,18 +2,18 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, Resolve, Router, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 
-import { Article, ArticlesService, UserService } from '../core';
+import { Message, MessagesService, UserService } from '../core';
 import { catchError, map } from 'rxjs/operators';
 
 @Injectable()
-export class EditableArticleResolver implements Resolve<Article> {
-  constructor(private articlesService: ArticlesService, private router: Router, private userService: UserService) {}
+export class EditableMessageResolver implements Resolve<Message> {
+  constructor(private messagesService: MessagesService, private router: Router, private userService: UserService) {}
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> {
-    return this.articlesService.get(route.params['slug']).pipe(
-      map((article) => {
-        if (this.userService.getCurrentUser().username === article.author.username) {
-          return article;
+    return this.messagesService.get(route.params['slug']).pipe(
+      map((message) => {
+        if (this.userService.getCurrentUser().username === message.author.username) {
+          return message;
         } else {
           this.router.navigateByUrl('/');
         }

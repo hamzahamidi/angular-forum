@@ -15,8 +15,8 @@ const routes: Routes = [
     loadChildren: () => import('./editor/editor.module').then((m) => m.EditorModule),
   },
   {
-    path: 'article',
-    loadChildren: () => import('./article/article.module').then((m) => m.ArticleModule),
+    path: 'message',
+    loadChildren: () => import('./message/message.module').then((m) => m.MessageModule),
   },
 ];
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { ArticleListConfig, Profile } from '../core';
+import { MessageListConfig, Profile } from '../core';
 
 @Component({
   selector: 'app-profile-favorites',
@@ -11,7 +11,7 @@ export class ProfileFavoritesComponent implements OnInit {
   constructor(private route: ActivatedRoute, private router: Router) {}
 
   profile: Profile;
-  favoritesConfig: ArticleListConfig = {
+  favoritesConfig: MessageListConfig = {
     type: 'all',
     filters: {},
   };

@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { Article, ArticlesService, UserService } from '../../core';
+import { Message, MessagesService, UserService } from '../../core';
 import { of } from 'rxjs';
 import { concatMap, tap } from 'rxjs/operators';
 
@@ -10,9 +10,9 @@ import { concatMap, tap } from 'rxjs/operators';
   templateUrl: './favorite-button.component.html',
 })
 export class FavoriteButtonComponent {
-  constructor(private articlesService: ArticlesService, private router: Router, private userService: UserService) {}
+  constructor(private messagesService: MessagesService, private router: Router, private userService: UserService) {}
 
-  @Input() article: Article;
+  @Input() message: Message;
   @Output() toggle = new EventEmitter<boolean>();
   isSubmitting = false;
 
@@ -28,9 +28,9 @@ export class FavoriteButtonComponent {
             return of(null);
           }
 
-          // Favorite the article if it isn't favorited yet
-          if (!this.article.favorited) {
-            return this.articlesService.favorite(this.article.slug).pipe(
+          // Favorite the message if it isn't favorited yet
+          if (!this.message.favorited) {
+            return this.messagesService.favorite(this.message.slug).pipe(
               tap(
                 (data) => {
                   this.isSubmitting = false;
@@ -40,9 +40,9 @@ export class FavoriteButtonComponent {
               )
             );
 
-            // Otherwise, unfavorite the article
+            // Otherwise, unfavorite the message
           } else {
-            return this.articlesService.unfavorite(this.article.slug).pipe(
+            return this.messagesService.unfavorite(this.message.slug).pipe(
               tap(
                 (data) => {
                   this.isSubmitting = false;
