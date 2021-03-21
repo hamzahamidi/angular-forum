@@ -30,7 +30,10 @@ export class MessagesService {
   }
 
   get(slug): Observable<Message> {
-    return this.apiService.get(MESSAGE_PATH + '/' + slug).pipe(map((data) => data.message));
+    return this.apiService.get(MESSAGE_PATH + '/' + slug).pipe(
+      map((data) => data.article),
+      map((article) => article) // extraire article devrait suffire en attendant cavus
+    );
   }
 
   destroy(slug) {
@@ -40,11 +43,13 @@ export class MessagesService {
   save(message): Observable<Message> {
     // If we're updating an existing message
     if (message.slug) {
-      return this.apiService.put(MESSAGE_PATH + '/' + message.slug, { message }).pipe(map((data) => data.message));
+      return this.apiService
+        .put(MESSAGE_PATH + '/' + message.slug, { article: message })
+        .pipe(map((data) => data.message));
 
       // Otherwise, create a new message
     } else {
-      return this.apiService.post(MESSAGE_PATH + '/', { message }).pipe(map((data) => data.message));
+      return this.apiService.post(MESSAGE_PATH + '/', { article: message }).pipe(map((data) => data.message));
     }
   }
 
