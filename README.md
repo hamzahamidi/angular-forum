@@ -1,7 +1,17 @@
-[![Build Status](https://travis-ci.com/hamzahamidi/angular-forum.svg?branch=master)](https://travis-ci.com/hamzahamidi/angular-forum)
-[![GitHub release](https://img.shields.io/github/release/hamzahamidi/angular-forum.svg)](https://github.com/hamzahamidi/angular-forum/releases/latest)
-[![GitHub license](https://img.shields.io/github/license/hamzahamidi/angular-forum.svg)](https://github.com/hamzahamidi/angular-forum)
-
+<p align="center">
+    <a href="https://github.com/hamzahamidi/angular-forum/actions?query=workflow%3ABuild">
+        <img src="https://github.com/hamzahamidi/angular-forum/workflows/Build/badge.svg" alt="Build Status">
+    </a>
+    <a href="https://github.com/hamzahamidi/angular-forum/releases/latest">
+        <img src="https://img.shields.io/github/release/hamzahamidi/angular-forum.svg" alt="Release"/>
+    </a>
+    <a href="https://app.netlify.com/sites/demo-forum/deploys">
+        <img src="https://api.netlify.com/api/v1/badges/9119af54-2449-4044-980d-2528a15fd2f4/deploy-status" alt="Build Status">
+    </a>
+    <a href="https://github.com/hamzahamidi/angular-forum/blob/main/LICENSE">
+        <img src="https://img.shields.io/github/license/hamzahamidi/angular-forum.svg" alt="License MIT">
+    </a>
+</p>
 
 > ### Angular project containing real world examples (CRUD, auth, advanced patterns, etc).
 
@@ -17,15 +27,12 @@ This codebase was created to demonstrate a fully fledged application built with 
 
 Make sure you have the [Angular CLI](https://github.com/angular/angular-cli#installation) installed globally. 
 
-We use [Yarn](https://yarnpkg.com) to manage the dependencies, so we strongly recommend you to use Yarn. you can install it from [Here](https://yarnpkg.com/en/docs/install), then run `yarn install --frozen-lockfile` to resolve all dependencies (might take a minute).
-
-Or, you can use npm the default package manager of NodeJs & install the dependencies with `npm install`.
+We use npm the default package manager of NodeJs & install the dependencies with `npm install`.
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ### Building the project
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `-prod` flag for a production build.
-
+Run `npm run build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 ## Functionality overview
 
