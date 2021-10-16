@@ -1,0 +1,10 @@
+version: '3.8'
+services:
+    front-application:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      volumes:
+        - '.:/usr/src/app'
+      ports:
+        - '4200:4200'
