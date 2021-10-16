@@ -10,7 +10,9 @@
     "lint": "ng lint --force",
     "e2e": "ng e2e"
   },
-  "engines": {"node": ">=14"},
+  "engines": {
+    "node": ">=14"
+  },
   "pre-commit": [
     "lint"
   ],
@@ -35,16 +37,18 @@
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
-    "karma": "~5.2.3",
+    "karma": "^6.3.4",
     "karma-chrome-launcher": "~3.1.0",
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "pre-commit": "^1.2.2",
     "protractor": "~7.0.0",
-    "ts-node": "~8.6.2",
+    "ts-node": "^10.3.0",
     "tslint": "~6.1.0",
     "typescript": "~4.0.3"
   },
-  "resolutions": {"webpack": "^5.0.0"}
+  "resolutions": {
+    "webpack": "^5.0.0"
+  }
 }
