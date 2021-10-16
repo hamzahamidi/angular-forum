@@ -10,6 +10,7 @@
     "lint": "ng lint --force",
     "e2e": "ng e2e"
   },
+  "engines": {"node": ">=14"},
   "pre-commit": [
     "lint"
   ],
