@@ -1,10 +1,10 @@
-name: Build
+name: CI
 
 on:
   workflow_dispatch:
     inputs:
       logLevel:
-        description: 'Log level'     
+        description: 'Log level'
         required: true
         default: 'warning'
   push:
@@ -13,18 +13,18 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-
+  CI:
+    name: install and build
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: [12.x, 14.x, 16.x]
+        node-version: [16.x]
 
     steps:
     - uses: actions/checkout@v2
     - name: setup Node ${{ matrix.node-version }}
-      uses: actions/setup-node@v1
+    - uses: actions/setup-node@v2
       with:
         node-version: ${{ matrix.node-version }}
     - run: npm ci

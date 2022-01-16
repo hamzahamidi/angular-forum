@@ -1,4 +1,4 @@
-FROM node:14.18.1-buster-slim AS compile-image
+FROM node:16.13.2-buster-slim AS compile-image
 
 LABEL name="Angular application" \
       description="This image is for an Angular application starter."
