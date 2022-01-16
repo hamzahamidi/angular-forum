@@ -25,7 +25,7 @@
     "@angular/platform-browser": "^11.2.14",
     "@angular/platform-browser-dynamic": "^11.2.14",
     "@angular/router": "^11.2.14",
-    "marked": "^0.8.1",
+    "marked": "^4.0.10",
     "rxjs": "^6.5.5",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
@@ -34,6 +34,7 @@
     "@angular-devkit/build-angular": "~0.1102.14",
     "@angular/cli": "^11.2.14",
     "@angular/compiler-cli": "^11.2.14",
+    "@types/marked": "^4.0.1",
     "codelyzer": "^6.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
