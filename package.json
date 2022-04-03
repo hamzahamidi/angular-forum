@@ -11,7 +11,7 @@
     "e2e": "ng e2e"
   },
   "engines": {
-    "node": ">=14"
+    "node": ">=16"
   },
   "pre-commit": [
     "lint"
