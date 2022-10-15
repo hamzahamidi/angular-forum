@@ -95,7 +95,6 @@
       }
     }
   },
-  "defaultProject": "ang2-forum",
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
