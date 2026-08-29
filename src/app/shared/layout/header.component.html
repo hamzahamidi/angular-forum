@@ -23,7 +23,17 @@
     </a>
   </ng-container>
 
-  <button mat-icon-button (click)="themeService.toggle()" matTooltip="Toggle dark mode">
+  <button mat-icon-button [matMenuTriggerFor]="paletteMenu" matTooltip="Theme color">
+    <mat-icon>palette</mat-icon>
+  </button>
+  <mat-menu #paletteMenu="matMenu">
+    <button mat-menu-item *ngFor="let p of themeService.palettes" (click)="themeService.setPalette(p.key)">
+      <span class="palette-dot" [style.background]="p.color"></span>
+      {{ p.label }}
+    </button>
+  </mat-menu>
+
+  <button mat-icon-button (click)="themeService.toggleDark()" matTooltip="Toggle dark mode">
     <mat-icon>{{ (themeService.isDarkMode$ | async) ? 'light_mode' : 'dark_mode' }}</mat-icon>
   </button>
 </mat-toolbar>
