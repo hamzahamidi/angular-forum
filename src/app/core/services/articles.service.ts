@@ -6,6 +6,10 @@ import { ApiService } from './api.service';
 import { Article, ArticleListConfig } from '../models';
 import { map } from 'rxjs/operators';
 
+function isSpam(article: Article): boolean {
+  return article.title.toLowerCase().includes('checkpoint ledger');
+}
+
 @Injectable()
 export class ArticlesService {
   constructor (
@@ -13,7 +17,6 @@ export class ArticlesService {
   ) {}
 
   query(config: ArticleListConfig): Observable<{articles: Article[], articlesCount: number}> {
-    // Convert any filters over to Angular's URLSearchParams
     const params = {};
 
     Object.keys(config.filters)
@@ -25,7 +28,10 @@ export class ArticlesService {
     .get(
       '/articles' + ((config.type === 'feed') ? '/feed' : ''),
       new HttpParams({ fromObject: params })
-    );
+    ).pipe(map(data => {
+      const filtered = data.articles.filter(a => !isSpam(a));
+      return { articles: filtered, articlesCount: filtered.length ? data.articlesCount : 0 };
+    }));
   }
 
   get(slug): Observable<Article> {
