@@ -5,8 +5,9 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Article, ArticlesService } from '../core';
 
 @Component({
-  selector: 'app-editor-page',
-  templateUrl: './editor.component.html'
+    selector: 'app-editor-page',
+    templateUrl: './editor.component.html',
+    standalone: false
 })
 export class EditorComponent implements OnInit {
   article: Article = {} as Article;

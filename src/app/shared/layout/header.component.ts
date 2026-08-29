@@ -4,8 +4,9 @@ import { User, UserService, ThemeService, FALLBACK_AVATAR } from '../../core';
 import packageJson from '../../../../package.json';
 
 @Component({
-  selector: 'app-layout-header',
-  templateUrl: './header.component.html'
+    selector: 'app-layout-header',
+    templateUrl: './header.component.html',
+    standalone: false
 })
 export class HeaderComponent implements OnInit {
   constructor(

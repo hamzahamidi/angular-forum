@@ -3,8 +3,9 @@ import { Component, Input } from '@angular/core';
 import { Article, FALLBACK_AVATAR } from '../../core';
 
 @Component({
-  selector: 'app-article-meta',
-  templateUrl: './article-meta.component.html'
+    selector: 'app-article-meta',
+    templateUrl: './article-meta.component.html',
+    standalone: false
 })
 export class ArticleMetaComponent {
   @Input() article: Article;

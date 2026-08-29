@@ -3,8 +3,9 @@ import { Component, Input } from '@angular/core';
 import { Article } from '../../core';
 
 @Component({
-  selector: 'app-article-preview',
-  templateUrl: './article-preview.component.html'
+    selector: 'app-article-preview',
+    templateUrl: './article-preview.component.html',
+    standalone: false
 })
 export class ArticlePreviewComponent {
   @Input() article: Article;
