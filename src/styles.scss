@@ -1,30 +1,114 @@
 @use '@angular/material' as mat;
 
-$light-theme: mat.define-theme((
-  color: (
-    theme-type: light,
-    primary: mat.$azure-palette,
-    tertiary: mat.$cyan-palette,
-  ),
-  density: (
-    scale: 0,
-  ),
+// Azure (default)
+$azure-light: mat.define-theme((
+  color: (theme-type: light, primary: mat.$azure-palette, tertiary: mat.$cyan-palette),
+  density: (scale: 0),
+));
+$azure-dark: mat.define-theme((
+  color: (theme-type: dark, primary: mat.$azure-palette, tertiary: mat.$cyan-palette),
 ));
 
-$dark-theme: mat.define-theme((
-  color: (
-    theme-type: dark,
-    primary: mat.$azure-palette,
-    tertiary: mat.$cyan-palette,
-  ),
+// Violet
+$violet-light: mat.define-theme((
+  color: (theme-type: light, primary: mat.$violet-palette, tertiary: mat.$magenta-palette),
+));
+$violet-dark: mat.define-theme((
+  color: (theme-type: dark, primary: mat.$violet-palette, tertiary: mat.$magenta-palette),
 ));
 
+// Rose
+$rose-light: mat.define-theme((
+  color: (theme-type: light, primary: mat.$rose-palette, tertiary: mat.$orange-palette),
+));
+$rose-dark: mat.define-theme((
+  color: (theme-type: dark, primary: mat.$rose-palette, tertiary: mat.$orange-palette),
+));
+
+// Green
+$green-light: mat.define-theme((
+  color: (theme-type: light, primary: mat.$green-palette, tertiary: mat.$cyan-palette),
+));
+$green-dark: mat.define-theme((
+  color: (theme-type: dark, primary: mat.$green-palette, tertiary: mat.$cyan-palette),
+));
+
+// Orange
+$orange-light: mat.define-theme((
+  color: (theme-type: light, primary: mat.$orange-palette, tertiary: mat.$red-palette),
+));
+$orange-dark: mat.define-theme((
+  color: (theme-type: dark, primary: mat.$orange-palette, tertiary: mat.$red-palette),
+));
+
+// Base theme (azure light)
 html {
-  @include mat.all-component-themes($light-theme);
+  @include mat.all-component-themes($azure-light);
 }
 
-.dark-theme {
-  @include mat.all-component-colors($dark-theme);
+// Dark variants
+.dark-theme.theme-azure, .dark-theme:not([class*="theme-"]) {
+  @include mat.all-component-colors($azure-dark);
+}
+
+// Violet
+.theme-violet {
+  @include mat.all-component-colors($violet-light);
+  &.dark-theme { @include mat.all-component-colors($violet-dark); }
+}
+
+// Rose
+.theme-rose {
+  @include mat.all-component-colors($rose-light);
+  &.dark-theme { @include mat.all-component-colors($rose-dark); }
+}
+
+// Green
+.theme-green {
+  @include mat.all-component-colors($green-light);
+  &.dark-theme { @include mat.all-component-colors($green-dark); }
+}
+
+// Orange
+.theme-orange {
+  @include mat.all-component-colors($orange-light);
+  &.dark-theme { @include mat.all-component-colors($orange-dark); }
+}
+
+// Banner gradients per palette
+:root {
+  --banner-gradient: linear-gradient(135deg, #1a237e 0%, #283593 50%, #1565c0 100%);
+  --banner-gradient-dark: linear-gradient(135deg, #0d47a1 0%, #1565c0 50%, #0277bd 100%);
+  --profile-gradient: linear-gradient(135deg, #37474f 0%, #455a64 100%);
+  --profile-gradient-dark: linear-gradient(135deg, #263238 0%, #37474f 100%);
+}
+
+.theme-violet {
+  --banner-gradient: linear-gradient(135deg, #4a148c 0%, #6a1b9a 50%, #7c4dff 100%);
+  --banner-gradient-dark: linear-gradient(135deg, #311b92 0%, #4527a0 50%, #651fff 100%);
+  --profile-gradient: linear-gradient(135deg, #4a148c 0%, #6a1b9a 100%);
+  --profile-gradient-dark: linear-gradient(135deg, #311b92 0%, #4a148c 100%);
+}
+
+.theme-rose {
+  --banner-gradient: linear-gradient(135deg, #880e4f 0%, #ad1457 50%, #e91e63 100%);
+  --banner-gradient-dark: linear-gradient(135deg, #880e4f 0%, #c2185b 50%, #f06292 100%);
+  --profile-gradient: linear-gradient(135deg, #880e4f 0%, #ad1457 100%);
+  --profile-gradient-dark: linear-gradient(135deg, #4a0028 0%, #880e4f 100%);
+}
+
+.theme-green {
+  --banner-gradient: linear-gradient(135deg, #1b5e20 0%, #2e7d32 50%, #43a047 100%);
+  --banner-gradient-dark: linear-gradient(135deg, #1b5e20 0%, #388e3c 50%, #4caf50 100%);
+  --profile-gradient: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%);
+  --profile-gradient-dark: linear-gradient(135deg, #0a3d0a 0%, #1b5e20 100%);
+}
+
+.theme-orange {
+  --banner-gradient: linear-gradient(135deg, #bf360c 0%, #e65100 50%, #f57c00 100%);
+  --banner-gradient-dark: linear-gradient(135deg, #bf360c 0%, #e65100 50%, #ff9800 100%);
+  --profile-gradient: linear-gradient(135deg, #bf360c 0%, #e65100 100%);
+  --profile-gradient-dark: linear-gradient(135deg, #8d2000 0%, #bf360c 100%);
 }
 
 html, body {
@@ -58,7 +142,7 @@ a {
 .banner {
   padding: 32px 0;
   text-align: center;
-  background: linear-gradient(135deg, #1a237e 0%, #283593 50%, #1565c0 100%);
+  background: var(--banner-gradient);
   color: white;
 
   h1 {
@@ -75,7 +159,7 @@ a {
 }
 
 .dark-theme .banner {
-  background: linear-gradient(135deg, #0d47a1 0%, #1565c0 50%, #0277bd 100%);
+  background: var(--banner-gradient-dark);
 }
 
 .feed-layout {
@@ -204,7 +288,7 @@ a {
   .user-banner {
     text-align: center;
     padding: 32px 0;
-    background: linear-gradient(135deg, #37474f 0%, #455a64 100%);
+    background: var(--profile-gradient);
     color: white;
   }
 
@@ -225,13 +309,13 @@ a {
 }
 
 .dark-theme .profile-page .user-banner {
-  background: linear-gradient(135deg, #263238 0%, #37474f 100%);
+  background: var(--profile-gradient-dark);
 }
 
 .article-detail {
   .article-banner {
     padding: 32px 0;
-    background: linear-gradient(135deg, #1a237e 0%, #283593 100%);
+    background: var(--banner-gradient);
     color: white;
 
     h1 {
@@ -274,7 +358,7 @@ a {
 }
 
 .dark-theme .article-detail .article-banner {
-  background: linear-gradient(135deg, #0d47a1 0%, #1565c0 100%);
+  background: var(--banner-gradient-dark);
 }
 
 .article-meta-row {
@@ -345,6 +429,15 @@ a {
   vertical-align: middle;
   margin-right: 4px;
   object-fit: cover;
+}
+
+.palette-dot {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  margin-right: 8px;
+  vertical-align: middle;
 }
 
 .loading-bar {
