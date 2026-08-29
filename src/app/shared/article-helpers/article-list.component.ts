@@ -2,9 +2,10 @@ import { Component, Input } from '@angular/core';
 
 import { Article, ArticleListConfig, ArticlesService } from '../../core';
 @Component({
-  selector: 'app-article-list',
-  styleUrls: ['article-list.component.css'],
-  templateUrl: './article-list.component.html'
+    selector: 'app-article-list',
+    styleUrls: ['article-list.component.css'],
+    templateUrl: './article-list.component.html',
+    standalone: false
 })
 export class ArticleListComponent {
   constructor (

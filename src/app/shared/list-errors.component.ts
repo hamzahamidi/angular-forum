@@ -3,8 +3,9 @@ import { Component, Input } from '@angular/core';
 import { Errors } from '../core';
 
 @Component({
-  selector: 'app-list-errors',
-  templateUrl: './list-errors.component.html'
+    selector: 'app-list-errors',
+    templateUrl: './list-errors.component.html',
+    standalone: false
 })
 export class ListErrorsComponent {
   formattedErrors: Array<string> = [];
