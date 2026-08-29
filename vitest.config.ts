@@ -12,6 +12,5 @@ export default defineConfig({
       'node_modules/@analogjs/vitest-angular/setup-zone.js',
       'src/setup-test.mjs',
     ],
-    passWithNoTests: true,
   },
 });
