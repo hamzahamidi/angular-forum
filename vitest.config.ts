@@ -8,7 +8,10 @@ export default defineConfig({
     include: ['src/**/*.spec.ts'],
     globals: true,
     environment: 'jsdom',
-    setupFiles: ['src/setup-test.ts'],
+    setupFiles: [
+      'node_modules/@analogjs/vitest-angular/setup-zone.js',
+      'src/setup-test.mjs',
+    ],
     passWithNoTests: true,
   },
 });
