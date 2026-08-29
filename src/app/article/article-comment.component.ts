@@ -3,8 +3,9 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { Comment, User, UserService, FALLBACK_AVATAR } from '../core';
 
 @Component({
-  selector: 'app-article-comment',
-  templateUrl: './article-comment.component.html'
+    selector: 'app-article-comment',
+    templateUrl: './article-comment.component.html',
+    standalone: false
 })
 export class ArticleCommentComponent implements OnInit {
   constructor(

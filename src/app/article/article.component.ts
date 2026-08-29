@@ -13,8 +13,9 @@ import {
 } from '../core';
 
 @Component({
-  selector: 'app-article-page',
-  templateUrl: './article.component.html'
+    selector: 'app-article-page',
+    templateUrl: './article.component.html',
+    standalone: false
 })
 export class ArticleComponent implements OnInit {
   article: Article;
