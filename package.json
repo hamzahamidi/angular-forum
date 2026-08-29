@@ -7,15 +7,11 @@
     "start": "ng serve",
     "build": "ng build --configuration production --base-href ./ ",
     "test": "ng test",
-    "lint": "ng lint --force",
-    "e2e": "ng e2e"
+    "lint": "ng lint"
   },
   "engines": {
-    "node": ">=16"
+    "node": ">=22.22.3"
   },
-  "pre-commit": [
-    "lint"
-  ],
   "private": true,
   "dependencies": {
     "@angular/common": "^22.1.4",
@@ -26,7 +22,7 @@
     "@angular/platform-browser-dynamic": "^22.1.4",
     "@angular/router": "^22.1.4",
     "marked": "^4.0.10",
-    "rxjs": "^6.5.5",
+    "rxjs": "^7.8.2",
     "tslib": "^2.0.0",
     "zone.js": "~0.15.1"
   },
@@ -42,7 +38,6 @@
     "@types/marked": "^4.0.1",
     "@typescript-eslint/eslint-plugin": "^8.33.1",
     "@typescript-eslint/parser": "^8.33.1",
-    "codelyzer": "^6.0.0",
     "eslint": "^9.28.0",
     "istanbul-lib-instrument": "^6.0.3",
     "jasmine-core": "~3.6.0",
@@ -52,10 +47,7 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "pre-commit": "^1.2.2",
-    "protractor": "~7.0.0",
     "ts-node": "^10.3.0",
-    "tslint": "~6.1.0",
     "typescript": "~6.0.3"
   },
   "resolutions": {

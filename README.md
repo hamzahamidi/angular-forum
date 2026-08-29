@@ -1,6 +1,6 @@
 <p align="center">
-    <a href="https://github.com/hamzahamidi/angular-forum/actions?query=workflow%3ABuild">
-        <img src="https://github.com/hamzahamidi/angular-forum/workflows/Build/badge.svg" alt="Build Status">
+    <a href="https://github.com/hamzahamidi/angular-forum/actions?query=workflow%3ACI">
+        <img src="https://github.com/hamzahamidi/angular-forum/workflows/CI/badge.svg" alt="Build Status">
     </a>
     <a href="https://github.com/hamzahamidi/angular-forum/releases/latest">
         <img src="https://img.shields.io/github/release/hamzahamidi/angular-forum.svg" alt="Release"/>
