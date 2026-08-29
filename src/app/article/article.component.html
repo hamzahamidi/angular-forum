@@ -6,9 +6,9 @@
 
       <app-article-meta [article]="article">
 
-          <span [hidden]="!canModify">
+        <span [hidden]="!canModify">
           <a class="btn btn-sm btn-outline-secondary"
-             [routerLink]="['/editor', article.slug]">
+            [routerLink]="['/editor', article.slug]">
             <i class="ion-edit"></i> Edit Article
           </a>
 
@@ -44,10 +44,12 @@
         <div [innerHTML]="article.body | markdown"></div>
 
         <ul class="tag-list">
-          <li *ngFor="let tag of article.tagList"
-            class="tag-default tag-pill tag-outline">
-            {{ tag }}
-          </li>
+          @for (tag of article.tagList; track tag) {
+            <li
+              class="tag-default tag-pill tag-outline">
+              {{ tag }}
+            </li>
+          }
         </ul>
 
       </div>
@@ -58,9 +60,9 @@
     <div class="article-actions">
       <app-article-meta [article]="article">
 
-          <span [hidden]="!canModify">
+        <span [hidden]="!canModify">
           <a class="btn btn-sm btn-outline-secondary"
-             [routerLink]="['/editor', article.slug]">
+            [routerLink]="['/editor', article.slug]">
             <i class="ion-edit"></i> Edit Article
           </a>
 
@@ -104,7 +106,7 @@
               <div class="card-footer">
                 <img [src]="currentUser.image" class="comment-author-img" />
                 <button class="btn btn-sm btn-primary" type="submit">
-                 Post Comment
+                  Post Comment
                 </button>
               </div>
             </fieldset>
@@ -115,11 +117,12 @@
           <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this article.
         </div>
 
-        <app-article-comment
-          *ngFor="let comment of comments"
-          [comment]="comment"
-          (deleteComment)="onDeleteComment(comment)">
-        </app-article-comment>
+        @for (comment of comments; track comment) {
+          <app-article-comment
+            [comment]="comment"
+            (deleteComment)="onDeleteComment(comment)">
+          </app-article-comment>
+        }
 
       </div>
     </div>
