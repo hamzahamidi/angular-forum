@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { User, UserService, Profile } from '../core';
+import { User, UserService, Profile, FALLBACK_AVATAR } from '../core';
 import { concatMap ,  tap } from 'rxjs/operators';
 
 @Component({
@@ -38,6 +38,6 @@ export class ProfileComponent implements OnInit {
   }
 
   onImgError(event: Event) {
-    (event.target as HTMLImageElement).src = 'https://api.realworld.io/images/smiley-cyrus.jpeg';
+    (event.target as HTMLImageElement).src = FALLBACK_AVATAR;
   }
 }

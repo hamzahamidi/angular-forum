@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User, UserService, ThemeService } from '../../core';
+import { User, UserService, ThemeService, FALLBACK_AVATAR } from '../../core';
 import packageJson from '../../../../package.json';
-
-const FALLBACK_AVATAR = 'https://api.realworld.io/images/smiley-cyrus.jpeg';
 
 @Component({
   selector: 'app-layout-header',

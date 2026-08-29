@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
-import { Comment, User, UserService } from '../core';
+import { Comment, User, UserService, FALLBACK_AVATAR } from '../core';
 
 @Component({
   selector: 'app-article-comment',
@@ -30,6 +30,6 @@ export class ArticleCommentComponent implements OnInit {
   }
 
   onImgError(event: Event) {
-    (event.target as HTMLImageElement).src = 'https://api.realworld.io/images/smiley-cyrus.jpeg';
+    (event.target as HTMLImageElement).src = FALLBACK_AVATAR;
   }
 }

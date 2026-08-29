@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Article } from '../../core';
+import { Article, FALLBACK_AVATAR } from '../../core';
 
 @Component({
   selector: 'app-article-meta',
@@ -10,6 +10,6 @@ export class ArticleMetaComponent {
   @Input() article: Article;
 
   onImgError(event: Event) {
-    (event.target as HTMLImageElement).src = 'https://api.realworld.io/images/smiley-cyrus.jpeg';
+    (event.target as HTMLImageElement).src = FALLBACK_AVATAR;
   }
 }

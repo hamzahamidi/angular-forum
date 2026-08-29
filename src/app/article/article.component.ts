@@ -8,7 +8,8 @@ import {
   Comment,
   CommentsService,
   User,
-  UserService
+  UserService,
+  FALLBACK_AVATAR
 } from '../core';
 
 @Component({
@@ -114,6 +115,6 @@ export class ArticleComponent implements OnInit {
   }
 
   onImgError(event: Event) {
-    (event.target as HTMLImageElement).src = 'https://api.realworld.io/images/smiley-cyrus.jpeg';
+    (event.target as HTMLImageElement).src = FALLBACK_AVATAR;
   }
 }
