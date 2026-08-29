@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { User, UserService, Profile } from '../core';
@@ -7,6 +7,7 @@ import { concatMap ,  tap } from 'rxjs/operators';
 @Component({
     selector: 'app-profile-page',
     templateUrl: './profile.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ProfileComponent implements OnInit {

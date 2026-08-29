@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { ArticleListConfig, TagsService, UserService } from '../core';
@@ -7,6 +7,7 @@ import { ArticleListConfig, TagsService, UserService } from '../core';
     selector: 'app-home-page',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css'],
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class HomeComponent implements OnInit {
