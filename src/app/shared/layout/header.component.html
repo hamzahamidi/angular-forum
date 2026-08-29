@@ -18,22 +18,80 @@
       <mat-icon>settings</mat-icon> Settings
     </a>
     <a mat-button [routerLink]="['/profile', currentUser.username]" routerLinkActive="active" class="toolbar-nav-link">
-      <img [src]="currentUser.image" *ngIf="currentUser.image" class="user-pic-small" />
+      <img [src]="currentUser.image" *ngIf="currentUser.image" class="user-pic-small" (error)="onImgError($event)" />
       {{ currentUser.username }}
     </a>
   </ng-container>
 
-  <button mat-icon-button [matMenuTriggerFor]="paletteMenu" matTooltip="Theme color">
-    <mat-icon>palette</mat-icon>
-  </button>
-  <mat-menu #paletteMenu="matMenu">
-    <button mat-menu-item *ngFor="let p of themeService.palettes" (click)="themeService.setPalette(p.key)">
-      <span class="palette-dot" [style.background]="p.color"></span>
-      {{ p.label }}
-    </button>
-  </mat-menu>
-
-  <button mat-icon-button (click)="themeService.toggleDark()" matTooltip="Toggle dark mode">
-    <mat-icon>{{ (themeService.isDarkMode$ | async) ? 'light_mode' : 'dark_mode' }}</mat-icon>
+  <button mat-icon-button (click)="panelOpen = !panelOpen" matTooltip="Menu">
+    <mat-icon>menu</mat-icon>
   </button>
 </mat-toolbar>
+
+<div class="theme-panel-backdrop" *ngIf="panelOpen" (click)="panelOpen = false"></div>
+<div class="theme-panel" [class.open]="panelOpen">
+  <div class="theme-panel-header">
+    <button mat-icon-button (click)="panelOpen = false">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="panel-user" *appShowAuthed="true">
+    <img [src]="currentUser.image" class="panel-avatar" (error)="onImgError($event)" />
+    <div class="panel-username">{{ currentUser.username }}</div>
+    <div class="panel-user-links">
+      <a mat-button [routerLink]="['/profile', currentUser.username]" (click)="panelOpen = false">
+        <mat-icon>person</mat-icon> Profile
+      </a>
+      <a mat-button routerLink="/settings" (click)="panelOpen = false">
+        <mat-icon>settings</mat-icon> Settings
+      </a>
+      <a mat-button routerLink="/editor" (click)="panelOpen = false">
+        <mat-icon>edit</mat-icon> New Article
+      </a>
+    </div>
+  </div>
+
+  <div class="panel-user" *appShowAuthed="false">
+    <div class="panel-user-links">
+      <a mat-button routerLink="/login" (click)="panelOpen = false">
+        <mat-icon>login</mat-icon> Sign in
+      </a>
+      <a mat-button routerLink="/register" (click)="panelOpen = false">
+        <mat-icon>person_add</mat-icon> Sign up
+      </a>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="theme-panel-section">
+    <div class="theme-panel-label">Appearance</div>
+    <button class="palette-option" (click)="themeService.toggleDark()">
+      <mat-icon>{{ (themeService.isDarkMode$ | async) ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      <span class="palette-name">{{ (themeService.isDarkMode$ | async) ? 'Light mode' : 'Dark mode' }}</span>
+    </button>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="theme-panel-section">
+    <div class="theme-panel-label">Color</div>
+    <div class="palette-grid">
+      <button *ngFor="let p of themeService.palettes"
+        class="palette-option"
+        [class.active]="(themeService.palette$ | async) === p.key"
+        (click)="themeService.setPalette(p.key)">
+        <span class="palette-swatch">
+          <span class="swatch-half" [style.background]="p.primary"></span>
+          <span class="swatch-half" [style.background]="p.secondary"></span>
+        </span>
+        <span class="palette-name">{{ p.label }}</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="panel-footer">
+    <span>Forum v{{ appVersion }}</span>
+  </div>
+</div>

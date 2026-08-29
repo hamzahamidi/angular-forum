@@ -1,6 +1,6 @@
 <div class="article-meta-row">
   <a [routerLink]="['/profile', article.author.username]">
-    <img [src]="article.author.image" />
+    <img [src]="article.author.image" (error)="onImgError($event)" />
   </a>
 
   <div class="meta-info">

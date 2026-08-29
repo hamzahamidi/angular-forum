@@ -1,6 +1,6 @@
 {
   "name": "ang2-forum",
-  "version": "8.0.0",
+  "version": "18.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",

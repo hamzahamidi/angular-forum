@@ -113,4 +113,7 @@ export class ArticleComponent implements OnInit {
       );
   }
 
+  onImgError(event: Event) {
+    (event.target as HTMLImageElement).src = 'https://api.realworld.io/images/smiley-cyrus.jpeg';
+  }
 }
