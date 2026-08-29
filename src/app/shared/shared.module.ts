@@ -16,7 +16,6 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatMenuModule } from '@angular/material/menu';
 
 import { ArticleListComponent, ArticleMetaComponent, ArticlePreviewComponent } from './article-helpers';
 import { FavoriteButtonComponent, FollowButtonComponent } from './buttons';
@@ -36,7 +35,6 @@ const MATERIAL_MODULES = [
   MatProgressBarModule,
   MatSlideToggleModule,
   MatTooltipModule,
-  MatMenuModule,
 ];
 
 @NgModule({

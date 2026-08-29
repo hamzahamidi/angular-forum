@@ -431,13 +431,154 @@ a {
   object-fit: cover;
 }
 
-.palette-dot {
-  display: inline-block;
-  width: 14px;
-  height: 14px;
+.palette-swatch {
+  display: inline-flex;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  margin-right: 8px;
+  overflow: hidden;
   vertical-align: middle;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  flex-shrink: 0;
+
+  .swatch-half {
+    width: 50%;
+    height: 100%;
+  }
+}
+
+.dark-theme .palette-swatch {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+
+.theme-panel-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+}
+
+.theme-panel {
+  position: fixed;
+  top: 0;
+  right: -280px;
+  width: 280px;
+  height: 100vh;
+  background: #fff;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  transition: right 0.25s ease;
+  display: flex;
+  flex-direction: column;
+
+  &.open {
+    right: 0;
+  }
+}
+
+.dark-theme .theme-panel {
+  background: #1e1e1e;
+  box-shadow: -4px 0 24px rgba(0, 0, 0, 0.5);
+}
+
+.theme-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 4px 8px;
+}
+
+.panel-user {
+  padding: 16px;
+  text-align: center;
+}
+
+.panel-avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-bottom: 8px;
+}
+
+.panel-username {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.panel-user-links {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+
+  a {
+    justify-content: flex-start;
+  }
+}
+
+.panel-footer {
+  margin-top: auto;
+  padding: 12px 16px;
+  font-size: 0.75rem;
+  opacity: 0.4;
+  text-align: center;
+}
+
+.theme-panel-section {
+  padding: 16px;
+}
+
+.theme-panel-label {
+  font-size: 0.8rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  opacity: 0.6;
+  margin-bottom: 12px;
+}
+
+.palette-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.palette-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 8px;
+  background: transparent;
+  cursor: pointer;
+  color: inherit;
+  font-size: 0.95rem;
+  transition: background 0.15s;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+  }
+
+  &.active {
+    background: rgba(0, 0, 0, 0.08);
+    font-weight: 600;
+  }
+
+  .palette-swatch {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+.dark-theme .palette-option {
+  &:hover {
+    background: rgba(255, 255, 255, 0.08);
+  }
+
+  &.active {
+    background: rgba(255, 255, 255, 0.12);
+  }
 }
 
 .loading-bar {

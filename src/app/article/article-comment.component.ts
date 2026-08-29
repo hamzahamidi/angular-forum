@@ -29,5 +29,7 @@ export class ArticleCommentComponent implements OnInit {
     this.deleteComment.emit(true);
   }
 
-
+  onImgError(event: Event) {
+    (event.target as HTMLImageElement).src = 'https://api.realworld.io/images/smiley-cyrus.jpeg';
+  }
 }

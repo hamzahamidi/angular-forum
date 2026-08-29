@@ -1,7 +1,7 @@
 <div class="profile-page">
 
   <div class="user-banner">
-    <img [src]="profile.image" class="user-avatar" />
+    <img [src]="profile.image" class="user-avatar" (error)="onImgError($event)" />
     <h4>{{ profile.username }}</h4>
     <p>{{ profile.bio }}</p>
     <app-follow-button

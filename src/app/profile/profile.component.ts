@@ -37,4 +37,7 @@ export class ProfileComponent implements OnInit {
     this.profile.following = following;
   }
 
+  onImgError(event: Event) {
+    (event.target as HTMLImageElement).src = 'https://api.realworld.io/images/smiley-cyrus.jpeg';
+  }
 }

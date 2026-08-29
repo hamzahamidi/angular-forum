@@ -8,4 +8,8 @@ import { Article } from '../../core';
 })
 export class ArticleMetaComponent {
   @Input() article: Article;
+
+  onImgError(event: Event) {
+    (event.target as HTMLImageElement).src = 'https://api.realworld.io/images/smiley-cyrus.jpeg';
+  }
 }

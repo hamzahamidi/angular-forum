@@ -4,15 +4,16 @@ import { BehaviorSubject } from 'rxjs';
 export interface ThemePalette {
   key: string;
   label: string;
-  color: string;
+  primary: string;
+  secondary: string;
 }
 
 export const THEME_PALETTES: ThemePalette[] = [
-  { key: 'azure', label: 'Azure', color: '#1565c0' },
-  { key: 'violet', label: 'Violet', color: '#7c4dff' },
-  { key: 'rose', label: 'Rose', color: '#e91e63' },
-  { key: 'green', label: 'Green', color: '#2e7d32' },
-  { key: 'orange', label: 'Orange', color: '#e65100' },
+  { key: 'azure', label: 'Azure', primary: '#1565c0', secondary: '#00bcd4' },
+  { key: 'violet', label: 'Violet', primary: '#7c4dff', secondary: '#ff4081' },
+  { key: 'rose', label: 'Rose', primary: '#e91e63', secondary: '#ff9800' },
+  { key: 'green', label: 'Green', primary: '#2e7d32', secondary: '#8bc34a' },
+  { key: 'orange', label: 'Orange', primary: '#e65100', secondary: '#ffc107' },
 ];
 
 @Injectable({ providedIn: 'root' })

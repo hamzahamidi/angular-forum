@@ -5,7 +5,7 @@
   <mat-card-actions>
     <div class="comment-header">
       <a [routerLink]="['/profile', comment.author.username]">
-        <img [src]="comment.author.image" />
+        <img [src]="comment.author.image" (error)="onImgError($event)" />
       </a>
       <a [routerLink]="['/profile', comment.author.username]" style="font-weight: 500; font-size: 0.9rem">
         {{ comment.author.username }}
