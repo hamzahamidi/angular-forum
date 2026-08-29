@@ -3,27 +3,20 @@
   [article]="article">
 </app-article-preview>
 
-<div class="app-article-preview"
-  [hidden]="!loading">
-  Loading articles...
+<div *ngIf="loading" style="padding: 24px 0">
+  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
 </div>
 
-<div class="app-article-preview"
-  [hidden]="loading || results.length">
+<div *ngIf="!loading && !results?.length" style="padding: 24px 0; text-align: center; opacity: 0.6">
   No articles are here... yet.
 </div>
 
-<nav [hidden]="loading || totalPages.length <= 1">
-  <ul class="pagination">
-
-    <li class="page-item"
-      [ngClass]="{'active': pageNumber === currentPage}"
-      *ngFor="let pageNumber of totalPages"
-      (click)="setPageTo(pageNumber)">
-
-      <a class="page-link" >{{ pageNumber }}</a>
-
-    </li>
-
-  </ul>
-</nav>
+<div class="pagination-row" *ngIf="!loading && totalPages.length > 1">
+  <button mat-mini-fab
+    *ngFor="let pageNumber of totalPages"
+    [color]="pageNumber === currentPage ? 'primary' : ''"
+    (click)="setPageTo(pageNumber)"
+    style="margin: 2px">
+    {{ pageNumber }}
+  </button>
+</div>

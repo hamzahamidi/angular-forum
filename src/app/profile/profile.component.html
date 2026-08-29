@@ -1,58 +1,45 @@
 <div class="profile-page">
 
-  <div class="user-info">
-    <div class="container">
-      <div class="row">
-
-        <div class="col-xs-12 col-md-10 offset-md-1">
-          <img [src]="profile.image" class="user-img" />
-          <h4>{{ profile.username }}</h4>
-          <p>{{ profile.bio }}</p>
-          <app-follow-button
-            [hidden]="isUser"
-            [profile]="profile"
-            (toggle)="onToggleFollowing($event)">
-          </app-follow-button>
-           <a [routerLink]="['/settings']"
-              [hidden]="!isUser"
-              class="btn btn-sm btn-outline-secondary action-btn">
-              <i class="ion-gear-a"></i> Edit Profile Settings
-            </a>
-        </div>
-
-      </div>
-    </div>
+  <div class="user-banner">
+    <img [src]="profile.image" class="user-avatar" />
+    <h4>{{ profile.username }}</h4>
+    <p>{{ profile.bio }}</p>
+    <app-follow-button
+      [hidden]="isUser"
+      [profile]="profile"
+      (toggle)="onToggleFollowing($event)">
+    </app-follow-button>
+    <a [routerLink]="['/settings']"
+       [hidden]="!isUser"
+       mat-stroked-button
+       style="color: white; border-color: rgba(255,255,255,0.5)">
+      <mat-icon>settings</mat-icon> Edit Profile Settings
+    </a>
   </div>
 
-  <div class="container">
-    <div class="row">
-
-      <div class="col-xs-12 col-md-10 offset-md-1">
-        <div class="articles-toggle">
-          <ul class="nav nav-pills outline-active">
-            <li class="nav-item">
-              <a class="nav-link"
-                 routerLinkActive="active"
-                 [routerLinkActiveOptions]="{ exact: true }"
-                 [routerLink]="['/profile', profile.username]">
-                 My Posts
-              </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link"
-                 routerLinkActive="active"
-                 [routerLinkActiveOptions]="{ exact: true }"
-                 [routerLink]="['/profile', profile.username, 'favorites']">
-                 Favorited Posts
-              </a>
-            </li>
-          </ul>
-        </div>
-
+  <div class="profile-content">
+    <nav mat-tab-nav-bar [tabPanel]="tabPanel">
+      <a mat-tab-link
+         [routerLink]="['/profile', profile.username]"
+         routerLinkActive
+         #myPostsLink="routerLinkActive"
+         [routerLinkActiveOptions]="{ exact: true }"
+         [active]="myPostsLink.isActive">
+        My Posts
+      </a>
+      <a mat-tab-link
+         [routerLink]="['/profile', profile.username, 'favorites']"
+         routerLinkActive
+         #favoritesLink="routerLinkActive"
+         [active]="favoritesLink.isActive">
+        Favorited Posts
+      </a>
+    </nav>
+    <mat-tab-nav-panel #tabPanel>
+      <div style="padding-top: 16px">
         <router-outlet></router-outlet>
       </div>
-
-    </div>
+    </mat-tab-nav-panel>
   </div>
 
 </div>

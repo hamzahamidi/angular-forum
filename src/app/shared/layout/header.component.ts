@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { User, UserService } from '../../core';
+import { User, UserService, ThemeService } from '../../core';
 
 @Component({
   selector: 'app-layout-header',
@@ -8,10 +8,11 @@ import { User, UserService } from '../../core';
 })
 export class HeaderComponent implements OnInit {
   constructor(
-    private userService: UserService
+    private userService: UserService,
+    public themeService: ThemeService
   ) {}
 
-  currentUser: User;
+  currentUser!: User;
 
   ngOnInit() {
     this.userService.currentUser.subscribe(

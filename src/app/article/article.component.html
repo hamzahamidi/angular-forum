@@ -1,21 +1,24 @@
-<div class="article-page">
+<div class="article-detail">
 
-  <div class="banner">
+  <div class="article-banner">
     <div class="container">
       <h1>{{ article.title }}</h1>
 
       <app-article-meta [article]="article">
 
-          <span [hidden]="!canModify">
-          <a class="btn btn-sm btn-outline-secondary"
-             [routerLink]="['/editor', article.slug]">
-            <i class="ion-edit"></i> Edit Article
+        <span [hidden]="!canModify">
+          <a mat-stroked-button
+             [routerLink]="['/editor', article.slug]"
+             style="color: white; border-color: rgba(255,255,255,0.5)">
+            <mat-icon>edit</mat-icon> Edit Article
           </a>
 
-          <button class="btn btn-sm btn-outline-danger"
-            [ngClass]="{disabled: isDeleting}"
-            (click)="deleteArticle()">
-            <i class="ion-trash-a"></i> Delete Article
+          <button mat-stroked-button
+            color="warn"
+            [disabled]="isDeleting"
+            (click)="deleteArticle()"
+            style="margin-left: 8px">
+            <mat-icon>delete</mat-icon> Delete Article
           </button>
         </span>
 
@@ -28,7 +31,7 @@
           <app-favorite-button
             [article]="article"
             (toggle)="onToggleFavorite($event)">
-            {{ article.favorited ? 'Unfavorite' : 'Favorite' }} Article <span class="counter">({{ article.favoritesCount }})</span>
+            {{ article.favorited ? 'Unfavorite' : 'Favorite' }} ({{ article.favoritesCount }})
           </app-favorite-button>
         </span>
 
@@ -36,38 +39,31 @@
     </div>
   </div>
 
-  <div class="container page">
+  <div class="article-body">
+    <div [innerHTML]="article.body | markdown"></div>
 
-    <div class="row article-content">
-      <div class="col-md-12">
+    <mat-chip-set style="margin-top: 24px">
+      <mat-chip *ngFor="let tag of article.tagList" disabled>
+        {{ tag }}
+      </mat-chip>
+    </mat-chip-set>
+  </div>
 
-        <div [innerHTML]="article.body | markdown"></div>
+  <mat-divider></mat-divider>
 
-        <ul class="tag-list">
-          <li *ngFor="let tag of article.tagList"
-            class="tag-default tag-pill tag-outline">
-            {{ tag }}
-          </li>
-        </ul>
-
-      </div>
-    </div>
-
-    <hr />
-
-    <div class="article-actions">
+  <div class="comments-section">
+    <div style="text-align: center; padding: 24px 0">
       <app-article-meta [article]="article">
 
-          <span [hidden]="!canModify">
-          <a class="btn btn-sm btn-outline-secondary"
-             [routerLink]="['/editor', article.slug]">
-            <i class="ion-edit"></i> Edit Article
+        <span [hidden]="!canModify">
+          <a mat-stroked-button [routerLink]="['/editor', article.slug]">
+            <mat-icon>edit</mat-icon> Edit Article
           </a>
-
-          <button class="btn btn-sm btn-outline-danger"
-            [ngClass]="{disabled: isDeleting}"
-            (click)="deleteArticle()">
-            <i class="ion-trash-a"></i> Delete Article
+          <button mat-stroked-button color="warn"
+            [disabled]="isDeleting"
+            (click)="deleteArticle()"
+            style="margin-left: 8px">
+            <mat-icon>delete</mat-icon> Delete Article
           </button>
         </span>
 
@@ -80,49 +76,44 @@
           <app-favorite-button
             [article]="article"
             (toggle)="onToggleFavorite($event)">
-            {{ article.favorited ? 'Unfavorite' : 'Favorite' }} Article <span class="counter">({{ article.favoritesCount }})</span>
+            {{ article.favorited ? 'Unfavorite' : 'Favorite' }} ({{ article.favoritesCount }})
           </app-favorite-button>
         </span>
 
       </app-article-meta>
     </div>
 
-    <div class="row">
-      <div class="col-xs-12 col-md-8 offset-md-2">
-
-        <div *appShowAuthed="true">
-          <app-list-errors [errors]="commentFormErrors"></app-list-errors>
-          <form class="card comment-form" (ngSubmit)="addComment()">
-            <fieldset [disabled]="isSubmitting">
-              <div class="card-block">
-                <textarea class="form-control"
-                  placeholder="Write a comment..."
-                  rows="3"
-                  [formControl]="commentControl"
-                ></textarea>
-              </div>
-              <div class="card-footer">
-                <img [src]="currentUser.image" class="comment-author-img" />
-                <button class="btn btn-sm btn-primary" type="submit">
-                 Post Comment
+    <div *appShowAuthed="true">
+      <app-list-errors [errors]="commentFormErrors"></app-list-errors>
+      <mat-card style="margin-bottom: 16px">
+        <mat-card-content>
+          <form (ngSubmit)="addComment()">
+            <fieldset [disabled]="isSubmitting" style="border: none; padding: 0; margin: 0">
+              <mat-form-field appearance="outline" style="width: 100%">
+                <mat-label>Write a comment...</mat-label>
+                <textarea matInput rows="3" [formControl]="commentControl"></textarea>
+              </mat-form-field>
+              <div style="display: flex; align-items: center; gap: 8px">
+                <img [src]="currentUser.image" class="user-pic-small" />
+                <button mat-raised-button color="primary" type="submit">
+                  Post Comment
                 </button>
               </div>
             </fieldset>
           </form>
-        </div>
-
-        <div *appShowAuthed="false">
-          <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this article.
-        </div>
-
-        <app-article-comment
-          *ngFor="let comment of comments"
-          [comment]="comment"
-          (deleteComment)="onDeleteComment(comment)">
-        </app-article-comment>
-
-      </div>
+        </mat-card-content>
+      </mat-card>
     </div>
+
+    <div *appShowAuthed="false" style="padding: 16px 0; text-align: center">
+      <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this article.
+    </div>
+
+    <app-article-comment
+      *ngFor="let comment of comments"
+      [comment]="comment"
+      (deleteComment)="onDeleteComment(comment)">
+    </app-article-comment>
 
   </div>
 </div>

@@ -1,45 +1,36 @@
 <div class="auth-page">
-  <div class="container page">
-    <div class="row">
+  <div class="container">
+    <div class="form-container">
+      <h1>{{ title }}</h1>
+      <p class="auth-link">
+        <a [routerLink]="['/login']" *ngIf="authType === 'register'">Have an account?</a>
+        <a [routerLink]="['/register']" *ngIf="authType === 'login'">Need an account?</a>
+      </p>
+      <app-list-errors [errors]="errors"></app-list-errors>
+      <form [formGroup]="authForm" (ngSubmit)="submitForm()">
+        <fieldset [disabled]="isSubmitting">
+          <mat-form-field *ngIf="authType === 'register'" appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput formControlName="username" type="text" />
+          </mat-form-field>
 
-      <div class="col-md-6 offset-md-3 col-xs-12">
-        <h1 class="text-xs-center">{{ title }}</h1>
-        <p class="text-xs-center">
-          <a [routerLink]="['/login']" *ngIf="authType === 'register'">Have an account?</a>
-          <a [routerLink]="['/register']" *ngIf="authType === 'login'">Need an account?</a>
-        </p>
-        <app-list-errors [errors]="errors"></app-list-errors>
-        <form [formGroup]="authForm" (ngSubmit)="submitForm()">
-          <fieldset [disabled]="isSubmitting">
-            <fieldset class="form-group">
-              <input
-                formControlName="username"
-                placeholder="Username"
-                class="form-control form-control-lg"
-                type="text"
-                *ngIf="authType === 'register'" />
-            </fieldset>
-            <fieldset class="form-group">
-              <input
-                formControlName="email"
-                placeholder="Email"
-                class="form-control form-control-lg"
-                type="text" />
-            </fieldset>
-            <fieldset class="form-group">
-              <input
-                formControlName="password"
-                placeholder="Password"
-                class="form-control form-control-lg"
-                type="password" />
-            </fieldset>
-            <button class="btn btn-lg btn-primary pull-xs-right" [disabled]="!authForm.valid" type="submit">
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput formControlName="email" type="email" />
+          </mat-form-field>
+
+          <mat-form-field appearance="outline">
+            <mat-label>Password</mat-label>
+            <input matInput formControlName="password" type="password" />
+          </mat-form-field>
+
+          <div class="form-actions">
+            <button mat-raised-button color="primary" [disabled]="!authForm.valid" type="submit">
               {{ title }}
             </button>
-          </fieldset>
-        </form>
-      </div>
-
+          </div>
+        </fieldset>
+      </form>
     </div>
   </div>
 </div>

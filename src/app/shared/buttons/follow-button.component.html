@@ -1,10 +1,7 @@
-<button
-  class="btn btn-sm action-btn"
-  [ngClass]="{ 'disabled': isSubmitting,
-               'btn-outline-secondary': !profile.following,
-               'btn-secondary': profile.following }"
+<button mat-stroked-button
+  [disabled]="isSubmitting"
+  [color]="profile.following ? 'primary' : ''"
   (click)="toggleFollowing()">
-  <i class="ion-plus-round"></i>
-  &nbsp;
+  <mat-icon>{{ profile.following ? 'person_remove' : 'person_add' }}</mat-icon>
   {{ profile.following ? 'Unfollow' : 'Follow' }} {{ profile.username }}
 </button>
