@@ -1,4 +1,4 @@
-FROM node:20-slim AS compile-image
+FROM node:22-slim AS compile-image
 
 LABEL name="Angular application" \
       description="This image is for an Angular application starter."

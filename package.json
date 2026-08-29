@@ -10,7 +10,7 @@
     "lint": "ng lint --force"
   },
   "engines": {
-    "node": ">=20.19"
+    "node": ">=22.22.3"
   },
   "private": true,
   "dependencies": {
@@ -40,7 +40,7 @@
     "@typescript-eslint/parser": "^8.33.1",
     "eslint": "^9.28.0",
     "istanbul-lib-instrument": "^6.0.3",
-    "jasmine-core": "~3.6.0",
+    "jasmine-core": "~5.1.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "^6.3.16",
     "karma-chrome-launcher": "~3.1.0",
