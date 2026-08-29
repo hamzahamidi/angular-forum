@@ -1,68 +1,53 @@
 <div class="settings-page">
-  <div class="container page">
-    <div class="row">
-      <div class="col-md-6 offset-md-3 col-xs-12">
+  <div class="container">
+    <div class="form-container">
+      <h1>Your Settings</h1>
 
-        <h1 class="text-xs-center">Your Settings</h1>
+      <app-list-errors [errors]="errors"></app-list-errors>
 
-        <app-list-errors [errors]="errors"></app-list-errors>
+      <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
+        <fieldset [disabled]="isSubmitting">
 
-        <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
-          <fieldset [disabled]="isSubmitting">
+          <mat-form-field appearance="outline">
+            <mat-label>URL of profile picture</mat-label>
+            <input matInput type="text" formControlName="image" />
+          </mat-form-field>
 
-            <fieldset class="form-group">
-              <input class="form-control"
-                type="text"
-                placeholder="URL of profile picture"
-                formControlName="image" />
-            </fieldset>
+          <mat-form-field appearance="outline">
+            <mat-label>Username</mat-label>
+            <input matInput type="text" formControlName="username" />
+          </mat-form-field>
 
-            <fieldset class="form-group">
-              <input class="form-control form-control-lg"
-                type="text"
-                placeholder="Username"
-                formControlName="username" />
-            </fieldset>
+          <mat-form-field appearance="outline">
+            <mat-label>Short bio about you</mat-label>
+            <textarea matInput rows="8" formControlName="bio"></textarea>
+          </mat-form-field>
 
-            <fieldset class="form-group">
-              <textarea class="form-control form-control-lg"
-                rows="8"
-                placeholder="Short bio about you"
-                formControlName="bio">
-              </textarea>
-            </fieldset>
+          <mat-form-field appearance="outline">
+            <mat-label>Email</mat-label>
+            <input matInput type="email" formControlName="email" />
+          </mat-form-field>
 
-            <fieldset class="form-group">
-              <input class="form-control form-control-lg"
-                type="email"
-                placeholder="Email"
-                formControlName="email" />
-            </fieldset>
+          <mat-form-field appearance="outline">
+            <mat-label>New Password</mat-label>
+            <input matInput type="password" formControlName="password" />
+          </mat-form-field>
 
-            <fieldset class="form-group">
-              <input class="form-control form-control-lg"
-                type="password"
-                placeholder="New Password"
-                formControlName="password" />
-            </fieldset>
-
-            <button class="btn btn-lg btn-primary pull-xs-right"
-              type="submit">
+          <div class="form-actions">
+            <button mat-raised-button color="primary" type="submit">
               Update Settings
             </button>
+          </div>
 
-          </fieldset>
-        </form>
+        </fieldset>
+      </form>
 
-        <!-- Line break for logout button -->
-        <hr />
+      <mat-divider style="margin: 16px 0"></mat-divider>
 
-        <button class="btn btn-outline-danger"
-          (click)="logout()">
-          Or click here to logout.
-        </button>
+      <button mat-stroked-button color="warn" (click)="logout()">
+        Or click here to logout.
+      </button>
 
-      </div>
     </div>
   </div>
 </div>

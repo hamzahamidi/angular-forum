@@ -1,7 +1,8 @@
-<button class="btn btn-sm"
- [ngClass]="{ 'disabled' : isSubmitting,
-              'btn-outline-primary': !article.favorited,
-              'btn-primary': article.favorited }"
- (click)="toggleFavorite()">
-  <i class="ion-heart"></i> <ng-content></ng-content>
+<button mat-icon-button
+  [disabled]="isSubmitting"
+  [color]="article.favorited ? 'warn' : ''"
+  (click)="toggleFavorite()"
+  matTooltip="Favorite">
+  <mat-icon>{{ article.favorited ? 'favorite' : 'favorite_border' }}</mat-icon>
 </button>
+<span style="font-size: 0.85rem"><ng-content></ng-content></span>

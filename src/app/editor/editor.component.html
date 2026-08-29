@@ -1,59 +1,50 @@
 <div class="editor-page">
-  <div class="container page">
-    <div class="row">
-      <div class="col-md-10 offset-md-1 col-xs-12">
+  <div class="container">
+    <div class="form-container" style="max-width: 800px">
 
-        <app-list-errors [errors]="errors"></app-list-errors>
+      <app-list-errors [errors]="errors"></app-list-errors>
 
-        <form [formGroup]="articleForm">
-          <fieldset [disabled]="isSubmitting">
+      <form [formGroup]="articleForm">
+        <fieldset [disabled]="isSubmitting">
 
-            <fieldset class="form-group">
-              <input class="form-control form-control-lg"
-                formControlName="title"
-                type="text"
-                placeholder="Article Title" />
-            </fieldset>
+          <mat-form-field appearance="outline">
+            <mat-label>Article Title</mat-label>
+            <input matInput formControlName="title" type="text" />
+          </mat-form-field>
 
-            <fieldset class="form-group">
-              <input class="form-control"
-                formControlName="description"
-                type="text"
-                placeholder="What's this article about?" />
-            </fieldset>
+          <mat-form-field appearance="outline">
+            <mat-label>What's this article about?</mat-label>
+            <input matInput formControlName="description" type="text" />
+          </mat-form-field>
 
-            <fieldset class="form-group">
-              <textarea class="form-control"
-                formControlName="body"
-                rows="8"
-                placeholder="Write your article (in markdown)">
-              </textarea>
-            </fieldset>
+          <mat-form-field appearance="outline">
+            <mat-label>Write your article (in markdown)</mat-label>
+            <textarea matInput formControlName="body" rows="8"></textarea>
+          </mat-form-field>
 
-            <fieldset class="form-group">
-              <input class="form-control"
-                type="text"
-                placeholder="Enter tags"
-                [formControl]="tagField"
-                (keyup.enter)="addTag()" />
+          <mat-form-field appearance="outline">
+            <mat-label>Enter tags</mat-label>
+            <input matInput type="text" [formControl]="tagField" (keyup.enter)="addTag()" />
+          </mat-form-field>
 
-              <div class="tag-list">
-                <span *ngFor="let tag of article.tagList"
-                  class="tag-default tag-pill">
-                  <i class="ion-close-round" (click)="removeTag(tag)"></i>
-                  {{ tag }}
-                </span>
-              </div>
-            </fieldset>
+          <mat-chip-set>
+            <mat-chip *ngFor="let tag of article.tagList"
+              (removed)="removeTag(tag)"
+              removable>
+              {{ tag }}
+              <mat-icon matChipRemove>cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-set>
 
-            <button class="btn btn-lg pull-xs-right btn-primary" type="button" (click)="submitForm()">
+          <div class="form-actions" style="margin-top: 16px">
+            <button mat-raised-button color="primary" type="button" (click)="submitForm()">
               Publish Article
             </button>
+          </div>
 
-          </fieldset>
-        </form>
+        </fieldset>
+      </form>
 
-      </div>
     </div>
   </div>
 </div>

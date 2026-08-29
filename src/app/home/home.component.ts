@@ -15,24 +15,26 @@ export class HomeComponent implements OnInit {
     private userService: UserService
   ) {}
 
-  isAuthenticated: boolean;
+  isAuthenticated = false;
   listConfig: ArticleListConfig = {
     type: 'all',
     filters: {}
   };
   tags: Array<string> = [];
   tagsLoaded = false;
+  selectedTab = 0;
 
   ngOnInit() {
     this.userService.isAuthenticated.subscribe(
       (authenticated) => {
         this.isAuthenticated = authenticated;
 
-        // set the article list accordingly
         if (authenticated) {
           this.setListTo('feed');
+          this.selectedTab = 0;
         } else {
           this.setListTo('all');
+          this.selectedTab = 0;
         }
       }
     );
@@ -44,14 +46,37 @@ export class HomeComponent implements OnInit {
     });
   }
 
+  onTabChange(event: any) {
+    const label = event.tab.textLabel;
+    if (label === 'Your Feed') {
+      this.setListTo('feed');
+    } else if (label === 'Global Feed') {
+      this.setListTo('all');
+    }
+  }
+
   setListTo(type: string = '', filters: Object = {}) {
-    // If feed is requested but user is not authenticated, redirect to login
     if (type === 'feed' && !this.isAuthenticated) {
       this.router.navigateByUrl('/login');
       return;
     }
 
-    // Otherwise, set the list object
     this.listConfig = {type: type, filters: filters};
+
+    if (this.isAuthenticated) {
+      if (type === 'feed' && !Object.keys(filters).length) {
+        this.selectedTab = 0;
+      } else if (type === 'all' && !Object.keys(filters).length) {
+        this.selectedTab = 1;
+      } else {
+        this.selectedTab = 2;
+      }
+    } else {
+      if (Object.keys(filters).length) {
+        this.selectedTab = 1;
+      } else {
+        this.selectedTab = 0;
+      }
+    }
   }
 }

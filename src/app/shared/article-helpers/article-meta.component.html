@@ -1,16 +1,15 @@
-<div class="article-meta">
+<div class="article-meta-row">
   <a [routerLink]="['/profile', article.author.username]">
     <img [src]="article.author.image" />
   </a>
 
-  <div class="info">
-    <a class="author"
-      [routerLink]="['/profile', article.author.username]">
+  <div class="meta-info">
+    <a class="author-name" [routerLink]="['/profile', article.author.username]">
       {{ article.author.username }}
     </a>
-    <span class="date">
+    <div class="article-date">
       {{ article.createdAt | date: 'longDate' }}
-    </span>
+    </div>
   </div>
 
   <ng-content></ng-content>

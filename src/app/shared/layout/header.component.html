@@ -1,75 +1,29 @@
-<nav class="navbar navbar-light">
-  <div class="container">
-    <a class="navbar-brand" routerLink="/">forum</a>
+<mat-toolbar color="primary">
+  <a routerLink="/" style="font-weight: 700; font-size: 1.3rem" class="toolbar-nav-link">forum</a>
 
-    <!-- Show this for logged out users -->
-    <ul *appShowAuthed="false"
-      class="nav navbar-nav pull-xs-right">
+  <span class="spacer"></span>
 
-      <li class="nav-item">
-        <a class="nav-link"
-          routerLink="/">
-          Home
-        </a>
-      </li>
+  <ng-container *appShowAuthed="false">
+    <a mat-button routerLink="/" class="toolbar-nav-link">Home</a>
+    <a mat-button routerLink="/login" routerLinkActive="active" class="toolbar-nav-link">Sign in</a>
+    <a mat-button routerLink="/register" routerLinkActive="active" class="toolbar-nav-link">Sign up</a>
+  </ng-container>
 
-      <li class="nav-item">
-        <a class="nav-link"
-          routerLink="/login"
-          routerLinkActive="active">
-          Sign in
-        </a>
-      </li>
+  <ng-container *appShowAuthed="true">
+    <a mat-button routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" class="toolbar-nav-link">Home</a>
+    <a mat-button routerLink="/editor" routerLinkActive="active" class="toolbar-nav-link">
+      <mat-icon>edit</mat-icon> New Article
+    </a>
+    <a mat-button routerLink="/settings" routerLinkActive="active" class="toolbar-nav-link">
+      <mat-icon>settings</mat-icon> Settings
+    </a>
+    <a mat-button [routerLink]="['/profile', currentUser.username]" routerLinkActive="active" class="toolbar-nav-link">
+      <img [src]="currentUser.image" *ngIf="currentUser.image" class="user-pic-small" />
+      {{ currentUser.username }}
+    </a>
+  </ng-container>
 
-      <li class="nav-item">
-        <a class="nav-link"
-          routerLink="/register"
-          routerLinkActive="active">
-          Sign up
-        </a>
-      </li>
-
-    </ul>
-
-    <!-- Show this for logged in users -->
-    <ul *appShowAuthed="true"
-      class="nav navbar-nav pull-xs-right">
-
-      <li class="nav-item">
-        <a class="nav-link"
-          routerLink="/"
-          routerLinkActive="active"
-          [routerLinkActiveOptions]="{ exact: true }">
-          Home
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link"
-          routerLink="/editor"
-          routerLinkActive="active">
-          <i class="ion-compose"></i>&nbsp;New Article
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link"
-          routerLink="/settings"
-          routerLinkActive="active">
-          <i class="ion-gear-a"></i>&nbsp;Settings
-        </a>
-      </li>
-
-      <li class="nav-item">
-        <a class="nav-link"
-          [routerLink]="['/profile', currentUser.username]"
-          routerLinkActive="active">
-          <img [src]="currentUser.image" *ngIf="currentUser.image" class="user-pic" />
-          {{ currentUser.username }}
-        </a>
-      </li>
-
-    </ul>
-
-  </div>
-</nav>
+  <button mat-icon-button (click)="themeService.toggle()" matTooltip="Toggle dark mode">
+    <mat-icon>{{ (themeService.isDarkMode$ | async) ? 'light_mode' : 'dark_mode' }}</mat-icon>
+  </button>
+</mat-toolbar>

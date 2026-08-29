@@ -1,22 +1,22 @@
-<div class="card">
-  <div class="card-block">
-    <p class="card-text">
-      {{ comment.body }}
-    </p>
-  </div>
-  <div class="card-footer">
-    <a class="comment-author" [routerLink]="['/profile', comment.author.username]">
-      <img [src]="comment.author.image" class="comment-author-img" />
-    </a>
-    &nbsp;
-    <a class="comment-author" [routerLink]="['/profile', comment.author.username]">
-      {{ comment.author.username }}
-    </a>
-    <span class="date-posted">
-      {{ comment.createdAt | date: 'longDate' }}
-    </span>
-    <span class="mod-options" [hidden]="!canModify">
-      <i class="ion-trash-a" (click)="deleteClicked()"></i>
-    </span>
-  </div>
-</div>
+<mat-card class="comment-card">
+  <mat-card-content>
+    <p>{{ comment.body }}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <div class="comment-header">
+      <a [routerLink]="['/profile', comment.author.username]">
+        <img [src]="comment.author.image" />
+      </a>
+      <a [routerLink]="['/profile', comment.author.username]" style="font-weight: 500; font-size: 0.9rem">
+        {{ comment.author.username }}
+      </a>
+      <span style="font-size: 0.8rem; opacity: 0.6">
+        {{ comment.createdAt | date: 'longDate' }}
+      </span>
+      <span class="spacer"></span>
+      <button mat-icon-button [hidden]="!canModify" (click)="deleteClicked()" matTooltip="Delete comment">
+        <mat-icon>delete</mat-icon>
+      </button>
+    </div>
+  </mat-card-actions>
+</mat-card>
