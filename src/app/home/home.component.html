@@ -15,16 +15,16 @@
           <ul class="nav nav-pills outline-active">
             <li class="nav-item">
               <a class="nav-link"
-                 [ngClass]="{'active': listConfig.type === 'feed'}"
-                 (click)="setListTo('feed')">
-                 Your Feed
+                [ngClass]="{'active': listConfig.type === 'feed'}"
+                (click)="setListTo('feed')">
+                Your Feed
               </a>
             </li>
             <li class="nav-item">
               <a class="nav-link"
-                 [ngClass]="{'active': listConfig.type === 'all' && !listConfig.filters.tag}"
-                 (click)="setListTo('all')">
-                 Global Feed
+                [ngClass]="{'active': listConfig.type === 'all' && !listConfig.filters.tag}"
+                (click)="setListTo('all')">
+                Global Feed
               </a>
             </li>
             <li class="nav-item" [hidden]="!listConfig.filters.tag">
@@ -43,11 +43,13 @@
           <p>Popular Tags</p>
 
           <div class="tag-list">
-            <a *ngFor="let tag of tags"
-               (click)="setListTo('all', {tag: tag})"
-               class="tag-default tag-pill">
-               {{ tag }}
-            </a>
+            @for (tag of tags; track tag) {
+              <a
+                (click)="setListTo('all', {tag: tag})"
+                class="tag-default tag-pill">
+                {{ tag }}
+              </a>
+            }
           </div>
 
           <div [hidden]="tagsLoaded">
