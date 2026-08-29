@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi, withXhr } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { ArticleListComponent, ArticleMetaComponent, ArticlePreviewComponent } from './article-helpers';
@@ -33,5 +33,5 @@ import { ShowAuthedDirective } from './show-authed.directive';
     ], imports: [CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        RouterModule], providers: [provideHttpClient(withInterceptorsFromDi())] })
+        RouterModule], providers: [provideHttpClient(withXhr(), withInterceptorsFromDi())] })
 export class SharedModule {}
