@@ -5,8 +5,9 @@ import { User, UserService, Profile } from '../core';
 import { concatMap ,  tap } from 'rxjs/operators';
 
 @Component({
-  selector: 'app-profile-page',
-  templateUrl: './profile.component.html'
+    selector: 'app-profile-page',
+    templateUrl: './profile.component.html',
+    standalone: false
 })
 export class ProfileComponent implements OnInit {
   constructor(
