@@ -8,7 +8,10 @@ import {
 
 import { UserService } from '../core';
 
-@Directive({ selector: '[appShowAuthed]' })
+@Directive({
+    selector: '[appShowAuthed]',
+    standalone: false
+})
 export class ShowAuthedDirective implements OnInit {
   constructor(
     private templateRef: TemplateRef<any>,

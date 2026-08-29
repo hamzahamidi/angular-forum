@@ -1,10 +1,12 @@
-import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { Comment, User, UserService } from '../core';
 
 @Component({
-  selector: 'app-article-comment',
-  templateUrl: './article-comment.component.html'
+    selector: 'app-article-comment',
+    templateUrl: './article-comment.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class ArticleCommentComponent implements OnInit {
   constructor(

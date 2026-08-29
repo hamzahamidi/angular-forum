@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -12,8 +12,10 @@ import {
 } from '../core';
 
 @Component({
-  selector: 'app-article-page',
-  templateUrl: './article.component.html'
+    selector: 'app-article-page',
+    templateUrl: './article.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class ArticleComponent implements OnInit {
   article: Article;

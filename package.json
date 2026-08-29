@@ -10,36 +10,37 @@
     "lint": "ng lint --force"
   },
   "engines": {
-    "node": ">=18.19"
+    "node": ">=22.22.3"
   },
   "private": true,
   "dependencies": {
-    "@angular/common": "^18.2.14",
-    "@angular/compiler": "^18.2.14",
-    "@angular/core": "^18.2.14",
-    "@angular/forms": "^18.2.14",
-    "@angular/platform-browser": "^18.2.14",
-    "@angular/platform-browser-dynamic": "^18.2.14",
-    "@angular/router": "^18.2.14",
+    "@angular/common": "^22.1.4",
+    "@angular/compiler": "^22.1.4",
+    "@angular/core": "^22.1.4",
+    "@angular/forms": "^22.1.4",
+    "@angular/platform-browser": "^22.1.4",
+    "@angular/platform-browser-dynamic": "^22.1.4",
+    "@angular/router": "^22.1.4",
     "marked": "^4.0.10",
     "rxjs": "^7.8.2",
     "tslib": "^2.0.0",
-    "zone.js": "~0.14.10"
+    "zone.js": "~0.15.1"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "^18.2.21",
-    "@angular-eslint/builder": "18.4.3",
-    "@angular-eslint/eslint-plugin": "18.4.3",
-    "@angular-eslint/eslint-plugin-template": "18.4.3",
-    "@angular-eslint/schematics": "18.4.3",
-    "@angular-eslint/template-parser": "18.4.3",
-    "@angular/cli": "^18.2.21",
-    "@angular/compiler-cli": "^18.2.14",
+    "@angular-devkit/build-angular": "^22.1.6",
+    "@angular-eslint/builder": "20.7.0",
+    "@angular-eslint/eslint-plugin": "20.7.0",
+    "@angular-eslint/eslint-plugin-template": "20.7.0",
+    "@angular-eslint/schematics": "20.7.0",
+    "@angular-eslint/template-parser": "20.7.0",
+    "@angular/cli": "^22.1.6",
+    "@angular/compiler-cli": "^22.1.4",
     "@types/marked": "^4.0.1",
-    "@typescript-eslint/eslint-plugin": "^8.68.0",
-    "@typescript-eslint/parser": "^8.68.0",
-    "eslint": "^8.57.1",
-    "jasmine-core": "~3.6.0",
+    "@typescript-eslint/eslint-plugin": "^8.33.1",
+    "@typescript-eslint/parser": "^8.33.1",
+    "eslint": "^9.28.0",
+    "istanbul-lib-instrument": "^6.0.3",
+    "jasmine-core": "~5.1.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "^6.3.16",
     "karma-chrome-launcher": "~3.1.0",
@@ -47,7 +48,7 @@
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
     "ts-node": "^10.3.0",
-    "typescript": "~5.4.5"
+    "typescript": "~6.0.3"
   },
   "resolutions": {
     "webpack": "^5.0.0"

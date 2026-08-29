@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { Article, ArticlesService } from '../core';
 
 @Component({
-  selector: 'app-editor-page',
-  templateUrl: './editor.component.html'
+    selector: 'app-editor-page',
+    templateUrl: './editor.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class EditorComponent implements OnInit {
   article: Article = {} as Article;

@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 
 import { User, UserService } from '../../core';
 
 @Component({
-  selector: 'app-layout-header',
-  templateUrl: './header.component.html'
+    selector: 'app-layout-header',
+    templateUrl: './header.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
+    standalone: false
 })
 export class HeaderComponent implements OnInit {
   constructor(
