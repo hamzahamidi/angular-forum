@@ -10,7 +10,7 @@
     "lint": "ng lint --force"
   },
   "engines": {
-    "node": ">=18.19"
+    "node": ">=20.19"
   },
   "private": true,
   "dependencies": {
@@ -28,17 +28,17 @@
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "^20.3.35",
-    "@angular-eslint/builder": "18.4.3",
-    "@angular-eslint/eslint-plugin": "18.4.3",
-    "@angular-eslint/eslint-plugin-template": "18.4.3",
-    "@angular-eslint/schematics": "18.4.3",
-    "@angular-eslint/template-parser": "18.4.3",
+    "@angular-eslint/builder": "20.7.0",
+    "@angular-eslint/eslint-plugin": "20.7.0",
+    "@angular-eslint/eslint-plugin-template": "20.7.0",
+    "@angular-eslint/schematics": "20.7.0",
+    "@angular-eslint/template-parser": "20.7.0",
     "@angular/cli": "^20.3.35",
     "@angular/compiler-cli": "^20.3.30",
     "@types/marked": "^4.0.1",
-    "@typescript-eslint/eslint-plugin": "^8.68.0",
-    "@typescript-eslint/parser": "^8.68.0",
-    "eslint": "^8.57.1",
+    "@typescript-eslint/eslint-plugin": "^8.33.1",
+    "@typescript-eslint/parser": "^8.33.1",
+    "eslint": "^9.28.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "^6.3.16",
