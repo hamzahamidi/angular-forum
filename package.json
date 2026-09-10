@@ -46,7 +46,7 @@
     "eslint": "^8.57.1",
     "jsdom": "^26.1.0",
     "typescript": "~5.8.3",
-    "vitest": "^3.2.0"
+    "vitest": "^4.1.11"
   },
   "resolutions": {
     "webpack": "^5.0.0"
