@@ -1,42 +1,36 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, linkedSignal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 
 import { User, UserService, Profile, FALLBACK_AVATAR } from '../core';
-import { concatMap ,  tap } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-profile-page',
     templateUrl: './profile.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
-export class ProfileComponent implements OnInit {
+export class ProfileComponent {
   constructor(
     private route: ActivatedRoute,
     private userService: UserService
   ) { }
 
-  profile!: Profile;
-  currentUser!: User;
-  isUser!: boolean;
+  private readonly resolvedProfile = toSignal(
+    this.route.data.pipe(map(data => data['profile'] as Profile)),
+    { initialValue: {} as Profile }
+  );
 
-  ngOnInit() {
-    this.route.data.pipe(
-      concatMap(data => {
-        this.profile = data['profile'] as Profile;
-        // Load the current user's data.
-        return this.userService.currentUser.pipe(tap(
-          (userData: User) => {
-            this.currentUser = userData;
-            this.isUser = (this.currentUser.username === this.profile.username);
-          }
-        ));
-      })
-    ).subscribe();
-  }
+  private readonly currentUser = toSignal(
+    this.userService.currentUser,
+    { initialValue: {} as User }
+  );
+
+  readonly profile = linkedSignal(() => this.resolvedProfile());
+  readonly isUser = computed(() => this.currentUser().username === this.profile().username);
 
   onToggleFollowing(following: boolean) {
-    this.profile = { ...this.profile, following };
+    this.profile.update(profile => ({ ...profile, following }));
   }
 
   onImgError(event: Event) {

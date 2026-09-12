@@ -1,16 +1,16 @@
 <div class="profile-page">
 
   <div class="user-banner">
-    <img [src]="profile.image" class="user-avatar" (error)="onImgError($event)" />
-    <h4>{{ profile.username }}</h4>
-    <p>{{ profile.bio }}</p>
+    <img [src]="profile().image" class="user-avatar" (error)="onImgError($event)" />
+    <h4>{{ profile().username }}</h4>
+    <p>{{ profile().bio }}</p>
     <app-follow-button
-      [hidden]="isUser"
-      [profile]="profile"
+      [hidden]="isUser()"
+      [profile]="profile()"
       (toggle)="onToggleFollowing($event)">
     </app-follow-button>
     <a [routerLink]="['/settings']"
-       [hidden]="!isUser"
+       [hidden]="!isUser()"
        mat-stroked-button
        style="color: white; border-color: rgba(255,255,255,0.5)">
       <mat-icon>settings</mat-icon> Edit Profile Settings
@@ -20,7 +20,7 @@
   <div class="profile-content">
     <nav mat-tab-nav-bar [tabPanel]="tabPanel">
       <a mat-tab-link
-         [routerLink]="['/profile', profile.username]"
+         [routerLink]="['/profile', profile().username]"
          routerLinkActive
          #myPostsLink="routerLinkActive"
          [routerLinkActiveOptions]="{ exact: true }"
@@ -28,7 +28,7 @@
         My Posts
       </a>
       <a mat-tab-link
-         [routerLink]="['/profile', profile.username, 'favorites']"
+         [routerLink]="['/profile', profile().username, 'favorites']"
          routerLinkActive
          #favoritesLink="routerLinkActive"
          [active]="favoritesLink.isActive">

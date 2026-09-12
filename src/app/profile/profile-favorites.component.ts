@@ -1,33 +1,24 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { EMPTY, Observable } from 'rxjs';
 
 import { ArticleListConfig, Profile } from '../core';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-profile-favorites',
     templateUrl: './profile-favorites.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
-export class ProfileFavoritesComponent implements OnInit {
+export class ProfileFavoritesComponent {
   constructor(
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) {}
 
-  profile!: Profile;
-  favoritesConfig: ArticleListConfig = {
-    type: 'all',
-    filters: {}
-  };
-
-  ngOnInit() {
-    this.route.parent?.data.subscribe(
-      data => {
-        this.profile = data['profile'] as Profile;
-        this.favoritesConfig.filters.favorited = this.profile.username;
-      }
-    );
-  }
-
+  readonly favoritesConfig: Observable<ArticleListConfig> = (this.route.parent?.data ?? EMPTY).pipe(
+    map(data => ({
+      type: 'all',
+      filters: { favorited: (data['profile'] as Profile).username }
+    }))
+  );
 }

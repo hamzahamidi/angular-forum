@@ -1,37 +1,24 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { EMPTY, Observable } from 'rxjs';
 
 import { ArticleListConfig, Profile } from '../core';
+import { map } from 'rxjs/operators';
 
 @Component({
     selector: 'app-profile-articles',
     templateUrl: './profile-articles.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
-export class ProfileArticlesComponent implements OnInit {
+export class ProfileArticlesComponent {
   constructor(
-    private route: ActivatedRoute,
-    private router: Router
+    private route: ActivatedRoute
   ) {}
 
-  profile!: Profile;
-  articlesConfig: ArticleListConfig = {
-    type: 'all',
-    filters: {}
-  };
-
-  ngOnInit() {
-    this.route.parent?.data.subscribe(
-      data => {
-        this.profile = data['profile'] as Profile;
-        this.articlesConfig = {
-          type: 'all',
-          filters: {}
-        }; // Only method I found to refresh article load on swap
-        this.articlesConfig.filters.author = this.profile.username;
-      }
-    );
-  }
-
+  readonly articlesConfig: Observable<ArticleListConfig> = (this.route.parent?.data ?? EMPTY).pipe(
+    map(data => ({
+      type: 'all',
+      filters: { author: (data['profile'] as Profile).username }
+    }))
+  );
 }
