@@ -11,15 +11,15 @@
     <div class="feed-layout">
 
       <div class="feed-main">
-        <mat-tab-group (selectedTabChange)="onTabChange($event)" [selectedIndex]="selectedTab">
+        <mat-tab-group (selectedTabChange)="onTabChange($event)" [selectedIndex]="selectedTab()">
           <mat-tab label="Your Feed" *appShowAuthed="true"></mat-tab>
           <mat-tab label="Global Feed"></mat-tab>
-          @if (listConfig.filters.tag) {
-            <mat-tab [label]="'# ' + listConfig.filters.tag"></mat-tab>
+          @if (listConfig().filters.tag) {
+            <mat-tab [label]="'# ' + listConfig().filters.tag"></mat-tab>
           }
         </mat-tab-group>
 
-        <app-article-list [limit]="10" [config]="listConfig"></app-article-list>
+        <app-article-list [limit]="10" [config]="listConfig()"></app-article-list>
       </div>
 
       <div class="feed-sidebar">
@@ -28,26 +28,26 @@
             <mat-card-title style="font-size: 1rem">Popular Tags</mat-card-title>
           </mat-card-header>
           <mat-card-content>
-            <mat-chip-listbox>
-              @for (tag of tags; track tag) {
-                <mat-chip
-                  (click)="setListTo('all', {tag: tag})"
-                  class="tag-chip">
-                  {{ tag }}
-                </mat-chip>
-              }
-            </mat-chip-listbox>
+            @if (tags | async; as tagList) {
+              <mat-chip-listbox>
+                @for (tag of tagList; track tag) {
+                  <mat-chip
+                    (click)="setListTo('all', {tag: tag})"
+                    class="tag-chip">
+                    {{ tag }}
+                  </mat-chip>
+                }
+              </mat-chip-listbox>
 
-            @if (!tagsLoaded) {
+              @if (tagList.length === 0) {
+                <p style="opacity: 0.6; font-size: 0.9rem">
+                  No tags are here... yet.
+                </p>
+              }
+            } @else {
               <div style="padding: 8px 0">
                 <mat-progress-bar mode="indeterminate"></mat-progress-bar>
               </div>
-            }
-
-            @if (tagsLoaded && tags.length === 0) {
-              <p style="opacity: 0.6; font-size: 0.9rem">
-                No tags are here... yet.
-              </p>
             }
           </mat-card-content>
         </mat-card>
