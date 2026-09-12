@@ -1,11 +1,25 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { filter, map, startWith, switchMap } from 'rxjs/operators';
 
 import { Article, ArticleListConfig, ArticlesService } from '../../core';
+
+interface ArticleListRequest {
+  config: ArticleListConfig;
+  page: number;
+}
+
+interface ArticleListView {
+  loading: boolean;
+  currentPage: number;
+  results: Article[];
+  totalPages: number[];
+}
+
 @Component({
     selector: 'app-article-list',
     styleUrls: ['article-list.component.css'],
     templateUrl: './article-list.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class ArticleListComponent {
@@ -17,40 +31,39 @@ export class ArticleListComponent {
   @Input()
   set config(config: ArticleListConfig) {
     if (config) {
-      this.query = config;
-      this.currentPage = 1;
-      this.runQuery();
+      this.request.next({ config, page: 1 });
     }
   }
 
-  query!: ArticleListConfig;
-  results: Article[] = [];
-  loading = false;
-  currentPage = 1;
-  totalPages: Array<number> = [1];
+  private readonly request = new BehaviorSubject<ArticleListRequest | null>(null);
+
+  readonly view: Observable<ArticleListView> = this.request.pipe(
+    filter((request): request is ArticleListRequest => request !== null),
+    switchMap(request => this.load(request))
+  );
 
   setPageTo(pageNumber: number) {
-    this.currentPage = pageNumber;
-    this.runQuery();
+    const current = this.request.value;
+
+    if (current) {
+      this.request.next({ ...current, page: pageNumber });
+    }
   }
 
-  runQuery() {
-    this.loading = true;
-    this.results = [];
+  private load({ config, page }: ArticleListRequest): Observable<ArticleListView> {
+    const filters = this.limit
+      ? { ...config.filters, limit: this.limit, offset: this.limit * (page - 1) }
+      : config.filters;
 
-    // Create limit and offset filter (if necessary)
-    if (this.limit) {
-      this.query.filters.limit = this.limit;
-      this.query.filters.offset =  (this.limit * (this.currentPage - 1));
-    }
-
-    this.articlesService.query(this.query)
-    .subscribe(data => {
-      this.loading = false;
-      this.results = data.articles;
-
-      // Used from http://www.jstips.co/en/create-range-0...n-easily-using-one-line/
-      this.totalPages = Array.from(new Array(Math.ceil(data.articlesCount / this.limit)), (val, index) => index + 1);
-    });
+    return this.articlesService.query({ ...config, filters }).pipe(
+      map(data => ({
+        loading: false,
+        currentPage: page,
+        results: data.articles,
+        // Used from http://www.jstips.co/en/create-range-0...n-easily-using-one-line/
+        totalPages: Array.from(new Array(Math.ceil(data.articlesCount / this.limit)), (val, index) => index + 1)
+      })),
+      startWith({ loading: true, currentPage: page, results: [] as Article[], totalPages: [] as number[] })
+    );
   }
 }
