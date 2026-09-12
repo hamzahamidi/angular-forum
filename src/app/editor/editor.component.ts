@@ -39,10 +39,11 @@ export class EditorComponent implements OnInit {
 
   ngOnInit() {
     // If there's an article prefetched, load it
-    this.route.data.subscribe((data: { article: Article }) => {
-      if (data.article) {
-        this.article = data.article;
-        this.articleForm.patchValue(data.article);
+    this.route.data.subscribe(data => {
+      const article = data['article'] as Article | undefined;
+      if (article) {
+        this.article = article;
+        this.articleForm.patchValue(article);
       }
     });
   }

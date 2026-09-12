@@ -15,16 +15,16 @@ export class ProfileArticlesComponent implements OnInit {
     private router: Router
   ) {}
 
-  profile: Profile;
+  profile!: Profile;
   articlesConfig: ArticleListConfig = {
     type: 'all',
     filters: {}
   };
 
   ngOnInit() {
-    this.route.parent.data.subscribe(
-      (data: {profile: Profile}) => {
-        this.profile = data.profile;
+    this.route.parent?.data.subscribe(
+      data => {
+        this.profile = data['profile'] as Profile;
         this.articlesConfig = {
           type: 'all',
           filters: {}

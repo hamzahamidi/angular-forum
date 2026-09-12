@@ -17,11 +17,11 @@ export class ArticlesService {
   ) {}
 
   query(config: ArticleListConfig): Observable<{articles: Article[], articlesCount: number}> {
-    const params = {};
+    const params: Record<string, string> = {};
 
-    Object.keys(config.filters)
-    .forEach((key) => {
-      params[key] = config.filters[key];
+    Object.entries(config.filters)
+    .forEach(([key, value]) => {
+      params[key] = String(value);
     });
 
     return this.apiService
@@ -29,21 +29,21 @@ export class ArticlesService {
       '/articles' + ((config.type === 'feed') ? '/feed' : ''),
       new HttpParams({ fromObject: params })
     ).pipe(map(data => {
-      const filtered = data.articles.filter(a => !isSpam(a));
+      const filtered = data.articles.filter((a: Article) => !isSpam(a));
       return { articles: filtered, articlesCount: filtered.length ? data.articlesCount : 0 };
     }));
   }
 
-  get(slug): Observable<Article> {
+  get(slug: string): Observable<Article> {
     return this.apiService.get('/articles/' + slug)
       .pipe(map(data => data.article));
   }
 
-  destroy(slug) {
+  destroy(slug: string) {
     return this.apiService.delete('/articles/' + slug);
   }
 
-  save(article): Observable<Article> {
+  save(article: Article): Observable<Article> {
     // If we're updating an existing article
     if (article.slug) {
       return this.apiService.put('/articles/' + article.slug, {article: article})
@@ -56,11 +56,11 @@ export class ArticlesService {
     }
   }
 
-  favorite(slug): Observable<Article> {
+  favorite(slug: string): Observable<Article> {
     return this.apiService.post('/articles/' + slug + '/favorite');
   }
 
-  unfavorite(slug): Observable<Article> {
+  unfavorite(slug: string): Observable<Article> {
     return this.apiService.delete('/articles/' + slug + '/favorite');
   }
 

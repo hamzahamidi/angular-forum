@@ -13,10 +13,10 @@ export class ArticleCommentComponent implements OnInit {
     private userService: UserService
   ) {}
 
-  @Input() comment: Comment;
+  @Input() comment!: Comment;
   @Output() deleteComment = new EventEmitter<boolean>();
 
-  canModify: boolean;
+  canModify!: boolean;
 
   ngOnInit() {
     // Load the current user's data
