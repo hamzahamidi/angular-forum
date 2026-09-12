@@ -1,7 +1,9 @@
+import { TestBed } from '@angular/core/testing';
+import { ActivatedRoute, Router } from '@angular/router';
 import { of } from 'rxjs';
 
 import { ArticleComponent } from './article.component';
-import { Article, Comment, CommentsService } from '../core';
+import { Article, ArticlesService, Comment, CommentsService, User, UserService } from '../core';
 
 const stub = <T>(value: Partial<T> = {}) => value as T;
 
@@ -20,59 +22,85 @@ function articleFixture(): Article {
   };
 }
 
-function createComponent(commentsService: CommentsService = stub<CommentsService>()) {
-  return new ArticleComponent(stub(), stub(), commentsService, stub(), stub());
+function createComponent(options: { article?: Article; comments?: Comment[]; added?: Comment } = {}) {
+  const article = options.article ?? articleFixture();
+
+  TestBed.configureTestingModule({
+    providers: [
+      ArticleComponent,
+      { provide: ActivatedRoute, useValue: { data: of({ article }) } },
+      { provide: ArticlesService, useValue: stub<ArticlesService>() },
+      { provide: Router, useValue: stub<Router>() },
+      { provide: UserService, useValue: { currentUser: of({} as User) } },
+      {
+        provide: CommentsService,
+        useValue: stub<CommentsService>({
+          getAll: () => of(options.comments ?? []),
+          add: () => of(options.added ?? stub<Comment>({ id: 2, body: 'new' }))
+        })
+      }
+    ]
+  });
+
+  return { component: TestBed.inject(ArticleComponent), article };
 }
 
 describe('ArticleComponent state updates', () => {
+  afterEach(() => TestBed.resetTestingModule());
+
+  it('reads the resolved article from the route', () => {
+    const { component, article } = createComponent();
+
+    expect(component.article()).toBe(article);
+  });
+
   it('replaces the article when a favorite is toggled', () => {
-    const component = createComponent();
-    const original = articleFixture();
-    component.article = original;
+    const { component, article } = createComponent();
 
     component.onToggleFavorite(true);
 
-    expect(component.article).not.toBe(original);
-    expect(component.article.favorited).toBe(true);
-    expect(component.article.favoritesCount).toBe(4);
-    expect(original.favoritesCount).toBe(3);
+    expect(component.article()).not.toBe(article);
+    expect(component.article().favorited).toBe(true);
+    expect(component.article().favoritesCount).toBe(4);
+    expect(article.favoritesCount).toBe(3);
   });
 
   it('decrements the count when a favorite is removed', () => {
-    const component = createComponent();
-    component.article = { ...articleFixture(), favorited: true };
+    const { component } = createComponent({ article: { ...articleFixture(), favorited: true } });
 
     component.onToggleFavorite(false);
 
-    expect(component.article.favorited).toBe(false);
-    expect(component.article.favoritesCount).toBe(2);
+    expect(component.article().favorited).toBe(false);
+    expect(component.article().favoritesCount).toBe(2);
   });
 
   it('replaces the author when following is toggled', () => {
-    const component = createComponent();
-    const original = articleFixture();
-    component.article = original;
+    const { component, article } = createComponent();
 
     component.onToggleFollowing(true);
 
-    expect(component.article).not.toBe(original);
-    expect(component.article.author).not.toBe(original.author);
-    expect(component.article.author.following).toBe(true);
-    expect(original.author.following).toBe(false);
+    expect(component.article().author).not.toBe(article.author);
+    expect(component.article().author.following).toBe(true);
+    expect(article.author.following).toBe(false);
   });
 
-  it('replaces the comment array when a comment is added', () => {
-    const added = stub<Comment>({ id: 2, body: 'new' });
-    const component = createComponent(stub<CommentsService>({ add: () => of(added) }));
+  it('loads the comments of the resolved article', () => {
     const existing = stub<Comment>({ id: 1, body: 'existing' });
-    const original = [existing];
-    component.article = articleFixture();
-    component.comments = original;
+    const { component } = createComponent({ comments: [existing] });
+
+    expect(component.comments()).toEqual([existing]);
+  });
+
+  it('puts an added comment at the front without touching the loaded array', () => {
+    const existing = stub<Comment>({ id: 1, body: 'existing' });
+    const added = stub<Comment>({ id: 2, body: 'new' });
+    const loaded = [existing];
+    const { component } = createComponent({ comments: loaded, added });
 
     component.addComment();
 
-    expect(component.comments).not.toBe(original);
-    expect(component.comments).toEqual([added, existing]);
-    expect(original).toEqual([existing]);
+    expect(component.comments()).toEqual([added, existing]);
+    expect(loaded).toEqual([existing]);
+    expect(component.isSubmitting()).toBe(false);
   });
 });

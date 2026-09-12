@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Article, ArticlesService, UserService } from '../../core';
@@ -8,7 +8,6 @@ import { concatMap ,  tap } from 'rxjs/operators';
 @Component({
     selector: 'app-favorite-button',
     templateUrl: './favorite-button.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class FavoriteButtonComponent {
@@ -20,10 +19,10 @@ export class FavoriteButtonComponent {
 
   @Input() article!: Article;
   @Output() toggle = new EventEmitter<boolean>();
-  isSubmitting = false;
+  readonly isSubmitting = signal(false);
 
   toggleFavorite() {
-    this.isSubmitting = true;
+    this.isSubmitting.set(true);
 
     this.userService.isAuthenticated.pipe(concatMap(
       (authenticated) => {
@@ -38,10 +37,10 @@ export class FavoriteButtonComponent {
           return this.articlesService.favorite(this.article.slug)
           .pipe(tap(
             data => {
-              this.isSubmitting = false;
+              this.isSubmitting.set(false);
               this.toggle.emit(true);
             },
-            err => this.isSubmitting = false
+            err => this.isSubmitting.set(false)
           ));
 
         // Otherwise, unfavorite the article
@@ -49,10 +48,10 @@ export class FavoriteButtonComponent {
           return this.articlesService.unfavorite(this.article.slug)
           .pipe(tap(
             data => {
-              this.isSubmitting = false;
+              this.isSubmitting.set(false);
               this.toggle.emit(false);
             },
-            err => this.isSubmitting = false
+            err => this.isSubmitting.set(false)
           ));
         }
 
