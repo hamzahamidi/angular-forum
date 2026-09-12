@@ -24,7 +24,7 @@ export class ArticleListComponent {
   }
 
   query!: ArticleListConfig;
-  results!: Article[];
+  results: Article[] = [];
   loading = false;
   currentPage = 1;
   totalPages: Array<number> = [1];

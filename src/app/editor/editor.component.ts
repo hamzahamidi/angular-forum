@@ -2,7 +2,7 @@ import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { Article, ArticlesService } from '../core';
+import { Article, ArticlesService, Errors } from '../core';
 
 @Component({
     selector: 'app-editor-page',
@@ -14,7 +14,7 @@ export class EditorComponent implements OnInit {
   article: Article = {} as Article;
   articleForm: UntypedFormGroup;
   tagField = new UntypedFormControl();
-  errors: Object = {};
+  errors: Errors = { errors: {} };
   isSubmitting = false;
 
   constructor(
