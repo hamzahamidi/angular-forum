@@ -3,10 +3,10 @@
     <div class="form-container">
       <h1>Your Settings</h1>
 
-      <app-list-errors [errors]="errors"></app-list-errors>
+      <app-list-errors [errors]="errors()"></app-list-errors>
 
       <form [formGroup]="settingsForm" (ngSubmit)="submitForm()">
-        <fieldset [disabled]="isSubmitting">
+        <fieldset [disabled]="isSubmitting()">
 
           <mat-form-field appearance="outline">
             <mat-label>URL of profile picture</mat-label>

@@ -10,9 +10,9 @@
           <a [routerLink]="['/register']">Need an account?</a>
         }
       </p>
-      <app-list-errors [errors]="errors"></app-list-errors>
+      <app-list-errors [errors]="errors()"></app-list-errors>
       <form [formGroup]="authForm" (ngSubmit)="submitForm()">
-        <fieldset [disabled]="isSubmitting">
+        <fieldset [disabled]="isSubmitting()">
           @if (authType === 'register') {
             <mat-form-field appearance="outline">
               <mat-label>Username</mat-label>

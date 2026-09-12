@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 
@@ -7,14 +7,13 @@ import { Errors, User, UserService } from '../core';
 @Component({
     selector: 'app-settings-page',
     templateUrl: './settings.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class SettingsComponent implements OnInit {
   user: User = {} as User;
   settingsForm: UntypedFormGroup;
-  errors: Errors = { errors: {} };
-  isSubmitting = false;
+  readonly errors = signal<Errors>({ errors: {} });
+  readonly isSubmitting = signal(false);
 
   constructor(
     private router: Router,
@@ -46,20 +45,20 @@ export class SettingsComponent implements OnInit {
   }
 
   submitForm() {
-    this.isSubmitting = true;
+    this.isSubmitting.set(true);
 
     // update the model
     this.updateUser(this.settingsForm.value);
 
     this.userService
     .update(this.user)
-    .subscribe(
-      updatedUser => this.router.navigateByUrl('/profile/' + updatedUser.username),
-      err => {
-        this.errors = err;
-        this.isSubmitting = false;
+    .subscribe({
+      next: updatedUser => this.router.navigateByUrl('/profile/' + updatedUser.username),
+      error: err => {
+        this.errors.set(err);
+        this.isSubmitting.set(false);
       }
-    );
+    });
   }
 
   updateUser(values: Object) {

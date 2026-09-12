@@ -2,10 +2,10 @@
   <div class="container">
     <div class="form-container" style="max-width: 800px">
 
-      <app-list-errors [errors]="errors"></app-list-errors>
+      <app-list-errors [errors]="errors()"></app-list-errors>
 
       <form [formGroup]="articleForm">
-        <fieldset [disabled]="isSubmitting">
+        <fieldset [disabled]="isSubmitting()">
 
           <mat-form-field appearance="outline">
             <mat-label>Article Title</mat-label>

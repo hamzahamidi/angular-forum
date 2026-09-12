@@ -17,11 +17,11 @@
     <a mat-button routerLink="/settings" routerLinkActive="active" class="toolbar-nav-link">
       <mat-icon>settings</mat-icon> Settings
     </a>
-    <a mat-button [routerLink]="['/profile', currentUser.username]" routerLinkActive="active" class="toolbar-nav-link">
-      @if (currentUser.image) {
-        <img [src]="currentUser.image" class="user-pic-small" (error)="onImgError($event)" />
+    <a mat-button [routerLink]="['/profile', currentUser().username]" routerLinkActive="active" class="toolbar-nav-link">
+      @if (currentUser().image) {
+        <img [src]="currentUser().image" class="user-pic-small" (error)="onImgError($event)" />
       }
-      {{ currentUser.username }}
+      {{ currentUser().username }}
     </a>
   </ng-container>
 
@@ -41,10 +41,10 @@
   </div>
 
   <div class="panel-user" *appShowAuthed="true">
-    <img [src]="currentUser.image" class="panel-avatar" (error)="onImgError($event)" />
-    <div class="panel-username">{{ currentUser.username }}</div>
+    <img [src]="currentUser().image" class="panel-avatar" (error)="onImgError($event)" />
+    <div class="panel-username">{{ currentUser().username }}</div>
     <div class="panel-user-links">
-      <a mat-button [routerLink]="['/profile', currentUser.username]" (click)="panelOpen = false">
+      <a mat-button [routerLink]="['/profile', currentUser().username]" (click)="panelOpen = false">
         <mat-icon>person</mat-icon> Profile
       </a>
       <a mat-button routerLink="/settings" (click)="panelOpen = false">
