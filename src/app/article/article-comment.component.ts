@@ -1,7 +1,7 @@
 import { Component, computed, input, output } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 
-import { Comment, User, UserService, FALLBACK_AVATAR } from '../core';
+import { Comment, UserService, FALLBACK_AVATAR } from '../core';
 
 @Component({
     selector: 'app-article-comment',
@@ -18,7 +18,7 @@ export class ArticleCommentComponent {
 
   private readonly currentUser = toSignal(
     this.userService.currentUser,
-    { initialValue: {} as User }
+    { requireSync: true }
   );
 
   readonly canModify = computed(() => this.currentUser().username === this.comment().author.username);
