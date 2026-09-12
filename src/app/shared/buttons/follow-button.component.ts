@@ -18,7 +18,7 @@ export class FollowButtonComponent {
     private userService: UserService
   ) {}
 
-  @Input() profile: Profile;
+  @Input() profile!: Profile;
   @Output() toggle = new EventEmitter<boolean>();
   isSubmitting = false;
 

@@ -9,7 +9,7 @@ import { Article } from '../../core';
     standalone: false
 })
 export class ArticlePreviewComponent {
-  @Input() article: Article;
+  @Input() article!: Article;
 
   onToggleFavorite(favorited: boolean) {
     this.article['favorited'] = favorited;

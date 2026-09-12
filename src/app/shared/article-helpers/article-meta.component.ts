@@ -9,7 +9,7 @@ import { Article, FALLBACK_AVATAR } from '../../core';
     standalone: false
 })
 export class ArticleMetaComponent {
-  @Input() article: Article;
+  @Input() article!: Article;
 
   onImgError(event: Event) {
     (event.target as HTMLImageElement).src = FALLBACK_AVATAR;

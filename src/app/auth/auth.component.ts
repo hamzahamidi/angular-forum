@@ -11,7 +11,7 @@ import { Errors, UserService } from '../core';
     standalone: false
 })
 export class AuthComponent implements OnInit {
-  authType: String = '';
+  authType = '';
   title: String = '';
   errors: Errors = {errors: {}};
   isSubmitting = false;

@@ -15,16 +15,16 @@ export class ProfileFavoritesComponent implements OnInit {
     private router: Router
   ) {}
 
-  profile: Profile;
+  profile!: Profile;
   favoritesConfig: ArticleListConfig = {
     type: 'all',
     filters: {}
   };
 
   ngOnInit() {
-    this.route.parent.data.subscribe(
-      (data: {profile: Profile}) => {
-        this.profile = data.profile;
+    this.route.parent?.data.subscribe(
+      data => {
+        this.profile = data['profile'] as Profile;
         this.favoritesConfig.filters.favorited = this.profile.username;
       }
     );
