@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 import { User, UserService, ThemeService, FALLBACK_AVATAR } from '../../core';
 import packageJson from '../../../../package.json';
@@ -6,26 +7,21 @@ import packageJson from '../../../../package.json';
 @Component({
     selector: 'app-layout-header',
     templateUrl: './header.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   constructor(
     private userService: UserService,
     public themeService: ThemeService
   ) {}
 
-  currentUser!: User;
+  readonly currentUser = toSignal(
+    this.userService.currentUser,
+    { initialValue: {} as User }
+  );
+
   panelOpen = false;
   appVersion = packageJson.version;
-
-  ngOnInit() {
-    this.userService.currentUser.subscribe(
-      (userData) => {
-        this.currentUser = userData;
-      }
-    );
-  }
 
   onImgError(event: Event) {
     (event.target as HTMLImageElement).src = FALLBACK_AVATAR;

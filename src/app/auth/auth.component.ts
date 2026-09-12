@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, UntypedFormControl, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -7,14 +7,13 @@ import { Errors, UserService } from '../core';
 @Component({
     selector: 'app-auth-page',
     templateUrl: './auth.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class AuthComponent implements OnInit {
   authType = '';
   title: String = '';
-  errors: Errors = {errors: {}};
-  isSubmitting = false;
+  readonly errors = signal<Errors>({ errors: {} });
+  readonly isSubmitting = signal(false);
   authForm: UntypedFormGroup;
 
   constructor(
@@ -44,18 +43,18 @@ export class AuthComponent implements OnInit {
   }
 
   submitForm() {
-    this.isSubmitting = true;
-    this.errors = {errors: {}};
+    this.isSubmitting.set(true);
+    this.errors.set({ errors: {} });
 
     const credentials = this.authForm.value;
     this.userService
     .attemptAuth(this.authType, credentials)
-    .subscribe(
-      data => this.router.navigateByUrl('/'),
-      err => {
-        this.errors = err;
-        this.isSubmitting = false;
+    .subscribe({
+      next: () => this.router.navigateByUrl('/'),
+      error: err => {
+        this.errors.set(err);
+        this.isSubmitting.set(false);
       }
-    );
+    });
   }
 }

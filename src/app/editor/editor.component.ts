@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, signal } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -7,15 +7,14 @@ import { Article, ArticlesService, Errors } from '../core';
 @Component({
     selector: 'app-editor-page',
     templateUrl: './editor.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class EditorComponent implements OnInit {
   article: Article = {} as Article;
   articleForm: UntypedFormGroup;
   tagField = new UntypedFormControl();
-  errors: Errors = { errors: {} };
-  isSubmitting = false;
+  readonly errors = signal<Errors>({ errors: {} });
+  readonly isSubmitting = signal(false);
 
   constructor(
     private articlesService: ArticlesService,
@@ -64,19 +63,19 @@ export class EditorComponent implements OnInit {
   }
 
   submitForm() {
-    this.isSubmitting = true;
+    this.isSubmitting.set(true);
 
     // update the model
     this.updateArticle(this.articleForm.value);
 
     // post the changes
-    this.articlesService.save(this.article).subscribe(
-      article => this.router.navigateByUrl('/article/' + article.slug),
-      err => {
-        this.errors = err;
-        this.isSubmitting = false;
+    this.articlesService.save(this.article).subscribe({
+      next: article => this.router.navigateByUrl('/article/' + article.slug),
+      error: err => {
+        this.errors.set(err);
+        this.isSubmitting.set(false);
       }
-    );
+    });
   }
 
   updateArticle(values: Object) {
