@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { ActivatedRoute, Router } from '@angular/router';
-import { of } from 'rxjs';
+import { of, throwError } from 'rxjs';
 
 import { ArticleComponent } from './article.component';
 import { Article, ArticlesService, Comment, CommentsService, User, UserService } from '../core';
@@ -22,7 +22,7 @@ function articleFixture(): Article {
   };
 }
 
-function createComponent(options: { article?: Article; comments?: Comment[]; added?: Comment } = {}) {
+function createComponent(options: { article?: Article; comments?: Comment[]; added?: Comment; addFails?: unknown; destroyed?: number[] } = {}) {
   const article = options.article ?? articleFixture();
 
   TestBed.configureTestingModule({
@@ -36,7 +36,13 @@ function createComponent(options: { article?: Article; comments?: Comment[]; add
         provide: CommentsService,
         useValue: stub<CommentsService>({
           getAll: () => of(options.comments ?? []),
-          add: () => of(options.added ?? stub<Comment>({ id: 2, body: 'new' }))
+          add: () => options.addFails
+            ? throwError(() => options.addFails)
+            : of(options.added ?? stub<Comment>({ id: 2, body: 'new' })),
+          destroy: (commentId: number) => {
+            options.destroyed?.push(commentId);
+            return of({});
+          }
         })
       }
     ]
@@ -102,5 +108,27 @@ describe('ArticleComponent state updates', () => {
     expect(component.comments()).toEqual([added, existing]);
     expect(loaded).toEqual([existing]);
     expect(component.isSubmitting()).toBe(false);
+  });
+  it('surfaces the errors and re-enables the form when a comment fails to post', () => {
+    const failure = { errors: { body: "can't be blank" } };
+    const { component } = createComponent({ addFails: failure });
+
+    component.addComment();
+
+    expect(component.commentFormErrors()).toEqual(failure);
+    expect(component.isSubmitting()).toBe(false);
+    expect(component.comments()).toEqual([]);
+  });
+
+  it('drops a deleted comment and leaves the others alone', () => {
+    const kept = stub<Comment>({ id: 1, body: 'kept' });
+    const doomed = stub<Comment>({ id: 2, body: 'doomed' });
+    const destroyed: number[] = [];
+    const { component } = createComponent({ comments: [kept, doomed], destroyed });
+
+    component.onDeleteComment(doomed);
+
+    expect(destroyed).toEqual([2]);
+    expect(component.comments()).toEqual([kept]);
   });
 });
