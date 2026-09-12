@@ -7,6 +7,7 @@ import {
   ArticlesService,
   Comment,
   CommentsService,
+  Errors,
   User,
   UserService,
   FALLBACK_AVATAR
@@ -24,7 +25,7 @@ export class ArticleComponent implements OnInit {
   canModify!: boolean;
   comments!: Comment[];
   commentControl = new UntypedFormControl();
-  commentFormErrors = {};
+  commentFormErrors: Errors = { errors: {} };
   isSubmitting = false;
   isDeleting = false;
 
@@ -89,7 +90,7 @@ export class ArticleComponent implements OnInit {
 
   addComment() {
     this.isSubmitting = true;
-    this.commentFormErrors = {};
+    this.commentFormErrors = { errors: {} };
 
     const commentBody = this.commentControl.value;
     this.commentsService
