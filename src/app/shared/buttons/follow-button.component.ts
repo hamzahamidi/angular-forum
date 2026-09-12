@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Profile, ProfilesService, UserService } from '../../core';
@@ -8,6 +8,7 @@ import { of } from 'rxjs';
 @Component({
     selector: 'app-follow-button',
     templateUrl: './follow-button.component.html',
+    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class FollowButtonComponent {
