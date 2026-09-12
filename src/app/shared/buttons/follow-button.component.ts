@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, Output, ChangeDetectionStrategy } from '@angular/core';
+import { Component, EventEmitter, Input, Output, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { Profile, ProfilesService, UserService } from '../../core';
@@ -8,7 +8,6 @@ import { of } from 'rxjs';
 @Component({
     selector: 'app-follow-button',
     templateUrl: './follow-button.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
 export class FollowButtonComponent {
@@ -20,10 +19,10 @@ export class FollowButtonComponent {
 
   @Input() profile!: Profile;
   @Output() toggle = new EventEmitter<boolean>();
-  isSubmitting = false;
+  readonly isSubmitting = signal(false);
 
   toggleFollowing() {
-    this.isSubmitting = true;
+    this.isSubmitting.set(true);
     // TODO: remove nested subscribes, use mergeMap
 
     this.userService.isAuthenticated.pipe(concatMap(
@@ -39,10 +38,10 @@ export class FollowButtonComponent {
           return this.profilesService.follow(this.profile.username)
           .pipe(tap(
             data => {
-              this.isSubmitting = false;
+              this.isSubmitting.set(false);
               this.toggle.emit(true);
             },
-            err => this.isSubmitting = false
+            err => this.isSubmitting.set(false)
           ));
 
         // Otherwise, unfollow this profile
@@ -50,10 +49,10 @@ export class FollowButtonComponent {
           return this.profilesService.unfollow(this.profile.username)
           .pipe(tap(
             data => {
-              this.isSubmitting = false;
+              this.isSubmitting.set(false);
               this.toggle.emit(false);
             },
-            err => this.isSubmitting = false
+            err => this.isSubmitting.set(false)
           ));
         }
       }

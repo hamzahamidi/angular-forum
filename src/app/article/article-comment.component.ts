@@ -1,31 +1,27 @@
-import { Component, EventEmitter, Input, Output, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 import { Comment, User, UserService, FALLBACK_AVATAR } from '../core';
 
 @Component({
     selector: 'app-article-comment',
     templateUrl: './article-comment.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
-export class ArticleCommentComponent implements OnInit {
+export class ArticleCommentComponent {
   constructor(
     private userService: UserService
   ) {}
 
-  @Input() comment!: Comment;
-  @Output() deleteComment = new EventEmitter<boolean>();
+  readonly comment = input.required<Comment>();
+  readonly deleteComment = output<boolean>();
 
-  canModify!: boolean;
+  private readonly currentUser = toSignal(
+    this.userService.currentUser,
+    { initialValue: {} as User }
+  );
 
-  ngOnInit() {
-    // Load the current user's data
-    this.userService.currentUser.subscribe(
-      (userData: User) => {
-        this.canModify = (userData.username === this.comment.author.username);
-      }
-    );
-  }
+  readonly canModify = computed(() => this.currentUser().username === this.comment().author.username);
 
   deleteClicked() {
     this.deleteComment.emit(true);

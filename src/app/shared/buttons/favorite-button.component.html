@@ -1,5 +1,5 @@
 <button mat-icon-button
-  [disabled]="isSubmitting"
+  [disabled]="isSubmitting()"
   [color]="article.favorited ? 'warn' : ''"
   (click)="toggleFavorite()"
   matTooltip="Favorite">

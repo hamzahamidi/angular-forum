@@ -1,6 +1,8 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, computed, linkedSignal, signal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { UntypedFormControl } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { map, switchMap } from 'rxjs/operators';
 
 import {
   Article,
@@ -16,19 +18,9 @@ import {
 @Component({
     selector: 'app-article-page',
     templateUrl: './article.component.html',
-    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
-export class ArticleComponent implements OnInit {
-  article!: Article;
-  currentUser!: User;
-  canModify!: boolean;
-  comments!: Comment[];
-  commentControl = new UntypedFormControl();
-  commentFormErrors: Errors = { errors: {} };
-  isSubmitting = false;
-  isDeleting = false;
-
+export class ArticleComponent {
   constructor(
     private route: ActivatedRoute,
     private articlesService: ArticlesService,
@@ -37,85 +29,80 @@ export class ArticleComponent implements OnInit {
     private userService: UserService,
   ) { }
 
-  ngOnInit() {
-    // Retreive the prefetched article
-    this.route.data.subscribe(
-      data => {
-        this.article = data['article'] as Article;
+  private readonly resolvedArticle = toSignal(
+    this.route.data.pipe(map(data => data['article'] as Article)),
+    { requireSync: true }
+  );
 
-        // Load the comments on this article
-        this.populateComments();
-      }
-    );
+  private readonly loadedComments = toSignal(
+    this.route.data.pipe(
+      map(data => (data['article'] as Article).slug),
+      switchMap(slug => this.commentsService.getAll(slug))
+    ),
+    { initialValue: [] as Comment[] }
+  );
 
-    // Load the current user's data
-    this.userService.currentUser.subscribe(
-      (userData: User) => {
-        this.currentUser = userData;
+  readonly currentUser = toSignal(
+    this.userService.currentUser,
+    { initialValue: {} as User }
+  );
 
-        this.canModify = (this.currentUser.username === this.article.author.username);
-      }
-    );
-  }
+  readonly article = linkedSignal(() => this.resolvedArticle());
+  readonly comments = linkedSignal(() => this.loadedComments());
+  readonly canModify = computed(() => this.currentUser().username === this.article().author.username);
+
+  readonly commentFormErrors = signal<Errors>({ errors: {} });
+  readonly isSubmitting = signal(false);
+  readonly isDeleting = signal(false);
+  commentControl = new UntypedFormControl();
 
   onToggleFavorite(favorited: boolean) {
-    this.article = {
-      ...this.article,
+    this.article.update(article => ({
+      ...article,
       favorited,
-      favoritesCount: this.article.favoritesCount + (favorited ? 1 : -1)
-    };
+      favoritesCount: article.favoritesCount + (favorited ? 1 : -1)
+    }));
   }
 
   onToggleFollowing(following: boolean) {
-    this.article = {
-      ...this.article,
-      author: { ...this.article.author, following }
-    };
+    this.article.update(article => ({
+      ...article,
+      author: { ...article.author, following }
+    }));
   }
 
   deleteArticle() {
-    this.isDeleting = true;
+    this.isDeleting.set(true);
 
-    this.articlesService.destroy(this.article.slug)
-      .subscribe(
-        success => {
-          this.router.navigateByUrl('/');
-        }
-      );
-  }
-
-  populateComments() {
-    this.commentsService.getAll(this.article.slug)
-      .subscribe(comments => this.comments = comments);
+    this.articlesService.destroy(this.article().slug)
+      .subscribe(() => this.router.navigateByUrl('/'));
   }
 
   addComment() {
-    this.isSubmitting = true;
-    this.commentFormErrors = { errors: {} };
+    this.isSubmitting.set(true);
+    this.commentFormErrors.set({ errors: {} });
 
     const commentBody = this.commentControl.value;
     this.commentsService
-      .add(this.article.slug, commentBody)
-      .subscribe(
-        comment => {
-          this.comments = [comment, ...this.comments];
+      .add(this.article().slug, commentBody)
+      .subscribe({
+        next: comment => {
+          this.comments.update(comments => [comment, ...comments]);
           this.commentControl.reset('');
-          this.isSubmitting = false;
+          this.isSubmitting.set(false);
         },
-        errors => {
-          this.isSubmitting = false;
-          this.commentFormErrors = errors;
+        error: errors => {
+          this.isSubmitting.set(false);
+          this.commentFormErrors.set(errors);
         }
-      );
+      });
   }
 
   onDeleteComment(comment: Comment) {
-    this.commentsService.destroy(comment.id, this.article.slug)
-      .subscribe(
-        success => {
-          this.comments = this.comments.filter((item) => item !== comment);
-        }
-      );
+    this.commentsService.destroy(comment.id, this.article().slug)
+      .subscribe(() => {
+        this.comments.update(comments => comments.filter(item => item !== comment));
+      });
   }
 
   onImgError(event: Event) {

@@ -1,5 +1,5 @@
 <button mat-stroked-button
-  [disabled]="isSubmitting"
+  [disabled]="isSubmitting()"
   [color]="profile.following ? 'primary' : ''"
   (click)="toggleFollowing()">
   <mat-icon>{{ profile.following ? 'person_remove' : 'person_add' }}</mat-icon>

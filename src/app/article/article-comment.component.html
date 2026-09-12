@@ -1,20 +1,20 @@
 <mat-card class="comment-card">
   <mat-card-content>
-    <p>{{ comment.body }}</p>
+    <p>{{ comment().body }}</p>
   </mat-card-content>
   <mat-card-actions>
     <div class="comment-header">
-      <a [routerLink]="['/profile', comment.author.username]">
-        <img [src]="comment.author.image" (error)="onImgError($event)" />
+      <a [routerLink]="['/profile', comment().author.username]">
+        <img [src]="comment().author.image" (error)="onImgError($event)" />
       </a>
-      <a [routerLink]="['/profile', comment.author.username]" style="font-weight: 500; font-size: 0.9rem">
-        {{ comment.author.username }}
+      <a [routerLink]="['/profile', comment().author.username]" style="font-weight: 500; font-size: 0.9rem">
+        {{ comment().author.username }}
       </a>
       <span style="font-size: 0.8rem; opacity: 0.6">
-        {{ comment.createdAt | date: 'longDate' }}
+        {{ comment().createdAt | date: 'longDate' }}
       </span>
       <span class="spacer"></span>
-      <button mat-icon-button [hidden]="!canModify" (click)="deleteClicked()" matTooltip="Delete comment">
+      <button mat-icon-button [hidden]="!canModify()" (click)="deleteClicked()" matTooltip="Delete comment">
         <mat-icon>delete</mat-icon>
       </button>
     </div>
