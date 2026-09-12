@@ -8,8 +8,8 @@
 
         <span [hidden]="!canModify">
           <a mat-stroked-button
-             [routerLink]="['/editor', article.slug]"
-             style="color: white; border-color: rgba(255,255,255,0.5)">
+            [routerLink]="['/editor', article.slug]"
+            style="color: white; border-color: rgba(255,255,255,0.5)">
             <mat-icon>edit</mat-icon> Edit Article
           </a>
 
@@ -43,9 +43,11 @@
     <div [innerHTML]="article.body | markdown"></div>
 
     <mat-chip-set style="margin-top: 24px">
-      <mat-chip *ngFor="let tag of article.tagList" disabled>
-        {{ tag }}
-      </mat-chip>
+      @for (tag of article.tagList; track tag) {
+        <mat-chip disabled>
+          {{ tag }}
+        </mat-chip>
+      }
     </mat-chip-set>
   </div>
 
@@ -109,11 +111,12 @@
       <a [routerLink]="['/login']">Sign in</a> or <a [routerLink]="['/register']">sign up</a> to add comments on this article.
     </div>
 
-    <app-article-comment
-      *ngFor="let comment of comments"
-      [comment]="comment"
-      (deleteComment)="onDeleteComment(comment)">
-    </app-article-comment>
+    @for (comment of comments; track comment) {
+      <app-article-comment
+        [comment]="comment"
+        (deleteComment)="onDeleteComment(comment)">
+      </app-article-comment>
+    }
 
   </div>
 </div>

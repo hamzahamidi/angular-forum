@@ -14,9 +14,11 @@
       <div class="article-footer">
         <span class="read-more">Read more...</span>
         <mat-chip-set>
-          <mat-chip *ngFor="let tag of article.tagList" class="tag-chip" disabled>
-            {{ tag }}
-          </mat-chip>
+          @for (tag of article.tagList; track tag) {
+            <mat-chip class="tag-chip" disabled>
+              {{ tag }}
+            </mat-chip>
+          }
         </mat-chip-set>
       </div>
     </a>

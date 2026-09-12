@@ -1,22 +1,30 @@
-<app-article-preview
-  *ngFor="let article of results"
-  [article]="article">
-</app-article-preview>
+@for (article of results; track article) {
+  <app-article-preview
+    [article]="article">
+  </app-article-preview>
+}
 
-<div *ngIf="loading" style="padding: 24px 0">
-  <mat-progress-bar mode="indeterminate"></mat-progress-bar>
-</div>
+@if (loading) {
+  <div style="padding: 24px 0">
+    <mat-progress-bar mode="indeterminate"></mat-progress-bar>
+  </div>
+}
 
-<div *ngIf="!loading && !results?.length" style="padding: 24px 0; text-align: center; opacity: 0.6">
-  No articles are here... yet.
-</div>
+@if (!loading && !results?.length) {
+  <div style="padding: 24px 0; text-align: center; opacity: 0.6">
+    No articles are here... yet.
+  </div>
+}
 
-<div class="pagination-row" *ngIf="!loading && totalPages.length > 1">
-  <button mat-mini-fab
-    *ngFor="let pageNumber of totalPages"
-    [color]="pageNumber === currentPage ? 'primary' : ''"
-    (click)="setPageTo(pageNumber)"
-    style="margin: 2px">
-    {{ pageNumber }}
-  </button>
-</div>
+@if (!loading && totalPages.length > 1) {
+  <div class="pagination-row">
+    @for (pageNumber of totalPages; track pageNumber) {
+      <button mat-mini-fab
+        [color]="pageNumber === currentPage ? 'primary' : ''"
+        (click)="setPageTo(pageNumber)"
+        style="margin: 2px">
+        {{ pageNumber }}
+      </button>
+    }
+  </div>
+}

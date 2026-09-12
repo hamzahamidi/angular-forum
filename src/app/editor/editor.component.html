@@ -28,12 +28,14 @@
           </mat-form-field>
 
           <mat-chip-set>
-            <mat-chip *ngFor="let tag of article.tagList"
-              (removed)="removeTag(tag)"
-              removable>
-              {{ tag }}
-              <mat-icon matChipRemove>cancel</mat-icon>
-            </mat-chip>
+            @for (tag of article.tagList; track tag) {
+              <mat-chip
+                (removed)="removeTag(tag)"
+                removable>
+                {{ tag }}
+                <mat-icon matChipRemove>cancel</mat-icon>
+              </mat-chip>
+            }
           </mat-chip-set>
 
           <div class="form-actions" style="margin-top: 16px">
