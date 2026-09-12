@@ -1,2 +1,4 @@
-<app-article-list [limit]="10" [config]="favoritesConfig">
-</app-article-list>
+@if (favoritesConfig | async; as config) {
+  <app-article-list [limit]="10" [config]="config">
+  </app-article-list>
+}
