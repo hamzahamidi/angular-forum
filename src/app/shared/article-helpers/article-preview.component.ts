@@ -12,12 +12,10 @@ export class ArticlePreviewComponent {
   @Input() article!: Article;
 
   onToggleFavorite(favorited: boolean) {
-    this.article['favorited'] = favorited;
-
-    if (favorited) {
-      this.article['favoritesCount']++;
-    } else {
-      this.article['favoritesCount']--;
-    }
+    this.article = {
+      ...this.article,
+      favorited,
+      favoritesCount: this.article.favoritesCount + (favorited ? 1 : -1)
+    };
   }
 }
