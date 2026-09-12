@@ -59,17 +59,18 @@ export class ArticleComponent implements OnInit {
   }
 
   onToggleFavorite(favorited: boolean) {
-    this.article.favorited = favorited;
-
-    if (favorited) {
-      this.article.favoritesCount++;
-    } else {
-      this.article.favoritesCount--;
-    }
+    this.article = {
+      ...this.article,
+      favorited,
+      favoritesCount: this.article.favoritesCount + (favorited ? 1 : -1)
+    };
   }
 
   onToggleFollowing(following: boolean) {
-    this.article.author.following = following;
+    this.article = {
+      ...this.article,
+      author: { ...this.article.author, following }
+    };
   }
 
   deleteArticle() {
@@ -97,7 +98,7 @@ export class ArticleComponent implements OnInit {
       .add(this.article.slug, commentBody)
       .subscribe(
         comment => {
-          this.comments.unshift(comment);
+          this.comments = [comment, ...this.comments];
           this.commentControl.reset('');
           this.isSubmitting = false;
         },
