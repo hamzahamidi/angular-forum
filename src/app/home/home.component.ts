@@ -1,4 +1,5 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, linkedSignal } from '@angular/core';
+import { toSignal } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 
 import { ArticleListConfig, TagsService, UserService } from '../core';
@@ -7,46 +8,34 @@ import { ArticleListConfig, TagsService, UserService } from '../core';
     selector: 'app-home-page',
     templateUrl: './home.component.html',
     styleUrls: ['./home.component.css'],
-    changeDetection: ChangeDetectionStrategy.Eager,
     standalone: false
 })
-export class HomeComponent implements OnInit {
+export class HomeComponent {
   constructor(
     private router: Router,
     private tagsService: TagsService,
     private userService: UserService
   ) {}
 
-  isAuthenticated = false;
-  listConfig: ArticleListConfig = {
-    type: 'all',
-    filters: {}
-  };
-  tags: Array<string> = [];
-  tagsLoaded = false;
-  selectedTab = 0;
+  private readonly isAuthenticated = toSignal(
+    this.userService.isAuthenticated,
+    { initialValue: false }
+  );
 
-  ngOnInit() {
-    this.userService.isAuthenticated.subscribe(
-      (authenticated) => {
-        this.isAuthenticated = authenticated;
+  readonly tags = this.tagsService.getAll();
 
-        if (authenticated) {
-          this.setListTo('feed');
-          this.selectedTab = 0;
-        } else {
-          this.setListTo('all');
-          this.selectedTab = 0;
-        }
-      }
-    );
+  readonly listConfig = linkedSignal<boolean, ArticleListConfig>({
+    source: this.isAuthenticated,
+    computation: authenticated => ({
+      type: authenticated ? 'feed' : 'all',
+      filters: {}
+    })
+  });
 
-    this.tagsService.getAll()
-    .subscribe(tags => {
-      this.tags = tags;
-      this.tagsLoaded = true;
-    });
-  }
+  readonly selectedTab = linkedSignal<boolean, number>({
+    source: this.isAuthenticated,
+    computation: () => 0
+  });
 
   onTabChange(event: any) {
     const label = event.tab.textLabel;
@@ -58,27 +47,28 @@ export class HomeComponent implements OnInit {
   }
 
   setListTo(type: string = '', filters: Object = {}) {
-    if (type === 'feed' && !this.isAuthenticated) {
+    if (type === 'feed' && !this.isAuthenticated()) {
       this.router.navigateByUrl('/login');
       return;
     }
 
-    this.listConfig = {type: type, filters: filters};
+    this.listConfig.set({ type: type, filters: filters });
+    this.selectedTab.set(this.tabIndexFor(type, filters));
+  }
 
-    if (this.isAuthenticated) {
-      if (type === 'feed' && !Object.keys(filters).length) {
-        this.selectedTab = 0;
-      } else if (type === 'all' && !Object.keys(filters).length) {
-        this.selectedTab = 1;
-      } else {
-        this.selectedTab = 2;
-      }
-    } else {
-      if (Object.keys(filters).length) {
-        this.selectedTab = 1;
-      } else {
-        this.selectedTab = 0;
-      }
+  private tabIndexFor(type: string, filters: Object): number {
+    if (!this.isAuthenticated()) {
+      return Object.keys(filters).length ? 1 : 0;
     }
+
+    if (type === 'feed' && !Object.keys(filters).length) {
+      return 0;
+    }
+
+    if (type === 'all' && !Object.keys(filters).length) {
+      return 1;
+    }
+
+    return 2;
   }
 }

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectorRef,
   Directive,
   Input,
   OnInit,
@@ -16,7 +17,8 @@ export class ShowAuthedDirective implements OnInit {
   constructor(
     private templateRef: TemplateRef<any>,
     private userService: UserService,
-    private viewContainer: ViewContainerRef
+    private viewContainer: ViewContainerRef,
+    private changeDetector: ChangeDetectorRef
   ) {}
 
   condition!: boolean;
@@ -29,6 +31,9 @@ export class ShowAuthedDirective implements OnInit {
         } else {
           this.viewContainer.clear();
         }
+
+        // The host may be OnPush, and this runs outside any of its own events.
+        this.changeDetector.markForCheck();
       }
     );
   }
