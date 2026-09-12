@@ -18,7 +18,9 @@
       <mat-icon>settings</mat-icon> Settings
     </a>
     <a mat-button [routerLink]="['/profile', currentUser.username]" routerLinkActive="active" class="toolbar-nav-link">
-      <img [src]="currentUser.image" *ngIf="currentUser.image" class="user-pic-small" (error)="onImgError($event)" />
+      @if (currentUser.image) {
+        <img [src]="currentUser.image" class="user-pic-small" (error)="onImgError($event)" />
+      }
       {{ currentUser.username }}
     </a>
   </ng-container>
@@ -28,7 +30,9 @@
   </button>
 </mat-toolbar>
 
-<div class="theme-panel-backdrop" *ngIf="panelOpen" (click)="panelOpen = false"></div>
+@if (panelOpen) {
+  <div class="theme-panel-backdrop" (click)="panelOpen = false"></div>
+}
 <div class="theme-panel" [class.open]="panelOpen">
   <div class="theme-panel-header">
     <button mat-icon-button (click)="panelOpen = false">
@@ -78,16 +82,18 @@
   <div class="theme-panel-section">
     <div class="theme-panel-label">Color</div>
     <div class="palette-grid">
-      <button *ngFor="let p of themeService.palettes"
-        class="palette-option"
-        [class.active]="(themeService.palette$ | async) === p.key"
-        (click)="themeService.setPalette(p.key)">
-        <span class="palette-swatch">
-          <span class="swatch-half" [style.background]="p.primary"></span>
-          <span class="swatch-half" [style.background]="p.secondary"></span>
-        </span>
-        <span class="palette-name">{{ p.label }}</span>
-      </button>
+      @for (p of themeService.palettes; track p) {
+        <button
+          class="palette-option"
+          [class.active]="(themeService.palette$ | async) === p.key"
+          (click)="themeService.setPalette(p.key)">
+          <span class="palette-swatch">
+            <span class="swatch-half" [style.background]="p.primary"></span>
+            <span class="swatch-half" [style.background]="p.secondary"></span>
+          </span>
+          <span class="palette-name">{{ p.label }}</span>
+        </button>
+      }
     </div>
   </div>
 
