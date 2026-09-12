@@ -32,7 +32,6 @@
   "devDependencies": {
     "@analogjs/vite-plugin-angular": "^2.7.2",
     "@analogjs/vitest-angular": "^2.7.2",
-    "@angular-devkit/build-angular": "^22.1.8",
     "@angular/build": "^22.1.8",
     "@angular/cli": "^22.1.8",
     "@angular/compiler-cli": "^22.1.6",
@@ -43,8 +42,5 @@
     "typescript": "~6.0.3",
     "typescript-eslint": "^8.70.0",
     "vitest": "^4.1.11"
-  },
-  "resolutions": {
-    "webpack": "^5.0.0"
   }
 }
