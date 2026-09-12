@@ -10,7 +10,6 @@ import {
   Comment,
   CommentsService,
   Errors,
-  User,
   UserService,
   FALLBACK_AVATAR
 } from '../core';
@@ -44,7 +43,7 @@ export class ArticleComponent {
 
   readonly currentUser = toSignal(
     this.userService.currentUser,
-    { initialValue: {} as User }
+    { requireSync: true }
   );
 
   readonly article = linkedSignal(() => this.resolvedArticle());

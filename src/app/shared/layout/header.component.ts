@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 
-import { User, UserService, ThemeService, FALLBACK_AVATAR } from '../../core';
+import { UserService, ThemeService, FALLBACK_AVATAR } from '../../core';
 import packageJson from '../../../../package.json';
 
 @Component({
@@ -17,7 +17,7 @@ export class HeaderComponent {
 
   readonly currentUser = toSignal(
     this.userService.currentUser,
-    { initialValue: {} as User }
+    { requireSync: true }
   );
 
   panelOpen = false;

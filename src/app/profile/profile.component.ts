@@ -2,7 +2,7 @@ import { Component, computed, linkedSignal } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute } from '@angular/router';
 
-import { User, UserService, Profile, FALLBACK_AVATAR } from '../core';
+import { UserService, Profile, FALLBACK_AVATAR } from '../core';
 import { map } from 'rxjs/operators';
 
 @Component({
@@ -18,12 +18,12 @@ export class ProfileComponent {
 
   private readonly resolvedProfile = toSignal(
     this.route.data.pipe(map(data => data['profile'] as Profile)),
-    { initialValue: {} as Profile }
+    { requireSync: true }
   );
 
   private readonly currentUser = toSignal(
     this.userService.currentUser,
-    { initialValue: {} as User }
+    { requireSync: true }
   );
 
   readonly profile = linkedSignal(() => this.resolvedProfile());
